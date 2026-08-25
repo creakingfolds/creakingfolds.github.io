@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тихий скрип извилин</title>
+<style>
+html { background:#f2f2f2; color-scheme:light; }
+body { margin:0; color:#111;
+  font-family:Arial,"Liberation Sans",Helvetica,sans-serif; }
+header { padding:36px 20px 4px; text-align:center; }
+h1 { margin:0; font-size:30px; letter-spacing:0.01em; }
+main { max-width:1080px; margin:0 auto; padding:26px 20px 48px;
+  display:grid; gap:22px;
+  grid-template-columns:repeat(auto-fill, minmax(290px, 1fr)); }
+article { background:#fff; border:1px solid #333; display:flex;
+  flex-direction:column; }
+article .tint { height:9px; }
+article img { width:100%; height:168px; object-fit:cover; display:block;
+  border-bottom:1px solid #333; }
+article .body { padding:15px 17px 17px; display:flex; flex-direction:column;
+  gap:7px; flex:1; }
+article h2 { margin:0; font-size:19px; line-height:1.25;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+article .when { color:#555; font-size:14px; }
+article .facts { color:#888; font-size:13px; margin-top:auto;
+  padding-top:8px; }
+article .go { display:flex; gap:9px; padding-top:11px; }
+article a { flex:1; text-align:center; text-decoration:none; color:#111;
+  border:1px solid #333; padding:9px 4px; font-size:14px; }
+article a.play { font-weight:bold; }
+article .kept { display:flex; align-items:center; gap:8px; padding-top:10px;
+  color:#888; font-size:13px; }
+article .kept[hidden] { display:none; }
+article .kept button { margin-left:auto; display:grid; font:inherit;
+  color:#555; background:none; border:1px solid #333; padding:5px 9px;
+  cursor:pointer; }
+article .kept button b { grid-area:1 / 1; font-weight:normal; }
+article .kept button b + b, article .kept button.arm b { visibility:hidden; }
+article .kept button.arm b + b { visibility:visible; }
+article .kept button.arm { color:#A01F0D; border-color:#A01F0D; }
+footer { text-align:center; color:#888; font-size:13px;
+  padding:0 20px 40px; line-height:1.7; }
+footer .rights, footer .mail { color:#555; }
+footer .mail a { color:inherit; white-space:nowrap; }
+@media print { article .go, article .kept { display:none; }
+  article h2 { white-space:normal; overflow:visible; } }
+</style></head><body>
+<header><h1>Тихий скрип извилин</h1></header>
+<main>
+<article>
+<div class="tint" style="background:#B5DEF8"></div>
+<img src="menya-vygnali-iz-chata-za-bespoleznyy/photo.webp" alt="">
+<div class="body">
+<h2 title="Меня выгнали из чата за бесполезный навык &quot;желать всем приятного стрима&quot;, и я уехал в деревню собирать коровий навоз к сельскому празднику, однако оказалось, что бывшие товарищи сами бегут ко мне занимать баллы канала на документалку про рептилий">Меня выгнали из чата за бесполезный навык &quot;желать всем приятного стрима&quot;, и я уехал в деревню собирать коровий навоз к сельскому празднику, однако оказалось, что бывшие товарищи сами бегут ко мне занимать баллы канала на документалку про рептилий</h2>
+<div class="when">25 августа 2026</div>
+<div class="facts">18x13, 49 слов</div>
+<div class="kept" data-key="scanword-18x13-30925d12" hidden><span></span><button
+ type="button"><b>стереть</b><b>точно?</b></button></div>
+<div class="go"><a class="play" style="background:#B5DEF8"
+ href="menya-vygnali-iz-chata-za-bespoleznyy/index.html">Разгадать</a><a href="menya-vygnali-iz-chata-za-bespoleznyy/print.html">Распечатать</a></div>
+</div></article>
+<article>
+<div class="tint" style="background:#ffe1ff"></div>
+<img src="psiholog-ne-poveril-chto-ya-vituber/photo.webp" alt="">
+<div class="body">
+<h2 title="Психолог не поверил, что я витубер, и переселил меня в тело нарисованной девушки, однако оказалось, что чат уже голосует, какая из двух Олесь настоящая, и требует показать вебку в доказательство">Психолог не поверил, что я витубер, и переселил меня в тело нарисованной девушки, однако оказалось, что чат уже голосует, какая из двух Олесь настоящая, и требует показать вебку в доказательство</h2>
+<div class="when">14 августа 2026</div>
+<div class="facts">13x18, 50 слов</div>
+<div class="kept" data-key="scanword-13x18-c781120c" hidden><span></span><button
+ type="button"><b>стереть</b><b>точно?</b></button></div>
+<div class="go"><a class="play" style="background:#ffe1ff"
+ href="psiholog-ne-poveril-chto-ya-vituber/index.html">Разгадать</a><a href="psiholog-ne-poveril-chto-ya-vituber/print.html">Распечатать</a></div>
+</div></article>
+</main>
+<footer>Сканвордов на сайте: 2<div class="rights">© 2026 wibblywombat</div><div class="mail">Почта для связи: <a href="mailto:wibblywombat10@gmail.com">wibblywombat10@gmail.com</a></div></footer>
+<script>
+const KEPT_A = "вписано ";
+const KEPT_B = " из ";
+const KEPT_WAIT = 3000;
+
+const KEPT = [];
+for (const box of document.querySelectorAll('.kept')) {
+  const key = box.getAttribute('data-key');
+  const how = box.querySelector('span');
+  const btn = box.querySelector('button');
+  let armed = 0;
+  const read = () => {
+    try { return localStorage.getItem(key) || ''; } catch (e) { return ''; }
+  };
+  const show = () => {
+    const s = read();
+    let n = 0;
+    for (const c of s) if (c !== '.') n++;
+    box.hidden = !n;
+    how.textContent = n ? KEPT_A + n + KEPT_B + s.length : '';
+  };
+  const rest = () => {
+    clearTimeout(armed);
+    armed = 0;
+    btn.classList.remove('arm');
+  };
+  btn.addEventListener('keydown', (e) => {
+    if (e.repeat) e.preventDefault();
+  });
+  btn.addEventListener('click', (e) => {
+    if (e.detail > 1) return;
+    if (!armed) {
+      btn.classList.add('arm');
+      armed = setTimeout(rest, KEPT_WAIT);
+      return;
+    }
+    rest();
+    try {
+      const s = read();
+      if (s) localStorage.setItem(key, '.'.repeat(s.length));
+      localStorage.removeItem(key);
+    } catch (e) {}
+    show();
+  });
+  KEPT.push(() => { rest(); show(); });
+  show();
+}
+window.addEventListener('storage', () => { for (const f of KEPT) f(); });
+
+const FITS = () => {
+  for (const h of document.querySelectorAll('article h2')) {
+    h.title = h.textContent;
+    if (h.scrollWidth <= h.clientWidth) h.removeAttribute('title');
+  }
+};
+window.addEventListener('resize', FITS);
+FITS();
+</script>
+<script data-goatcounter="https://wibblywombat.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body></html>
