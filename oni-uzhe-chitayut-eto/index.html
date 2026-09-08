@@ -1,0 +1,1308 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><title>Они уже читают это · Тихий скрип извилин</title>
+<style>
+html { background:#fff; color-scheme:light; }
+body { margin:0;
+  font-family:Arial,"Liberation Sans",Helvetica,sans-serif; }
+.g { position:relative; width:1224px; height:884px;
+  -webkit-user-select:none; user-select:none; }
+.g::after { content:""; position:absolute; inset:0; box-sizing:border-box;
+  border:1px solid #333; pointer-events:none; }
+.g i, .g b { position:absolute; width:68px; height:68px;
+  box-sizing:border-box; border-top:1px solid #333;
+  border-left:1px solid #333; }
+.g i.q { background:#C0DEFF; }
+.g i.l { display:flex; align-items:center; justify-content:center;
+  font-size:36.4px; font-style:normal; font-weight:bold; color:#226FC3; }
+.g b { display:flex; align-items:center; justify-content:center;
+  background:#C0DEFF; padding:0 2.0px; overflow:hidden;
+  font-size:12.6px; line-height:13.9px; font-weight:normal;
+  text-align:center; color:#111; hyphens:manual; }
+.g b span { display:block; width:100%; }
+.g b hr { border:0; border-top:1px solid #111; margin:2px 20%; }
+.g figure { position:absolute; margin:0; overflow:hidden;
+  border-top:1px solid #333; border-left:1px solid #333;
+  box-sizing:border-box; background:#C0DEFF; }
+.g figure img { width:100%; height:100%; object-fit:cover; display:block; }
+.g figure u { display:block; width:100%; height:100%; background:#e8e8e8; }
+.g figure s { position:absolute; left:0; right:0; bottom:0;
+  height:17.7px; background:#C0DEFF; color:#111; text-decoration:none;
+  font-size:12.6px; line-height:17.7px; text-align:center; }
+.g svg.a { position:absolute; left:0; top:0; pointer-events:none; }
+@media print { body { margin:0; } }
+@media screen {
+  html { background:#B6C6D8; color-scheme:light; }
+  body { background:none; }
+  .g { background:#fff; }
+  .g i.s { background:#FFDDB8; }
+  .g b.s::after, .g figure.s::after { content:""; position:absolute; inset:0;
+    border:4px solid #FFDDB8; pointer-events:none; }
+  .g b.s { z-index:0; }
+  .g b.s::after { z-index:-1; }
+  .g i.v { color:#0E890B; }
+  @keyframes aura {
+    0%, 100% { text-shadow:0 0 0 rgba(5,255,0,0), 0 0 0 rgba(5,255,0,0); }
+    50% { text-shadow:0 0 15px rgba(5,255,0,1),
+      0 0 30px rgba(5,255,0,0.5); }
+  }
+  .g i.k.v { animation:aura 4s ease-in-out infinite; }
+  @media (prefers-reduced-motion:reduce) {
+    .g i.k.v { animation:none;
+      text-shadow:0 0 15px rgba(5,255,0,1), 0 0 30px rgba(5,255,0,0.5); }
+  }
+  .g i.x { color:#A01F0D;
+    background-image:repeating-linear-gradient(45deg,
+    rgba(160,31,13,0.2) 0 6px, transparent 6px 12px); }
+  .g b.v::after, .g b.x::after,
+  .g figure.v::after, .g figure.x::after { content:""; position:absolute;
+    inset:0; border:4px solid; pointer-events:none; }
+  .g b.v::after, .g figure.v::after { border-color:#0E8E0B; }
+  .g b.x::after, .g figure.x::after { border-color:#971D0C; }
+  .g b.v, .g b.x { z-index:0; }
+  .g b.v::after, .g b.x::after { z-index:-1; }
+  .lit { position:fixed; left:0; top:0; width:100%; height:4px;
+    box-sizing:border-box; border-bottom:1px solid #1D5EA5;
+    background:linear-gradient(90deg,
+    #C2F6C1 var(--p,0%), #1D5EA5 var(--p,0%));
+    opacity:0; pointer-events:none; }
+  .lit.on { opacity:1; }
+  .g i.c::after { content:""; position:absolute; left:35%; right:35%;
+    bottom:10%; height:7%; background:#226FC3; }
+  .g { transform-origin:0 0;
+    transform:translate(var(--px,0px), var(--py,0px)) scale(var(--k,1)); }
+  .g.move { will-change:transform; }
+  body { overflow:hidden; }
+  .tip { position:fixed; left:50%; bottom:8px;
+    transform:translateX(-50%); padding:6px 12px;
+    border:1px solid #1D5EA5; background:rgba(255,255,255,0.9); color:#1D5EA5;
+    font-size:15.0px; line-height:1.35; white-space:pre-line;
+    text-align:left; pointer-events:none; opacity:0; }
+  .tip.on { opacity:1; }
+  .tip.arm { border-color:#A01F0D; color:#A01F0D; }
+  .ask { position:fixed; left:8px; bottom:8px; margin:0;
+    width:44px; height:44px; display:flex; align-items:center;
+    justify-content:center; border:1px solid #1D5EA5; border-radius:50%;
+    background:rgba(255,255,255,0.9); color:#1D5EA5; font:inherit; font-size:21.8px;
+    line-height:1; cursor:pointer; opacity:0.5; transition:opacity 120ms; }
+  .ask:hover, .ask:focus-visible { opacity:1; }
+  .shade { position:fixed; inset:0; background:rgba(0,0,0,0.45); opacity:0;
+    pointer-events:none; transition:opacity 120ms; }
+  .shade.on { opacity:1; transition:none; pointer-events:auto; }
+  .modal { position:fixed; inset:0; margin:auto; box-sizing:border-box;
+    width:fit-content; height:fit-content; max-width:94vw; max-height:94vh;
+    overflow:hidden; border:1px solid #1D5EA5; background:rgba(255,255,255,0.9);
+    color:#1D5EA5; font-size:15.0px; line-height:1.35;
+    text-align:left; pointer-events:none; opacity:0;
+    transition:opacity 120ms; }
+  .modal.on { opacity:1; transition:none; }
+  .modal .close { position:absolute; top:0; right:0; margin:0;
+    padding:0.3em 0.6em; border:0; background:none; color:#fff;
+    font:inherit; font-size:2em; line-height:1; cursor:pointer; }
+  .modal.on .close { pointer-events:auto; }
+  .help { max-width:min(884px, 94vw); }
+  .help .who { margin:0; padding:0.4em 2.6em 0.4em 0.8em; background:#1D5EA5;
+    color:#fff; font-size:1.6em; line-height:1.25; font-weight:bold;
+    text-align:center; overflow-wrap:anywhere; }
+  .help .two { display:flex; flex-wrap:wrap; gap:1em 2em; padding:1em; }
+  .help section { flex:0 1 auto; min-width:0; }
+  .help .head { margin:0 0 0.5em; padding-bottom:0.3em;
+    border-bottom:1px solid #1D5EA5; letter-spacing:0.14em;
+    text-transform:uppercase; }
+  .help dl { display:grid; grid-template-columns:auto minmax(0, 1fr);
+    align-items:baseline; gap:0.4em 0.7em; margin:0; }
+  .help dt { white-space:nowrap; }
+  .help dd { margin:0; }
+  .help .say dt { white-space:normal; font-weight:bold; }
+  .help kbd, .tip kbd { display:inline-block; min-width:1.1em;
+    margin-right:0.25em; padding:0 0.3em; border:1px solid currentColor;
+    border-radius:0.25em; font:inherit; text-align:center; }
+  .help kbd .dir { position:relative; top:-0.09em; }
+  .help .word, .tip .word { margin-right:0.25em; }
+  .credit { display:flex; flex-wrap:wrap; justify-content:center;
+    gap:0.2em 1.5em; margin:0 1em; padding:0.6em 0 0.8em;
+    border-top:1px solid #1D5EA5; font-size:0.85em; }
+  .credit a { color:inherit; }
+  .help.on .credit a { pointer-events:auto; }
+  .go { display:flex; flex-wrap:wrap; justify-content:center;
+    gap:0.2em 1.5em; margin:0.5em 1em 0; }
+  .go a { color:inherit; }
+  .help.on .go a { pointer-events:auto; }
+  .help .go { margin-top:0; padding-top:0.6em;
+    border-top:1px solid #1D5EA5; }
+  .help .credit { padding-top:0.3em; border-top:none; }
+  .won { position:fixed; left:50%; bottom:8px;
+    transform:translateX(-50%); box-sizing:border-box;
+    max-width:min(884px, 94vw); max-height:40vh;
+    overflow:hidden; padding:0.6em 0 0;
+    border:1px solid #1D5EA5; background:rgba(255,255,255,0.9); color:#1D5EA5;
+    font-size:15.0px; line-height:1.35; text-align:center;
+    pointer-events:none; opacity:0; transition:opacity 120ms; }
+  .won.on { opacity:1; transition:none; }
+  .won .close { position:absolute; top:0; right:0; margin:0;
+    padding:0.2em 0.5em; border:0; background:none; color:inherit;
+    font:inherit; font-size:1.4em; line-height:1; cursor:pointer; }
+  .won .headline { margin:0 2.6em; }
+  .won.on .close, .won.on a { pointer-events:auto; }
+  .won:has(~ .tip.on), .won:has(~ .tip.on) .close,
+  .won:has(~ .tip.on) a { opacity:0; pointer-events:none; }
+  .egg { width:min(442px, 88vw); }
+  .egg .close { background:rgba(0,0,0,0.5); }
+  .egg img { display:block; width:100%; height:auto; max-height:64vh; }
+  .egg .cap { margin:0.5em 0.8em 0.7em; }
+}
+@media print { .tip, .ask, .shade, .modal, .won { display:none; } }
+</style></head><body>
+<div class="g">
+<i style="left:0px;top:0px"></i>
+<i style="left:68px;top:0px"></i>
+<i style="left:136px;top:0px"></i>
+<i style="left:204px;top:0px"></i>
+<i class="k" style="left:272px;top:0px"></i>
+<i style="left:340px;top:0px"></i>
+<i style="left:408px;top:0px"></i>
+<i class="q" style="left:476px;top:0px"></i>
+<i style="left:544px;top:0px"></i>
+<i class="k" style="left:612px;top:0px"></i>
+<i style="left:680px;top:0px"></i>
+<i style="left:748px;top:0px"></i>
+<i style="left:816px;top:0px"></i>
+<i style="left:884px;top:0px"></i>
+<i style="left:952px;top:0px"></i>
+<i style="left:1020px;top:0px"></i>
+<i style="left:1088px;top:0px"></i>
+<i style="left:1156px;top:0px"></i>
+<i class="q" style="left:0px;top:68px"></i>
+<i class="q" style="left:68px;top:68px"></i>
+<i class="q" style="left:136px;top:68px"></i>
+<i class="q" style="left:204px;top:68px"></i>
+<i style="left:272px;top:68px"></i>
+<i class="q" style="left:340px;top:68px"></i>
+<i style="left:408px;top:68px"></i>
+<i style="left:748px;top:68px"></i>
+<i class="q" style="left:816px;top:68px"></i>
+<i class="q" style="left:884px;top:68px"></i>
+<i class="q" style="left:952px;top:68px"></i>
+<i class="k" style="left:1020px;top:68px"></i>
+<i class="q" style="left:1088px;top:68px"></i>
+<i style="left:1156px;top:68px"></i>
+<i style="left:0px;top:136px"></i>
+<i style="left:68px;top:136px"></i>
+<i style="left:136px;top:136px"></i>
+<i style="left:204px;top:136px"></i>
+<i style="left:272px;top:136px"></i>
+<i style="left:340px;top:136px"></i>
+<i style="left:408px;top:136px"></i>
+<i style="left:748px;top:136px"></i>
+<i style="left:816px;top:136px"></i>
+<i style="left:884px;top:136px"></i>
+<i style="left:952px;top:136px"></i>
+<i style="left:1020px;top:136px"></i>
+<i style="left:1088px;top:136px"></i>
+<i style="left:1156px;top:136px"></i>
+<i class="q" style="left:0px;top:204px"></i>
+<i class="q" style="left:68px;top:204px"></i>
+<i style="left:136px;top:204px"></i>
+<i class="q" style="left:204px;top:204px"></i>
+<i style="left:272px;top:204px"></i>
+<i class="q" style="left:340px;top:204px"></i>
+<i style="left:408px;top:204px"></i>
+<i style="left:748px;top:204px"></i>
+<i class="q" style="left:816px;top:204px"></i>
+<i class="k" style="left:884px;top:204px"></i>
+<i class="q" style="left:952px;top:204px"></i>
+<i style="left:1020px;top:204px"></i>
+<i class="q" style="left:1088px;top:204px"></i>
+<i style="left:1156px;top:204px"></i>
+<i style="left:0px;top:272px"></i>
+<i style="left:68px;top:272px"></i>
+<i style="left:136px;top:272px"></i>
+<i style="left:204px;top:272px"></i>
+<i style="left:272px;top:272px"></i>
+<i style="left:340px;top:272px"></i>
+<i style="left:408px;top:272px"></i>
+<i style="left:748px;top:272px"></i>
+<i style="left:816px;top:272px"></i>
+<i style="left:884px;top:272px"></i>
+<i style="left:952px;top:272px"></i>
+<i style="left:1020px;top:272px"></i>
+<i style="left:1088px;top:272px"></i>
+<i class="q" style="left:1156px;top:272px"></i>
+<i class="q" style="left:0px;top:340px"></i>
+<i style="left:68px;top:340px"></i>
+<i style="left:136px;top:340px"></i>
+<i style="left:204px;top:340px"></i>
+<i class="q" style="left:272px;top:340px"></i>
+<i style="left:340px;top:340px"></i>
+<i style="left:408px;top:340px"></i>
+<i style="left:476px;top:340px"></i>
+<i style="left:544px;top:340px"></i>
+<i style="left:612px;top:340px"></i>
+<i style="left:680px;top:340px"></i>
+<i style="left:748px;top:340px"></i>
+<i class="q" style="left:816px;top:340px"></i>
+<i style="left:884px;top:340px"></i>
+<i style="left:952px;top:340px"></i>
+<i style="left:1020px;top:340px"></i>
+<i class="k" style="left:1088px;top:340px"></i>
+<i class="k" style="left:1156px;top:340px"></i>
+<i style="left:0px;top:408px"></i>
+<i style="left:68px;top:408px"></i>
+<i style="left:136px;top:408px"></i>
+<i style="left:204px;top:408px"></i>
+<i style="left:272px;top:408px"></i>
+<i style="left:340px;top:408px"></i>
+<i class="q" style="left:408px;top:408px"></i>
+<i class="k" style="left:476px;top:408px"></i>
+<i class="q" style="left:544px;top:408px"></i>
+<i class="q" style="left:612px;top:408px"></i>
+<i class="q" style="left:680px;top:408px"></i>
+<i class="q" style="left:748px;top:408px"></i>
+<i class="q" style="left:816px;top:408px"></i>
+<i style="left:884px;top:408px"></i>
+<i style="left:952px;top:408px"></i>
+<i style="left:1020px;top:408px"></i>
+<i style="left:1088px;top:408px"></i>
+<i style="left:1156px;top:408px"></i>
+<i class="q" style="left:0px;top:476px"></i>
+<i class="k" style="left:68px;top:476px"></i>
+<i class="q" style="left:136px;top:476px"></i>
+<i style="left:204px;top:476px"></i>
+<i class="q" style="left:272px;top:476px"></i>
+<i style="left:340px;top:476px"></i>
+<i style="left:408px;top:476px"></i>
+<i style="left:476px;top:476px"></i>
+<i style="left:544px;top:476px"></i>
+<i style="left:612px;top:476px"></i>
+<i style="left:680px;top:476px"></i>
+<i style="left:748px;top:476px"></i>
+<i class="q" style="left:816px;top:476px"></i>
+<i style="left:884px;top:476px"></i>
+<i style="left:952px;top:476px"></i>
+<i style="left:1020px;top:476px"></i>
+<i style="left:1088px;top:476px"></i>
+<i style="left:1156px;top:476px"></i>
+<i style="left:0px;top:544px"></i>
+<i class="q" style="left:68px;top:544px"></i>
+<i style="left:136px;top:544px"></i>
+<i style="left:204px;top:544px"></i>
+<i style="left:272px;top:544px"></i>
+<i style="left:340px;top:544px"></i>
+<i class="q" style="left:408px;top:544px"></i>
+<i style="left:476px;top:544px"></i>
+<i class="q" style="left:544px;top:544px"></i>
+<i class="k" style="left:612px;top:544px"></i>
+<i style="left:680px;top:544px"></i>
+<i style="left:748px;top:544px"></i>
+<i class="k" style="left:816px;top:544px"></i>
+<i class="q" style="left:884px;top:544px"></i>
+<i style="left:952px;top:544px"></i>
+<i class="q" style="left:1020px;top:544px"></i>
+<i class="q" style="left:1088px;top:544px"></i>
+<i style="left:1156px;top:544px"></i>
+<i style="left:0px;top:612px"></i>
+<i class="q" style="left:68px;top:612px"></i>
+<i style="left:136px;top:612px"></i>
+<i class="q" style="left:204px;top:612px"></i>
+<i class="k" style="left:272px;top:612px"></i>
+<i style="left:340px;top:612px"></i>
+<i style="left:408px;top:612px"></i>
+<i style="left:476px;top:612px"></i>
+<i class="q" style="left:544px;top:612px"></i>
+<i style="left:612px;top:612px"></i>
+<i style="left:680px;top:612px"></i>
+<i style="left:748px;top:612px"></i>
+<i style="left:816px;top:612px"></i>
+<i class="q" style="left:884px;top:612px"></i>
+<i style="left:952px;top:612px"></i>
+<i style="left:1020px;top:612px"></i>
+<i style="left:1088px;top:612px"></i>
+<i style="left:1156px;top:612px"></i>
+<i style="left:0px;top:680px"></i>
+<i style="left:68px;top:680px"></i>
+<i style="left:136px;top:680px"></i>
+<i class="q" style="left:204px;top:680px"></i>
+<i style="left:272px;top:680px"></i>
+<i style="left:340px;top:680px"></i>
+<i style="left:408px;top:680px"></i>
+<i style="left:476px;top:680px"></i>
+<i style="left:544px;top:680px"></i>
+<i style="left:612px;top:680px"></i>
+<i class="q" style="left:680px;top:680px"></i>
+<i style="left:748px;top:680px"></i>
+<i style="left:816px;top:680px"></i>
+<i style="left:884px;top:680px"></i>
+<i style="left:952px;top:680px"></i>
+<i style="left:1020px;top:680px"></i>
+<i class="k" style="left:1088px;top:680px"></i>
+<i style="left:1156px;top:680px"></i>
+<i style="left:0px;top:748px"></i>
+<i class="q" style="left:68px;top:748px"></i>
+<i style="left:136px;top:748px"></i>
+<i class="q" style="left:204px;top:748px"></i>
+<i style="left:272px;top:748px"></i>
+<i class="q" style="left:340px;top:748px"></i>
+<i style="left:408px;top:748px"></i>
+<i style="left:476px;top:748px"></i>
+<i style="left:544px;top:748px"></i>
+<i style="left:612px;top:748px"></i>
+<i style="left:680px;top:748px"></i>
+<i class="q" style="left:748px;top:748px"></i>
+<i style="left:816px;top:748px"></i>
+<i class="q" style="left:884px;top:748px"></i>
+<i style="left:952px;top:748px"></i>
+<i style="left:1020px;top:748px"></i>
+<i style="left:1088px;top:748px"></i>
+<i style="left:1156px;top:748px"></i>
+<i style="left:0px;top:816px"></i>
+<i style="left:68px;top:816px"></i>
+<i style="left:136px;top:816px"></i>
+<i style="left:204px;top:816px"></i>
+<i style="left:272px;top:816px"></i>
+<i style="left:340px;top:816px"></i>
+<i style="left:408px;top:816px"></i>
+<i class="k" style="left:476px;top:816px"></i>
+<i class="k" style="left:544px;top:816px"></i>
+<i style="left:612px;top:816px"></i>
+<i class="q" style="left:680px;top:816px"></i>
+<i style="left:748px;top:816px"></i>
+<i style="left:816px;top:816px"></i>
+<i class="k" style="left:884px;top:816px"></i>
+<i style="left:952px;top:816px"></i>
+<i style="left:1020px;top:816px"></i>
+<i style="left:1088px;top:816px"></i>
+<i style="left:1156px;top:816px"></i>
+<b style="left:0px;top:68px"><span>Вы­рав­ни­ва­ние ка­на­вы</span></b>
+<b style="left:204px;top:68px"><span>Мен­таль­ное втор­же­ние</span></b>
+<b style="left:340px;top:68px"><span>Спор­ное коль­цо на пиц­це</span></b>
+<b style="left:476px;top:0px"><span>По­бо­и­ще в кон­це вре­мён</span></b>
+<b style="left:816px;top:68px"><span>Веч­ная ко­лея ли­це­дея</span></b>
+<b style="left:952px;top:68px"><span>Ра­зоб­ла­чи­тель скры­то­го са­ха­ра</span></b>
+<b style="left:1088px;top:68px"><span>Что бы­ва­ет кру­тым и крот­ким?</span></b>
+<b style="left:68px;top:68px"><span>Сфе­ра па­ра­нор­маль­ных яв­ле­ний</span></b>
+<b style="left:136px;top:68px"><span>Ткань для се­мей­ных тру­сов</span></b>
+<b style="left:816px;top:204px"><span>Ро­ки­ров­ка пре­зи­ден­та с двой­ни­ком</span></b>
+<b style="left:884px;top:68px"><span>Зе­лё­ный пя­та­чок за ар­кой</span></b>
+<b style="left:0px;top:204px"><span>Пол­ша­га на­зад под на­жи­мом</span></b>
+<b style="left:68px;top:204px"><span>... идёт на се­кун­ды</span></b>
+<b style="left:204px;top:204px"><span>Укол за ста­рую вину</span></b>
+<b style="left:340px;top:204px"><span>Же­лез­ный фар­тук в сед­ле</span></b>
+<b style="left:952px;top:204px"><span>Чер­тё­нок в при­щу­ре</span></b>
+<b style="left:1088px;top:204px"><span>Реп­ти­ло­ид с гар­мош­кой</span></b>
+<b style="left:0px;top:340px"><span>Тро­ян­с­кий конь в шпри­це</span></b>
+<b style="left:272px;top:340px"><span>Зёр­ныш­ко гря­ду­ще­го по­жа­ра</span></b>
+<b style="left:544px;top:408px"><span>Слиш­ком глу­бо­кий для обыч­ной строй­ки</span></b>
+<b style="left:816px;top:340px"><span>Зак­ру­чен, как за­го­вор</span></b>
+<b style="left:1156px;top:272px"><span>Вихрь в цве­тас­том на­ря­де</span></b>
+<b style="left:0px;top:476px"><span>Волк, что прог­ло­тит Оди­на</span></b>
+<b style="left:816px;top:408px"><span>Окно в гор­ний мир</span></b>
+<b style="left:408px;top:408px"><span>&quot;Пос­т­ра­дав­шая&quot; в но­вос­тях</span></b>
+<b style="left:612px;top:408px"><span>&quot;Та­кой-то&quot; в цер­ков­ных тек­с­тах</span></b>
+<b style="left:680px;top:408px"><span>Авось­ка ры­ба­ка на пал­ке</span></b>
+<b style="left:748px;top:408px"><span>Кры­ла­тый снай­пер сер­дец</span></b>
+<b style="left:816px;top:476px"><span>Гла­варь про­пав­шей Ха­за­рии</span></b>
+<b style="left:68px;top:544px"><span>Плос­кая, как блин</span></b>
+<b style="left:204px;top:612px"><span>Чутьё на моду</span></b>
+<b style="left:136px;top:476px"><span>Ве­ли­кан из Древ­ней Руси</span></b>
+<b style="left:272px;top:476px"><span>&quot;Вы­ход­ная дверь&quot; реки</span></b>
+<b style="left:544px;top:544px"><span>Чей го­лос слы­шен до рож­де­ния?</span></b>
+<b style="left:884px;top:544px"><span>Па­ни­чес­кая ... от вы­шек</span></b>
+<b style="left:204px;top:680px"><span>&quot;Та­мож­ня&quot; для муки</span></b>
+<b style="left:408px;top:544px"><span>Свя­щен­ный ос­т­ров ари­ев</span></b>
+<b style="left:680px;top:680px"><span>Жи­тель Рес­пуб­ли­ки Саха</span></b>
+<b style="left:884px;top:612px"><span>&quot;Мо­но­лог&quot; сак­со­фо­на</span></b>
+<b style="left:1020px;top:544px"><span>Проз­ви­ще бун­та­ря у Этель Вой­нич</span></b>
+<b style="left:1088px;top:544px"><span>Зер­каль­це на нос­ке бо­тин­ка</span></b>
+<b style="left:68px;top:612px"><span>Сын осла и ко­бы­лы</span></b>
+<b style="left:204px;top:748px"><span>Брат Рю­ри­ка в Из­бор­с­ке</span></b>
+<b style="left:544px;top:612px"><span>Все­ви­дя­щее на дол­ла­ре</span></b>
+<b style="left:748px;top:748px"><span>Нас­то­я­щий ма­те­ри­ал пи­ра­мид</span></b>
+<b style="left:340px;top:748px"><span>Ус­луж­ли­вый ... ми­ро­вой за­ку­ли­сы</span></b>
+<b style="left:884px;top:748px"><span>Слё­зы све­чи</span></b>
+<b style="left:68px;top:748px"><span>Ма­лыш с крюч­ко­ва­тым клю­вом</span></b>
+<b style="left:680px;top:816px"><span>Шё­пот на ухо шпи­о­ну</span></b>
+<figure style="left:476px;top:68px;width:272px;height:272px"><img src="photo.webp" alt="" draggable="false"></figure>
+<svg class="a" width="1224" height="884" viewBox="0 0 1224 884">
+<polygon points="28.6,59.8 20.4,64.1 20.4,55.6" fill="#111"/>
+<polyline points="8.2,68.0 8.2,59.8 20.4,59.8" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="285.6,62.6 281.4,54.4 289.8,54.4" fill="#111"/>
+<polyline points="272.0,68.0 285.6,40.8 285.6,54.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="421.6,62.6 417.4,54.4 425.8,54.4" fill="#111"/>
+<polyline points="408.0,68.0 421.6,40.8 421.6,54.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="552.2,34.0 544.0,38.2 544.0,29.8" fill="#111"/>
+<polygon points="802.4,62.6 798.2,54.4 806.6,54.4" fill="#111"/>
+<polyline points="816.0,68.0 802.4,40.8 802.4,54.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="1033.6,62.6 1029.4,54.4 1037.8,54.4" fill="#111"/>
+<polyline points="1020.0,68.0 1033.6,40.8 1033.6,54.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="1169.6,62.6 1165.4,54.4 1173.8,54.4" fill="#111"/>
+<polyline points="1156.0,68.0 1169.6,40.8 1169.6,54.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="62.6,149.6 54.4,153.8 54.4,145.4" fill="#111"/>
+<polyline points="68.0,136.0 40.8,149.6 54.4,149.6" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="170.0,144.2 165.8,136.0 174.2,136.0" fill="#111"/>
+<polygon points="810.6,190.4 802.4,194.6 802.4,186.2" fill="#111"/>
+<polyline points="816.0,204.0 788.8,190.4 802.4,190.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="918.0,144.2 913.8,136.0 922.2,136.0" fill="#111"/>
+<polygon points="28.6,280.2 20.4,284.4 20.4,275.9" fill="#111"/>
+<polyline points="8.2,272.0 8.2,280.2 20.4,280.2" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="102.0,280.2 97.8,272.0 106.2,272.0" fill="#111"/>
+<polygon points="238.0,280.2 233.8,272.0 242.2,272.0" fill="#111"/>
+<polygon points="374.0,280.2 369.8,272.0 378.2,272.0" fill="#111"/>
+<polygon points="756.2,306.0 748.0,310.2 748.0,301.8" fill="#111"/>
+<polygon points="986.0,280.2 981.8,272.0 990.2,272.0" fill="#111"/>
+<polygon points="1122.0,280.2 1117.8,272.0 1126.2,272.0" fill="#111"/>
+<polygon points="76.2,374.0 68.0,378.2 68.0,369.8" fill="#111"/>
+<polygon points="348.2,374.0 340.0,378.2 340.0,369.8" fill="#111"/>
+<polygon points="530.4,402.6 526.2,394.4 534.6,394.4" fill="#111"/>
+<polyline points="544.0,408.0 530.4,380.8 530.4,394.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="892.2,374.0 884.0,378.2 884.0,369.8" fill="#111"/>
+<polygon points="1190.0,348.2 1185.8,340.0 1194.2,340.0" fill="#111"/>
+<polygon points="28.6,467.8 20.4,472.1 20.4,463.6" fill="#111"/>
+<polyline points="8.2,476.0 8.2,467.8 20.4,467.8" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="892.2,442.0 884.0,446.2 884.0,437.8" fill="#111"/>
+<polygon points="402.6,489.6 394.4,493.8 394.4,485.4" fill="#111"/>
+<polyline points="408.0,476.0 380.8,489.6 394.4,489.6" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="646.0,484.2 641.8,476.0 650.2,476.0" fill="#111"/>
+<polygon points="714.0,484.2 709.8,476.0 718.2,476.0" fill="#111"/>
+<polygon points="782.0,484.2 777.8,476.0 786.2,476.0" fill="#111"/>
+<polygon points="892.2,510.0 884.0,514.2 884.0,505.8" fill="#111"/>
+<polygon points="59.8,572.6 55.6,564.4 64.1,564.4" fill="#111"/>
+<polyline points="68.0,552.2 59.8,552.2 59.8,564.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="198.6,598.4 190.4,602.6 190.4,594.2" fill="#111"/>
+<polyline points="204.0,612.0 176.8,598.4 190.4,598.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="170.0,552.2 165.8,544.0 174.2,544.0" fill="#111"/>
+<polygon points="306.0,552.2 301.8,544.0 310.2,544.0" fill="#111"/>
+<polygon points="620.2,578.0 612.0,582.2 612.0,573.8" fill="#111"/>
+<polygon points="875.8,572.6 871.6,564.4 880.1,564.4" fill="#111"/>
+<polyline points="884.0,552.2 875.8,552.2 875.8,564.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="321.0,666.4 312.8,670.6 312.8,662.2" fill="#111"/>
+<polyline points="272.0,680.0 299.2,666.4 312.8,666.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="442.0,620.2 437.8,612.0 446.2,612.0" fill="#111"/>
+<polygon points="674.6,666.4 666.4,670.6 666.4,662.2" fill="#111"/>
+<polyline points="680.0,680.0 652.8,666.4 666.4,666.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="960.2,646.0 952.0,650.2 952.0,641.8" fill="#111"/>
+<polygon points="1054.0,620.2 1049.8,612.0 1058.2,612.0" fill="#111"/>
+<polygon points="1122.0,620.2 1117.8,612.0 1126.2,612.0" fill="#111"/>
+<polygon points="62.6,693.6 54.4,697.8 54.4,689.4" fill="#111"/>
+<polyline points="68.0,680.0 40.8,693.6 54.4,693.6" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="321.0,734.4 312.8,738.6 312.8,730.2" fill="#111"/>
+<polyline points="272.0,748.0 299.2,734.4 312.8,734.4" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="578.0,688.2 573.8,680.0 582.2,680.0" fill="#111"/>
+<polygon points="776.6,739.8 768.4,744.1 768.4,735.6" fill="#111"/>
+<polyline points="756.2,748.0 756.2,739.8 768.4,739.8" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="416.2,782.0 408.0,786.2 408.0,777.8" fill="#111"/>
+<polygon points="960.2,782.0 952.0,786.2 952.0,777.8" fill="#111"/>
+<polygon points="62.6,829.6 54.4,833.8 54.4,825.4" fill="#111"/>
+<polyline points="68.0,816.0 40.8,829.6 54.4,829.6" fill="none" stroke="#111" stroke-width="1.50"/>
+<polygon points="756.2,850.0 748.0,854.2 748.0,845.8" fill="#111"/>
+</svg>
+</div>
+<script>
+for (const b of document.querySelectorAll('.g b')) {
+  const t = b.firstElementChild;
+  let s = 12.6;
+  while (t.offsetHeight > b.clientHeight && s > 6) {
+    s -= 0.5;
+    b.style.fontSize = s + 'px';
+    b.style.lineHeight = (s * 13.9 / 12.6) + 'px';
+  }
+}
+
+const RUNS = [[1,1,0,7,2,1],[1,5,1,5,2,4],[1,7,1,6,2,6],[1,9,0,10,1,8],[1,12,1,6,2,13],[1,16,1,8,2,15],[1,18,1,4,2,17],[3,1,0,7,2,2],[3,3,1,5,2,3],[3,12,0,7,4,13],[3,14,1,6,2,14],[5,1,0,7,4,1],[5,2,1,4,4,2],[5,4,1,5,4,4],[5,6,1,7,4,6],[5,12,0,6,5,11],[5,15,1,9,4,15],[5,17,1,4,4,17],[6,2,0,3,6,1],[6,6,0,7,6,5],[6,8,1,8,7,9],[6,14,0,5,6,13],[6,18,1,8,5,18],[7,1,0,6,8,1],[7,14,0,5,7,13],[8,6,0,7,7,7],[8,10,1,6,7,10],[8,11,1,3,7,11],[8,12,1,4,7,12],[8,14,0,5,8,13],[9,1,1,5,9,2],[9,3,0,4,10,4],[9,3,1,5,8,3],[9,5,1,5,8,5],[9,10,0,4,9,9],[9,13,1,5,9,14],[10,5,0,4,11,4],[10,7,1,4,9,7],[10,10,0,4,11,11],[10,15,0,4,10,14],[10,16,1,4,9,16],[10,17,1,4,9,17],[11,1,0,3,10,2],[11,5,0,6,12,4],[11,9,1,3,10,9],[11,12,0,7,12,12],[12,7,0,5,12,6],[12,15,0,4,12,14],[13,1,0,10,12,2],[13,12,0,7,13,11]];
+const SEAL = ["0cf2b2a91082","495978ad5c27","6d317e936ec7","325e25c6c74e","a62ef89dd476","510ed6fad203","965c251880d8","1a4c93193546","3f6336e22c17","df49dea5491c","f4048bf819b6","06989354c620","f76a191da075","c778297afb9b","52c84840e6b1","e4a788151678","3a67e1ac011e","97fb6410fb60","59ead0eb412c","7566677c323e","05e9abe7ea14","f738eaa99762","632579987b37","1a18449c499b","0eebdb8769fd","bfc33e9404e5","8bf5854f7912","af65d6851051","8fcf41647d7e","a82edb53edf1","d5278ebf16d3","835f53e76268","13f698666015","0f3e0ddf5bdc","3a3f38e04509","b2e9ac04acfd","6ab85c1ffff0","1cea18dd0d82","1b0d8204737d","02071e2510d6","f357ee33fe57","a4d2de688f76","abfa4d24bce1","7b78d9025619","e8f589db5b84","78815ded8c0d","f22e7fee3dcd","d583471e14e8","2651428e9470","8469481ceb5b"];
+const SALT = 'b2cc652533c23be1';
+const CELL = 68;
+const PHOTO = 15;
+const KEY = 'scanword-18x13-03f3b2e1';
+const EGGS = [{"i": 0, "html": "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><img src=\"egg-0.jpg\" alt=\"\" draggable=\"false\"><p class=\"cap\">Почему засыпаны первые этажи старых зданий в Санкт-Петербурге? Кто это сделал?</p>"}, {"i": 44, "html": "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><img src=\"egg-44.webp\" alt=\"\" draggable=\"false\">"}];
+const SOUND = "egg-sound.ogg";
+
+const GRID = document.querySelector('.g');
+
+let zoom = 1;
+let panX = 0;
+let panY = 0;
+
+function unit() {
+  return CELL * (window.devicePixelRatio || 1);
+}
+
+function view() {
+  if (scrollX || scrollY) window.scrollTo(0, 0);
+  const dpr = window.devicePixelRatio || 1;
+  zoom = Math.round(unit() * zoom) / unit();
+  const w = GRID.offsetWidth * zoom;
+  const h = GRID.offsetHeight * zoom;
+  const vw = document.documentElement.clientWidth;
+  const vh = document.documentElement.clientHeight;
+  panX = Math.round(Math.min(vw - EDGE, Math.max(EDGE - w, panX)) * dpr) / dpr;
+  panY = Math.round(Math.min(vh - EDGE, Math.max(EDGE - h, panY)) * dpr) / dpr;
+  GRID.style.setProperty('--px', panX + 'px');
+  GRID.style.setProperty('--py', panY + 'px');
+  GRID.style.setProperty('--k', zoom);
+}
+
+function fit() {
+  const bar = LIT.getBoundingClientRect().height;
+  const vw = document.documentElement.clientWidth;
+  const vh = document.documentElement.clientHeight - bar;
+  const dpr = window.devicePixelRatio || 1;
+  const k = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN,
+                     Math.min(vw / GRID.offsetWidth, vh / GRID.offsetHeight)));
+  zoom = Math.floor(unit() * k) / unit();
+  panX = Math.round((vw - GRID.offsetWidth * zoom) / 2 * dpr) / dpr;
+  panY = Math.ceil((bar + (vh - GRID.offsetHeight * zoom) / 2) * dpr) / dpr;
+  view();
+}
+
+let ratio = window.devicePixelRatio || 1;
+
+function regauge() {
+  const now = window.devicePixelRatio || 1;
+  if (now === ratio) return false;
+  ratio = now;
+  fit();
+  return true;
+}
+
+function watch() {
+  matchMedia('(resolution: ' + ratio + 'dppx)')
+    .addEventListener('change', () => { regauge(); watch(); }, { once: true });
+}
+
+window.addEventListener('resize', () => {
+  if (!regauge()) view();
+  const open = modalOpen();
+  if (open) snug(open);
+});
+
+let settle = 0;
+
+function hold() {
+  clearTimeout(settle);
+  GRID.classList.add('move');
+}
+
+function release(ms) {
+  clearTimeout(settle);
+  settle = setTimeout(() => GRID.classList.remove('move'), ms);
+}
+
+document.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  if (modalOpen()) return;
+  hold();
+  const k = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN,
+                     zoom * (e.deltaY < 0 ? ZOOM_STEP : 1 / ZOOM_STEP)));
+  const r = GRID.getBoundingClientRect();
+  panX += (e.clientX - r.left) * (1 - k / zoom);
+  panY += (e.clientY - r.top) * (1 - k / zoom);
+  zoom = k;
+  view();
+  release(MOVE_IDLE);
+}, { passive: false });
+
+let grab = null;
+let moved = 0;
+
+document.addEventListener('pointerdown', (e) => {
+  if (modalOpen()) return;
+  if (e.button !== 0) return;
+  grab = [e.clientX, e.clientY, panX, panY];
+  moved = 0;
+  hold();
+});
+
+document.addEventListener('pointermove', (e) => {
+  if (!grab) return;
+  const dx = e.clientX - grab[0];
+  const dy = e.clientY - grab[1];
+  moved = Math.max(moved, Math.abs(dx) + Math.abs(dy));
+  panX = grab[2] + dx;
+  panY = grab[3] + dy;
+  view();
+});
+
+function drop() {
+  grab = null;
+  release(0);
+}
+
+document.addEventListener('pointerup', drop);
+document.addEventListener('pointercancel', drop);
+
+const at = (r, c) => r + ':' + c;
+const addr = (el) => at(el.offsetTop / CELL + 1, el.offsetLeft / CELL + 1);
+
+const COLS = Math.round(GRID.offsetWidth / CELL);
+const ROWS = Math.round(GRID.offsetHeight / CELL);
+
+const BOX = new Map();
+for (const e of document.querySelectorAll('.g i')) BOX.set(addr(e), e);
+
+const TAG = new Map();
+for (const e of document.querySelectorAll('.g b')) TAG.set(addr(e), e);
+const FIG = document.querySelector('.g figure');
+
+const CELLS = [];
+const MARK = [];
+const DIR = [];
+const WORD = new Map();
+const CLUE = new Map();
+RUNS.forEach(([sr, sc, d, n, qr, qc], i) => {
+  const own = [];
+  for (let k = 0; k < n; k++) {
+    const p = at(sr + (d ? k : 0), sc + (d ? 0 : k));
+    own.push(BOX.get(p));
+    const pair = WORD.get(p) || [-1, -1];
+    pair[d] = i;
+    WORD.set(p, pair);
+  }
+  CELLS.push(own);
+  DIR.push(d);
+  MARK.push(i === PHOTO ? FIG : TAG.get(at(qr, qc)));
+  CLUE.set(at(qr, qc), (CLUE.get(at(qr, qc)) || []).concat(i));
+});
+
+const SPOTS = [];
+for (const [p, e] of BOX) if (WORD.has(p)) SPOTS.push(e);
+
+let sel = -1;
+let caret = 0;
+
+function mark() {
+  for (const e of document.querySelectorAll('.g i.c')) e.classList.remove('c');
+  if (sel >= 0 && CELLS[sel][caret]) CELLS[sel][caret].classList.add('c');
+}
+
+function show(i, pos) {
+  for (const e of document.querySelectorAll('.s, .g i.c')) {
+    e.classList.remove('s', 'c');
+  }
+  sel = i;
+  caret = 0;
+  if (i < 0) return;
+  caret = Math.min(Math.max(pos || 0, 0), CELLS[i].length - 1);
+  for (const e of CELLS[i]) if (e) e.classList.add('s');
+  if (MARK[i]) MARK[i].classList.add('s');
+  mark();
+}
+
+const SHA_K = [
+  0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1,
+  0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
+  0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174, 0xe49b69c1, 0xefbe4786,
+  0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+  0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147,
+  0x06ca6351, 0x14292967, 0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13,
+  0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85, 0xa2bfe8a1, 0xa81a664b,
+  0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+  0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a,
+  0x5b9cca4f, 0x682e6ff3, 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
+  0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2];
+
+function utf8(s) {
+  const out = [];
+  for (let i = 0; i < s.length; i++) {
+    const c = s.charCodeAt(i);
+    if (c < 0x80) out.push(c);
+    else out.push(0xC0 | c >> 6, 0x80 | c & 63);
+  }
+  return out;
+}
+
+function sha256(text) {
+  const raw = utf8(text);
+  const n = raw.length;
+  const size = ((n + 8 >> 6) + 1) << 6;
+  const buf = new Uint8Array(size);
+  buf.set(raw);
+  buf[n] = 0x80;
+  const bits = n * 8;
+  buf[size - 4] = bits >>> 24;
+  buf[size - 3] = bits >>> 16 & 255;
+  buf[size - 2] = bits >>> 8 & 255;
+  buf[size - 1] = bits & 255;
+  const st = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
+              0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19];
+  const w = new Uint32Array(64);
+  for (let o = 0; o < size; o += 64) {
+    for (let i = 0; i < 16; i++) {
+      w[i] = buf[o + i * 4] << 24 | buf[o + i * 4 + 1] << 16
+           | buf[o + i * 4 + 2] << 8 | buf[o + i * 4 + 3];
+    }
+    for (let i = 16; i < 64; i++) {
+      const p = w[i - 15];
+      const q = w[i - 2];
+      const s0 = (p >>> 7 | p << 25) ^ (p >>> 18 | p << 14) ^ p >>> 3;
+      const s1 = (q >>> 17 | q << 15) ^ (q >>> 19 | q << 13) ^ q >>> 10;
+      w[i] = w[i - 16] + s0 + w[i - 7] + s1 | 0;
+    }
+    let a = st[0], b = st[1], c = st[2], d = st[3];
+    let e = st[4], f = st[5], g = st[6], x = st[7];
+    for (let i = 0; i < 64; i++) {
+      const u = (e >>> 6 | e << 26) ^ (e >>> 11 | e << 21)
+              ^ (e >>> 25 | e << 7);
+      const t1 = x + u + (e & f ^ ~e & g) + SHA_K[i] + w[i] | 0;
+      const v = (a >>> 2 | a << 30) ^ (a >>> 13 | a << 19)
+              ^ (a >>> 22 | a << 10);
+      const t2 = v + (a & b ^ a & c ^ b & c) | 0;
+      x = g; g = f; f = e; e = d + t1 | 0;
+      d = c; c = b; b = a; a = t1 + t2 | 0;
+    }
+    const now = [a, b, c, d, e, f, g, x];
+    for (let i = 0; i < 8; i++) st[i] = st[i] + now[i] | 0;
+  }
+  return st.map((v) => (v >>> 0).toString(16).padStart(8, '0')).join('');
+}
+
+const SEEN = new Map();
+
+function typed(i) {
+  let s = '';
+  for (const e of CELLS[i]) {
+    const ch = e && e.textContent;
+    if (!ch) return '';
+    s += ch;
+  }
+  return s;
+}
+
+function verdict(i) {
+  const word = typed(i);
+  const was = SEEN.get(i);
+  if (was && was[0] === word) return was[1];
+  let v = 0;
+  if (word) {
+    const seal = sha256(SALT + ':' + i + ':' + word).slice(0, SEAL[i].length);
+    v = seal === SEAL[i] ? 1 : 2;
+  }
+  SEEN.set(i, [word, v]);
+  return v;
+}
+
+function dress(e, v) {
+  e.classList.toggle('v', v === 1);
+  e.classList.toggle('x', v === 2);
+}
+
+const locked = (e) => e.classList.contains('v');
+
+function judge() {
+  const box = new Map();
+  const tag = new Map();
+  let done = 0;
+  for (let i = 0; i < RUNS.length; i++) {
+    const v = verdict(i);
+    if (v === 1) done++;
+    if (!v) continue;
+    for (const e of CELLS[i]) {
+      if (e) box.set(e, box.get(e) === 1 || v === 1 ? 1 : 2);
+    }
+    if (MARK[i]) tag.set(MARK[i], Math.max(tag.get(MARK[i]) || 0, v));
+  }
+  for (const e of BOX.values()) dress(e, box.get(e) || 0);
+  for (const e of TAG.values()) dress(e, tag.get(e) || 0);
+  if (FIG) dress(FIG, tag.get(FIG) || 0);
+  LIT.style.setProperty('--p', (100 * done / RUNS.length).toFixed(2) + '%');
+  hits = done;
+  if (hits !== RUNS.length) bye = 0;
+  crown();
+  pop();
+}
+
+const ARROW = {
+  ArrowUp: [-1, 0], ArrowDown: [1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1],
+};
+
+function land(r, c, dr, dc) {
+  for (let i = r + dr, j = c + dc;
+       i >= 1 && i <= ROWS && j >= 1 && j <= COLS;
+       i += dr, j += dc) {
+    const p = at(i, j);
+    if (WORD.has(p)) return p;
+  }
+  return null;
+}
+
+function step(dr, dc) {
+  if (sel < 0) {
+    show(0, 0);
+    return;
+  }
+  const here = CELLS[sel][caret];
+  const want = dc ? 0 : 1;
+  const mine = WORD.get(addr(here));
+  if (DIR[sel] !== want && mine[want] >= 0) {
+    show(mine[want], CELLS[mine[want]].indexOf(here));
+    return;
+  }
+  const [r, c] = addr(here).split(':').map(Number);
+  const p = land(r, c, dr, dc);
+  if (!p) return;
+  const pair = WORD.get(p);
+  const i = pair[want] >= 0 ? pair[want] : pair[1 - want];
+  show(i, CELLS[i].indexOf(BOX.get(p)));
+}
+
+function hop(d) {
+  const n = RUNS.length;
+  let i = sel < 0 ? (d > 0 ? -1 : 0) : sel;
+  for (let k = 0; k < n; k++) {
+    i = (i + d + n) % n;
+    if (verdict(i) !== 1) {
+      show(i, 0);
+      return;
+    }
+  }
+}
+
+function edge(end) {
+  if (sel < 0) return;
+  caret = end ? CELLS[sel].length - 1 : 0;
+  mark();
+}
+
+function slide(dx, dy) {
+  hold();
+  panX += dx;
+  panY += dy;
+  view();
+  release(MOVE_IDLE);
+}
+
+function scale(k) {
+  hold();
+  const now = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoom * k));
+  const r = GRID.getBoundingClientRect();
+  const root = document.documentElement;
+  panX += (root.clientWidth / 2 - r.left) * (1 - now / zoom);
+  panY += (root.clientHeight / 2 - r.top) * (1 - now / zoom);
+  zoom = now;
+  view();
+  release(MOVE_IDLE);
+}
+
+function letter(e) {
+  const k = e.key;
+  if (k && k.length === 1) {
+    const up = k.toUpperCase();
+    if (up === 'Ё') return 'Е';
+    if (up >= 'А' && up <= 'Я') return up;
+  }
+  const c = KEYS[e.code];
+  if (!c) return null;
+  return c === 'Ё' ? 'Е' : c;
+}
+
+function put(ch) {
+  const e = sel < 0 ? null : CELLS[sel][caret];
+  if (!e) return;
+  if (!locked(e)) {
+    e.textContent = ch;
+    e.classList.add('l');
+    keep();
+  }
+  if (caret < CELLS[sel].length - 1) caret++;
+  mark();
+  judge();
+}
+
+function wipe(e) {
+  if (!e || locked(e)) return;
+  e.textContent = '';
+  e.classList.remove('l');
+  keep();
+}
+
+function back() {
+  if (sel < 0) return;
+  wipe(CELLS[sel][caret]);
+  caret = Math.max(0, caret - 1);
+  mark();
+  judge();
+}
+
+function forth() {
+  if (sel < 0) return;
+  wipe(CELLS[sel][caret]);
+  if (caret < CELLS[sel].length - 1) caret++;
+  mark();
+  judge();
+}
+
+function keep() {
+  let s = '';
+  for (const e of SPOTS) s += e.textContent || '.';
+  try { localStorage.setItem(KEY, s); } catch (err) {}
+}
+
+function paint(s) {
+  if (!s || s.length !== SPOTS.length) return;
+  SPOTS.forEach((e, i) => {
+    const ch = s[i] === '.' ? '' : s[i];
+    if (e.textContent === ch) return;
+    e.textContent = ch;
+    e.classList.toggle('l', ch !== '');
+  });
+  judge();
+}
+
+function revive() {
+  try { paint(localStorage.getItem(KEY)); } catch (err) {}
+}
+
+window.addEventListener('storage', (e) => {
+  try {
+    if (e.key === KEY && e.storageArea === localStorage) paint(e.newValue);
+  } catch (err) {}
+});
+
+
+const KEYS = {"Backquote":"Ё","KeyQ":"Й","KeyW":"Ц","KeyE":"У","KeyR":"К","KeyT":"Е","KeyY":"Н","KeyU":"Г","KeyI":"Ш","KeyO":"Щ","KeyP":"З","BracketLeft":"Х","BracketRight":"Ъ","KeyA":"Ф","KeyS":"Ы","KeyD":"В","KeyF":"А","KeyG":"П","KeyH":"Р","KeyJ":"О","KeyK":"Л","KeyL":"Д","Semicolon":"Ж","Quote":"Э","KeyZ":"Я","KeyX":"Ч","KeyC":"С","KeyV":"М","KeyB":"И","KeyN":"Т","KeyM":"Ь","Comma":"Б","Period":"Ю"};
+
+const ZOOM_MIN = 0.25;
+const ZOOM_MAX = 6.0;
+const ZOOM_STEP = 1.1;
+const EDGE = 80;
+const SLIP = 4;
+const MOVE_IDLE = 200;
+const ZAP_WAIT = 3000;
+const PAN = 1;
+const ARMED = "Ещё раз <kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd> - стереть всё";
+
+const TRAP = new Set(['Space', 'Backspace', 'Delete', 'Tab', 'Enter',
+                      'Home', 'End', 'PageUp', 'PageDown',
+                      'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']);
+
+const MODS = new Set(['ShiftLeft', 'ShiftRight', 'CapsLock']);
+
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.altKey && e.code === "KeyW"
+      && !(e.getModifierState && e.getModifierState('AltGraph'))) {
+    e.preventDefault();
+    peek = peek ? 0 : 1;
+    crown();
+    return;
+  }
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (MODS.has(e.code)) return;
+  if (e.key === '?') {
+    e.preventDefault();
+    veil(HELP, !HELP.classList.contains('on'));
+    return;
+  }
+  const open = modalOpen();
+  if (e.code === 'Escape' && open) {
+    e.preventDefault();
+    veil(open, 0);
+    pop();
+    return;
+  }
+  if (open) return;
+  if (e.code === 'Delete' && e.shiftKey) {
+    e.preventDefault();
+    zap();
+    return;
+  }
+  disarm();
+  if (e.code === 'Escape') {
+    e.preventDefault();
+    show(-1);
+    return;
+  }
+  if (e.code === 'Digit0') {
+    e.preventDefault();
+    fit();
+    return;
+  }
+  if (e.code === 'Equal' || e.code === 'NumpadAdd') {
+    e.preventDefault();
+    scale(ZOOM_STEP);
+    return;
+  }
+  if (e.code === 'Minus' || e.code === 'NumpadSubtract') {
+    e.preventDefault();
+    scale(1 / ZOOM_STEP);
+    return;
+  }
+  if (TRAP.has(e.code)) {
+    e.preventDefault();
+    if (e.code === 'Backspace') back();
+    else if (e.code === 'Delete') forth();
+    else if (e.code === 'Tab') hop(e.shiftKey ? -1 : 1);
+    else if (e.code === 'Home') edge(0);
+    else if (e.code === 'End') edge(1);
+    else if (ARROW[e.code]) {
+      const [dr, dc] = ARROW[e.code];
+      if (e.shiftKey) slide(-dc * CELL * zoom * PAN, -dr * CELL * zoom * PAN);
+      else step(dr, dc);
+    }
+    return;
+  }
+  const ch = letter(e);
+  if (!ch) return;
+  e.preventDefault();
+  put(ch);
+});
+
+const ASK = document.createElement('button');
+ASK.type = 'button';
+ASK.className = 'ask';
+ASK.setAttribute('aria-label', "Открыть подсказку");
+ASK.textContent = '?';
+document.body.appendChild(ASK);
+ASK.addEventListener('click', () => veil(HELP, 1));
+
+const WON = document.createElement('div');
+WON.className = 'won';
+WON.innerHTML = "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"headline\">Сканворд разгадан</p><p class=\"go\"><a href=\"../\">Другие сканворды</a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span></p>";
+document.body.appendChild(WON);
+
+let hits = 0;
+let bye = 0;
+let peek = 0;
+
+function crown() {
+  WON.classList.toggle('on', !!peek || (hits === RUNS.length && !bye));
+}
+
+function eggKey(i) {
+  return KEY + ':egg:' + i;
+}
+
+function eggSeen(i) {
+  try { return localStorage.getItem(eggKey(i)) === '1'; } catch (err) { return false; }
+}
+
+function spook() {
+  if (SOUND) {
+    try {
+      spook.audio.currentTime = 0;
+      spook.audio.play().catch(() => {});
+    } catch (err) {}
+    return;
+  }
+  try {
+    const ctx = spook.ctx || (spook.ctx = new (window.AudioContext || window.webkitAudioContext)());
+    ctx.resume();
+    const now = ctx.currentTime;
+    const delay = ctx.createDelay();
+    delay.delayTime.value = 0.26;
+    const echo = ctx.createGain();
+    echo.gain.value = 0.4;
+    delay.connect(echo);
+    echo.connect(delay);
+    echo.connect(ctx.destination);
+
+    const drone = ctx.createOscillator();
+    drone.type = 'sine';
+    drone.frequency.value = 82;
+    const droneGain = ctx.createGain();
+    droneGain.gain.setValueAtTime(0, now);
+    droneGain.gain.linearRampToValueAtTime(0.05, now + 0.4);
+    droneGain.gain.exponentialRampToValueAtTime(0.0001, now + 3);
+    drone.connect(droneGain);
+    droneGain.connect(ctx.destination);
+
+    const voice = ctx.createOscillator();
+    voice.type = 'sine';
+    voice.frequency.setValueAtTime(880, now);
+    voice.frequency.exponentialRampToValueAtTime(440, now + 1.4);
+    const wobble = ctx.createOscillator();
+    wobble.frequency.value = 5.5;
+    const wobbleGain = ctx.createGain();
+    wobbleGain.gain.value = 14;
+    wobble.connect(wobbleGain);
+    wobbleGain.connect(voice.frequency);
+    const voiceGain = ctx.createGain();
+    voiceGain.gain.setValueAtTime(0, now);
+    voiceGain.gain.linearRampToValueAtTime(0.12, now + 0.06);
+    voiceGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.2);
+    voice.connect(voiceGain);
+    voiceGain.connect(ctx.destination);
+    voiceGain.connect(delay);
+
+    [drone, voice, wobble].forEach((o) => o.start(now));
+    drone.stop(now + 3);
+    voice.stop(now + 2.2);
+    wobble.stop(now + 2.2);
+  } catch (err) {}
+}
+if (SOUND) {
+  try {
+    spook.audio = new Audio(SOUND);
+    spook.audio.preload = 'auto';
+  } catch (err) {}
+}
+
+function pop() {
+  if (modalOpen()) return;
+  for (const g of EGG) {
+    if (verdict(g.i) !== 1) {
+      if (!g.shown) continue;
+      g.shown = 0;
+      try { localStorage.removeItem(eggKey(g.i)); } catch (err) {}
+      continue;
+    }
+    if (g.shown) continue;
+    g.shown = 1;
+    try { localStorage.setItem(eggKey(g.i), '1'); } catch (err) {}
+    spook();
+    veil(g.win, 1);
+    return;
+  }
+}
+
+const SHADE = document.createElement('div');
+SHADE.className = 'shade';
+document.body.appendChild(SHADE);
+
+const TIP = document.createElement('div');
+TIP.className = 'tip';
+document.body.appendChild(TIP);
+
+function makeModal(cls, html) {
+  const el = document.createElement('div');
+  el.className = 'modal ' + cls;
+  el.innerHTML = html;
+  document.body.appendChild(el);
+  return el;
+}
+
+const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Они уже читают это</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды</a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span></p>");
+const EGG = EGGS.map((g) => ({ i: g.i, win: makeModal('egg', g.html),
+                               shown: eggSeen(g.i) ? 1 : 0 }));
+
+let mute = 0;
+let armed = 0;
+
+function snug(el) {
+  el.style.fontSize = '';
+  let s = parseFloat(getComputedStyle(el).fontSize);
+  while ((el.scrollHeight > el.clientHeight
+          || el.scrollWidth > el.clientWidth) && s > 6) {
+    s -= 0.5;
+    el.style.fontSize = s + 'px';
+  }
+}
+
+function veil(el, on) {
+  el.classList.toggle('on', !!on);
+  SHADE.classList.toggle('on', !!modalOpen());
+  if (on) snug(el);
+}
+
+function modalOpen() {
+  return document.querySelector('.modal.on');
+}
+
+function say(text, ms, danger) {
+  clearTimeout(mute);
+  TIP.innerHTML = text;
+  TIP.classList.toggle('arm', !!danger);
+  TIP.classList.add('on');
+  mute = setTimeout(() => TIP.classList.remove('on'), ms);
+}
+
+function hush() {
+  clearTimeout(mute);
+  TIP.classList.remove('on');
+}
+
+function disarm() {
+  if (!armed) return;
+  clearTimeout(armed);
+  armed = 0;
+  hush();
+}
+
+function zap() {
+  if (!armed) {
+    armed = setTimeout(disarm, ZAP_WAIT);
+    say(ARMED, ZAP_WAIT, true);
+    return;
+  }
+  disarm();
+  show(-1);
+  paint('.'.repeat(SPOTS.length));
+  keep();
+}
+
+const LIT = document.createElement('div');
+LIT.className = 'lit';
+document.body.appendChild(LIT);
+window.addEventListener('focus', () => LIT.classList.add('on'));
+window.addEventListener('blur', () => LIT.classList.remove('on'));
+if (document.hasFocus()) LIT.classList.add('on');
+
+revive();
+judge();
+fit();
+watch();
+veil(HELP, SPOTS.every((e) => !e.textContent));
+
+document.addEventListener('click', (e) => {
+  const shut = e.target.closest('.modal .close');
+  if (shut) {
+    veil(shut.closest('.modal'), 0);
+    pop();
+    return;
+  }
+  if (e.target.closest('.won .close')) {
+    if (hits === RUNS.length) bye = 1;
+    peek = 0;
+    crown();
+    return;
+  }
+  if (modalOpen()) return;
+  if (moved > SLIP) return;
+  const el = e.target.closest('.g i, .g b, .g figure');
+  if (!el) return;
+  let list;
+  if (el.tagName === 'FIGURE') {
+    list = PHOTO < 0 ? [] : [PHOTO];
+  } else {
+    const pair = WORD.get(addr(el));
+    list = pair ? pair.filter((i) => i >= 0) : (CLUE.get(addr(el)) || []);
+  }
+  if (!list.length) return;
+  const spot = sel < 0 ? -1 : CELLS[sel].indexOf(el);
+  let i;
+  if (spot >= 0 && spot !== caret) {
+    i = sel;
+  } else if (list.includes(sel)) {
+    i = list[(list.indexOf(sel) + 1) % list.length];
+  } else {
+    const kin = sel < 0 ? [] : list.filter((k) => DIR[k] === DIR[sel]);
+    i = kin.length ? kin[0] : list[0];
+  }
+  show(i, Math.max(0, CELLS[i].indexOf(el)));
+});
+
+const HIT_AT = "oni-uzhe-chitayut-eto";
+const HIT_SENT = {};
+
+const HIT = (name) => {
+  const gc = window.goatcounter;
+  if (HIT_SENT[name] || !gc || !gc.count) return;
+  HIT_SENT[name] = 1;
+  gc.count({path: name + '/' + HIT_AT, title: '', event: true});
+};
+
+const WHOLE = () => {
+  for (let i = 0; i < RUNS.length; i++) if (verdict(i) !== 1) return 0;
+  return 1;
+};
+
+const HIT_WAS = WHOLE();
+
+keep = ((f) => () => {
+  f();
+  if (SPOTS.some((e) => e.textContent)) HIT('start');
+})(keep);
+
+judge = ((f) => () => {
+  f();
+  if (!HIT_WAS && WHOLE()) HIT('done');
+})(judge);
+</script>
+<script data-goatcounter="https://wibblywombat.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>
