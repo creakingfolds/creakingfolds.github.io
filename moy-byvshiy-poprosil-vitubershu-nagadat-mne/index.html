@@ -1275,7 +1275,9 @@ document.addEventListener('click', (e) => {
     const kin = sel < 0 ? [] : list.filter((k) => DIR[k] === DIR[sel]);
     i = kin.length ? kin[0] : list[0];
   }
-  show(i, Math.max(0, CELLS[i].indexOf(el)));
+  const own = CELLS[i].indexOf(el);
+  const pos = own >= 0 ? own : CELLS[i].findIndex((c) => !c.textContent);
+  show(i, pos < 0 ? 0 : pos);
 });
 
 const HIT_AT = "moy-byvshiy-poprosil-vitubershu-nagadat-mne";

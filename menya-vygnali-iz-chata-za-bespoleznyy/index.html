@@ -40,6 +40,16 @@ body { margin:0;
   .g b.s { z-index:0; }
   .g b.s::after { z-index:-1; }
   .g i.v { color:#0E890B; }
+  @keyframes aura {
+    0%, 100% { text-shadow:0 0 0 rgba(5,255,0,0), 0 0 0 rgba(5,255,0,0); }
+    50% { text-shadow:0 0 15px rgba(5,255,0,1),
+      0 0 30px rgba(5,255,0,0.5); }
+  }
+  .g i.k.v { animation:aura 4s ease-in-out infinite; }
+  @media (prefers-reduced-motion:reduce) {
+    .g i.k.v { animation:none;
+      text-shadow:0 0 15px rgba(5,255,0,1), 0 0 30px rgba(5,255,0,0.5); }
+  }
   .g i.x { color:#A01F0D;
     background-image:repeating-linear-gradient(45deg,
     rgba(160,31,13,0.2) 0 6px, transparent 6px 12px); }
@@ -69,15 +79,28 @@ body { margin:0;
     text-align:left; pointer-events:none; opacity:0; }
   .tip.on { opacity:1; }
   .tip.arm { border-color:#A01F0D; color:#A01F0D; }
-  .help { position:fixed; inset:0; margin:auto; box-sizing:border-box;
-    width:fit-content; height:fit-content;
-    max-width:min(884px, 94vw); max-height:94vh; overflow:hidden;
-    border:1px solid #1C6A9C; background:rgba(255,255,255,0.9); color:#1C6A9C;
-    font-size:15.0px; line-height:1.35;
+  .ask { position:fixed; left:8px; bottom:8px; margin:0;
+    width:44px; height:44px; display:flex; align-items:center;
+    justify-content:center; border:1px solid #1C6A9C; border-radius:50%;
+    background:rgba(255,255,255,0.9); color:#1C6A9C; font:inherit; font-size:21.8px;
+    line-height:1; cursor:pointer; opacity:0.5; transition:opacity 120ms; }
+  .ask:hover, .ask:focus-visible { opacity:1; }
+  .shade { position:fixed; inset:0; background:rgba(0,0,0,0.45); opacity:0;
+    pointer-events:none; transition:opacity 120ms; }
+  .shade.on { opacity:1; transition:none; pointer-events:auto; }
+  .modal { position:fixed; inset:0; margin:auto; box-sizing:border-box;
+    width:fit-content; height:fit-content; max-width:94vw; max-height:94vh;
+    overflow:hidden; border:1px solid #1C6A9C; background:rgba(255,255,255,0.9);
+    color:#1C6A9C; font-size:15.0px; line-height:1.35;
     text-align:left; pointer-events:none; opacity:0;
     transition:opacity 120ms; }
-  .help.on { opacity:1; transition:none; }
-  .help .who { margin:0; padding:0.4em 0.8em; background:#1C6A9C;
+  .modal.on { opacity:1; transition:none; }
+  .modal .close { position:absolute; top:0; right:0; margin:0;
+    padding:0.3em 0.6em; border:0; background:none; color:#fff;
+    font:inherit; font-size:2em; line-height:1; cursor:pointer; }
+  .modal.on .close { pointer-events:auto; }
+  .help { max-width:min(884px, 94vw); }
+  .help .who { margin:0; padding:0.4em 2.6em 0.4em 0.8em; background:#1C6A9C;
     color:#fff; font-size:1.6em; line-height:1.25; font-weight:bold;
     text-align:center; overflow-wrap:anywhere; }
   .help .two { display:flex; flex-wrap:wrap; gap:1em 2em; padding:1em; }
@@ -95,11 +118,39 @@ body { margin:0;
     border-radius:0.25em; font:inherit; text-align:center; }
   .help kbd .dir { position:relative; top:-0.09em; }
   .help .word, .tip .word { margin-right:0.25em; }
-  .help .bye { display:flex; flex-wrap:wrap; justify-content:center;
-    gap:0.3em 2.5em; margin:0 1em; padding:0.6em 0 0.8em;
-    border-top:1px solid #1C6A9C; font-weight:bold; }
+  .credit { display:flex; flex-wrap:wrap; justify-content:center;
+    gap:0.2em 1.5em; margin:0 1em; padding:0.6em 0 0.8em;
+    border-top:1px solid #1C6A9C; font-size:0.85em; }
+  .credit a { color:inherit; }
+  .help.on .credit a { pointer-events:auto; }
+  .go { display:flex; flex-wrap:wrap; justify-content:center;
+    gap:0.2em 1.5em; margin:0.5em 1em 0; }
+  .go a { color:inherit; }
+  .help.on .go a { pointer-events:auto; }
+  .help .go { margin-top:0; padding-top:0.6em;
+    border-top:1px solid #1C6A9C; }
+  .help .credit { padding-top:0.3em; border-top:none; }
+  .won { position:fixed; left:50%; bottom:8px;
+    transform:translateX(-50%); box-sizing:border-box;
+    max-width:min(884px, 94vw); max-height:40vh;
+    overflow:hidden; padding:0.6em 0 0;
+    border:1px solid #1C6A9C; background:rgba(255,255,255,0.9); color:#1C6A9C;
+    font-size:15.0px; line-height:1.35; text-align:center;
+    pointer-events:none; opacity:0; transition:opacity 120ms; }
+  .won.on { opacity:1; transition:none; }
+  .won .close { position:absolute; top:0; right:0; margin:0;
+    padding:0.2em 0.5em; border:0; background:none; color:inherit;
+    font:inherit; font-size:1.4em; line-height:1; cursor:pointer; }
+  .won .headline { margin:0 2.6em; }
+  .won.on .close, .won.on a { pointer-events:auto; }
+  .won:has(~ .tip.on), .won:has(~ .tip.on) .close,
+  .won:has(~ .tip.on) a { opacity:0; pointer-events:none; }
+  .egg { width:min(442px, 88vw); }
+  .egg .close { background:rgba(0,0,0,0.5); }
+  .egg img { display:block; width:100%; height:auto; max-height:64vh; }
+  .egg .cap { margin:0.5em 0.8em 0.7em; }
 }
-@media print { .tip, .help { display:none; } }
+@media print { .tip, .ask, .shade, .modal, .won { display:none; } }
 </style></head><body>
 <div class="g">
 <i style="left:0px;top:0px"></i>
@@ -459,6 +510,8 @@ const SALT = '031425f11e8ed109';
 const CELL = 68;
 const PHOTO = 27;
 const KEY = 'scanword-18x13-30925d12';
+const EGGS = [];
+const SOUND = null;
 
 const GRID = document.querySelector('.g');
 
@@ -515,7 +568,8 @@ function watch() {
 
 window.addEventListener('resize', () => {
   if (!regauge()) view();
-  if (HELP.classList.contains('on')) snug();
+  const open = modalOpen();
+  if (open) snug(open);
 });
 
 let settle = 0;
@@ -532,7 +586,7 @@ function release(ms) {
 
 document.addEventListener('wheel', (e) => {
   e.preventDefault();
-  veil(0);
+  if (modalOpen()) return;
   hold();
   const k = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN,
                      zoom * (e.deltaY < 0 ? ZOOM_STEP : 1 / ZOOM_STEP)));
@@ -548,10 +602,10 @@ let grab = null;
 let moved = 0;
 
 document.addEventListener('pointerdown', (e) => {
-  const shown = veil(0);
+  if (modalOpen()) return;
   if (e.button !== 0) return;
   grab = [e.clientX, e.clientY, panX, panY];
-  moved = shown ? SLIP + 1 : 0;
+  moved = 0;
   hold();
 });
 
@@ -747,6 +801,10 @@ function judge() {
   for (const e of TAG.values()) dress(e, tag.get(e) || 0);
   if (FIG) dress(FIG, tag.get(FIG) || 0);
   LIT.style.setProperty('--p', (100 * done / RUNS.length).toFixed(2) + '%');
+  hits = done;
+  if (hits !== RUNS.length) bye = 0;
+  crown();
+  pop();
 }
 
 const ARROW = {
@@ -916,21 +974,34 @@ const TRAP = new Set(['Space', 'Backspace', 'Delete', 'Tab', 'Enter',
 const MODS = new Set(['ShiftLeft', 'ShiftRight', 'CapsLock']);
 
 document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.altKey && e.code === "KeyW"
+      && !(e.getModifierState && e.getModifierState('AltGraph'))) {
+    e.preventDefault();
+    peek = peek ? 0 : 1;
+    crown();
+    return;
+  }
   if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (MODS.has(e.code)) return;
+  if (e.key === '?') {
+    e.preventDefault();
+    veil(HELP, !HELP.classList.contains('on'));
+    return;
+  }
+  const open = modalOpen();
+  if (e.code === 'Escape' && open) {
+    e.preventDefault();
+    veil(open, 0);
+    pop();
+    return;
+  }
+  if (open) return;
   if (e.code === 'Delete' && e.shiftKey) {
     e.preventDefault();
-    veil(0);
     zap();
     return;
   }
-  if (MODS.has(e.code)) return;
   disarm();
-  const shown = veil(0);
-  if (e.key === '?') {
-    e.preventDefault();
-    veil(!shown);
-    return;
-  }
   if (e.code === 'Escape') {
     e.preventDefault();
     show(-1);
@@ -971,33 +1042,155 @@ document.addEventListener('keydown', (e) => {
   put(ch);
 });
 
+const ASK = document.createElement('button');
+ASK.type = 'button';
+ASK.className = 'ask';
+ASK.setAttribute('aria-label', "Открыть подсказку");
+ASK.textContent = '?';
+document.body.appendChild(ASK);
+ASK.addEventListener('click', () => veil(HELP, 1));
+
+const WON = document.createElement('div');
+WON.className = 'won';
+WON.innerHTML = "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"headline\">Сканворд разгадан</p><p class=\"go\"><a href=\"../\">Другие сканворды</a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span><span>Специально для <a href=\"https://www.twitch.tv/oladiavt\">oladiavt</a></span></p>";
+document.body.appendChild(WON);
+
+let hits = 0;
+let bye = 0;
+let peek = 0;
+
+function crown() {
+  WON.classList.toggle('on', !!peek || (hits === RUNS.length && !bye));
+}
+
+function eggKey(i) {
+  return KEY + ':egg:' + i;
+}
+
+function eggSeen(i) {
+  try { return localStorage.getItem(eggKey(i)) === '1'; } catch (err) { return false; }
+}
+
+function spook() {
+  if (SOUND) {
+    try {
+      spook.audio.currentTime = 0;
+      spook.audio.play().catch(() => {});
+    } catch (err) {}
+    return;
+  }
+  try {
+    const ctx = spook.ctx || (spook.ctx = new (window.AudioContext || window.webkitAudioContext)());
+    ctx.resume();
+    const now = ctx.currentTime;
+    const delay = ctx.createDelay();
+    delay.delayTime.value = 0.26;
+    const echo = ctx.createGain();
+    echo.gain.value = 0.4;
+    delay.connect(echo);
+    echo.connect(delay);
+    echo.connect(ctx.destination);
+
+    const drone = ctx.createOscillator();
+    drone.type = 'sine';
+    drone.frequency.value = 82;
+    const droneGain = ctx.createGain();
+    droneGain.gain.setValueAtTime(0, now);
+    droneGain.gain.linearRampToValueAtTime(0.05, now + 0.4);
+    droneGain.gain.exponentialRampToValueAtTime(0.0001, now + 3);
+    drone.connect(droneGain);
+    droneGain.connect(ctx.destination);
+
+    const voice = ctx.createOscillator();
+    voice.type = 'sine';
+    voice.frequency.setValueAtTime(880, now);
+    voice.frequency.exponentialRampToValueAtTime(440, now + 1.4);
+    const wobble = ctx.createOscillator();
+    wobble.frequency.value = 5.5;
+    const wobbleGain = ctx.createGain();
+    wobbleGain.gain.value = 14;
+    wobble.connect(wobbleGain);
+    wobbleGain.connect(voice.frequency);
+    const voiceGain = ctx.createGain();
+    voiceGain.gain.setValueAtTime(0, now);
+    voiceGain.gain.linearRampToValueAtTime(0.12, now + 0.06);
+    voiceGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.2);
+    voice.connect(voiceGain);
+    voiceGain.connect(ctx.destination);
+    voiceGain.connect(delay);
+
+    [drone, voice, wobble].forEach((o) => o.start(now));
+    drone.stop(now + 3);
+    voice.stop(now + 2.2);
+    wobble.stop(now + 2.2);
+  } catch (err) {}
+}
+if (SOUND) {
+  try {
+    spook.audio = new Audio(SOUND);
+    spook.audio.preload = 'auto';
+  } catch (err) {}
+}
+
+function pop() {
+  if (modalOpen()) return;
+  for (const g of EGG) {
+    if (verdict(g.i) !== 1) {
+      if (!g.shown) continue;
+      g.shown = 0;
+      try { localStorage.removeItem(eggKey(g.i)); } catch (err) {}
+      continue;
+    }
+    if (g.shown) continue;
+    g.shown = 1;
+    try { localStorage.setItem(eggKey(g.i), '1'); } catch (err) {}
+    spook();
+    veil(g.win, 1);
+    return;
+  }
+}
+
+const SHADE = document.createElement('div');
+SHADE.className = 'shade';
+document.body.appendChild(SHADE);
+
 const TIP = document.createElement('div');
 TIP.className = 'tip';
 document.body.appendChild(TIP);
 
-const HELP = document.createElement('div');
-HELP.className = 'help';
-HELP.innerHTML = "<p class=\"who\">Меня выгнали из чата за бесполезный навык &quot;желать всем приятного стрима&quot;, и я уехал в деревню собирать коровий навоз к сельскому празднику, однако оказалось, что бывшие товарищи сами бегут ко мне занимать баллы канала на документалку про рептилий</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd></dl></section></div><p class=\"bye\"><span><kbd>?</kbd> - открыть эту подсказку</span><span>любая клавиша - закрыть</span></p>";
-document.body.appendChild(HELP);
+function makeModal(cls, html) {
+  const el = document.createElement('div');
+  el.className = 'modal ' + cls;
+  el.innerHTML = html;
+  document.body.appendChild(el);
+  return el;
+}
+
+const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Меня выгнали из чата за бесполезный навык &quot;желать всем приятного стрима&quot;, и я уехал в деревню собирать коровий навоз к сельскому празднику, однако оказалось, что бывшие товарищи сами бегут ко мне занимать баллы канала на документалку про рептилий</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды</a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span><span>Специально для <a href=\"https://www.twitch.tv/oladiavt\">oladiavt</a></span></p>");
+const EGG = EGGS.map((g) => ({ i: g.i, win: makeModal('egg', g.html),
+                               shown: eggSeen(g.i) ? 1 : 0 }));
 
 let mute = 0;
 let armed = 0;
 
-function snug() {
-  HELP.style.fontSize = '';
-  let s = parseFloat(getComputedStyle(HELP).fontSize);
-  while ((HELP.scrollHeight > HELP.clientHeight
-          || HELP.scrollWidth > HELP.clientWidth) && s > 6) {
+function snug(el) {
+  el.style.fontSize = '';
+  let s = parseFloat(getComputedStyle(el).fontSize);
+  while ((el.scrollHeight > el.clientHeight
+          || el.scrollWidth > el.clientWidth) && s > 6) {
     s -= 0.5;
-    HELP.style.fontSize = s + 'px';
+    el.style.fontSize = s + 'px';
   }
 }
 
-function veil(on) {
-  const was = HELP.classList.contains('on');
-  HELP.classList.toggle('on', !!on);
-  if (on) snug();
-  return was;
+function veil(el, on) {
+  el.classList.toggle('on', !!on);
+  SHADE.classList.toggle('on', !!modalOpen());
+  if (on) snug(el);
+}
+
+function modalOpen() {
+  return document.querySelector('.modal.on');
 }
 
 function say(text, ms, danger) {
@@ -1043,11 +1236,24 @@ revive();
 judge();
 fit();
 watch();
-veil(SPOTS.every((e) => !e.textContent));
+veil(HELP, SPOTS.every((e) => !e.textContent));
 
 document.addEventListener('click', (e) => {
+  const shut = e.target.closest('.modal .close');
+  if (shut) {
+    veil(shut.closest('.modal'), 0);
+    pop();
+    return;
+  }
+  if (e.target.closest('.won .close')) {
+    if (hits === RUNS.length) bye = 1;
+    peek = 0;
+    crown();
+    return;
+  }
+  if (modalOpen()) return;
   if (moved > SLIP) return;
-  const el = e.target.closest('i, b, figure');
+  const el = e.target.closest('.g i, .g b, .g figure');
   if (!el) return;
   let list;
   if (el.tagName === 'FIGURE') {
@@ -1067,7 +1273,9 @@ document.addEventListener('click', (e) => {
     const kin = sel < 0 ? [] : list.filter((k) => DIR[k] === DIR[sel]);
     i = kin.length ? kin[0] : list[0];
   }
-  show(i, Math.max(0, CELLS[i].indexOf(el)));
+  const own = CELLS[i].indexOf(el);
+  const pos = own >= 0 ? own : CELLS[i].findIndex((c) => !c.textContent);
+  show(i, pos < 0 ? 0 : pos);
 });
 
 const HIT_AT = "menya-vygnali-iz-chata-za-bespoleznyy";
