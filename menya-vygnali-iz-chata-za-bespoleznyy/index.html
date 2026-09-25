@@ -45,11 +45,33 @@ body { margin:0;
     50% { text-shadow:0 0 15px rgba(5,255,0,1),
       0 0 30px rgba(5,255,0,0.5); }
   }
-  .g i.k.v { animation:aura 4s ease-in-out infinite; }
+  .g i.k.v { animation:aura 4s ease-in-out var(--a, 0s) infinite; }
   @media (prefers-reduced-motion:reduce) {
     .g i.k.v { animation:none;
       text-shadow:0 0 15px rgba(5,255,0,1), 0 0 30px rgba(5,255,0,0.5); }
   }
+  @keyframes swell {
+    0%, 100% { text-shadow:0 0 0 rgba(5,255,0,0), 0 0 0 rgba(5,255,0,0); }
+    35% { text-shadow:0 0 15px rgba(5,255,0,1),
+      0 0 30px rgba(5,255,0,0.5); }
+  }
+  @keyframes douse {
+    35% { text-shadow:0 0 15px rgba(5,255,0,1),
+      0 0 30px rgba(5,255,0,0.5); }
+    100% { text-shadow:0 0 0 rgba(5,255,0,0), 0 0 0 rgba(5,255,0,0); }
+  }
+  @keyframes kindle {
+    0% { text-shadow:0 0 0 rgba(5,255,0,0), 0 0 0 rgba(5,255,0,0); }
+    45% { text-shadow:0 0 22px rgba(5,255,0,1),
+      0 0 45px rgba(5,255,0,0.5); }
+    100% { text-shadow:0 0 15px rgba(5,255,0,1),
+      0 0 30px rgba(5,255,0,0.5); }
+  }
+  .g.wave i:not(.q) { animation:swell 560ms ease-out var(--d, 0ms); }
+  .g.wave i.k.v { animation:aura 4s ease-in-out var(--a, 0s) infinite,
+    douse 560ms ease-out var(--d, 0ms) forwards; }
+  .g.read i.k.v { animation:kindle 450ms ease-out var(--r, 0ms) both; }
+  .g.woke { --a:-2s; }
   .g i.x { color:#A01F0D;
     background-image:repeating-linear-gradient(45deg,
     rgba(160,31,13,0.2) 0 6px, transparent 6px 12px); }
@@ -113,6 +135,10 @@ body { margin:0;
   .help dt { white-space:nowrap; }
   .help dd { margin:0; }
   .help .say dt { white-space:normal; font-weight:bold; }
+  .help dl + .head { margin-top:1.2em; }
+  .help .rules { width:0; min-width:100%; margin:0; padding:0;
+    list-style:none; }
+  .help .rules li + li { margin-top:0.4em; }
   .help kbd, .tip kbd { display:inline-block; min-width:1.1em;
     margin-right:0.25em; padding:0 0.3em; border:1px solid currentColor;
     border-radius:0.25em; font:inherit; text-align:center; }
@@ -131,20 +157,33 @@ body { margin:0;
     border-top:1px solid #1C6A9C; }
   .help .credit { padding-top:0.3em; border-top:none; }
   .won { position:fixed; left:50%; bottom:8px;
-    transform:translateX(-50%); box-sizing:border-box;
+    transform:translateX(-50%); box-sizing:border-box; width:max-content;
     max-width:min(884px, 94vw); max-height:40vh;
     overflow:hidden; padding:0.6em 0 0;
     border:1px solid #1C6A9C; background:rgba(255,255,255,0.9); color:#1C6A9C;
     font-size:15.0px; line-height:1.35; text-align:center;
     pointer-events:none; opacity:0; transition:opacity 120ms; }
-  .won.on { opacity:1; transition:none; }
+  @keyframes rise { from { opacity:0; translate:0 0.6em; } }
+  .won.on { opacity:1; transition:none; animation:rise 300ms ease-out; }
+  @media (prefers-reduced-motion:reduce) { .won.on { animation:none; } }
   .won .close { position:absolute; top:0; right:0; margin:0;
     padding:0.2em 0.5em; border:0; background:none; color:inherit;
     font:inherit; font-size:1.4em; line-height:1; cursor:pointer; }
   .won .headline { margin:0 2.6em; }
-  .won.on .close, .won.on a { pointer-events:auto; }
+  .won .took { margin:0.2em 2.6em 0; }
+  .won .took:empty { display:none; }
+  .won .thanks { margin:0.4em 1.5em 0; font-size:0.85em; }
+  .won .share { margin:0.5em 1em 0; }
+  .won .share button { display:inline-grid; margin:0; padding:0.2em 0.9em;
+    border:1px solid currentColor; background:none; color:inherit;
+    font:inherit; cursor:pointer; }
+  .won .share b { grid-area:1 / 1; font-weight:normal; }
+  .won .share b + b, .won .share .done b { visibility:hidden; }
+  .won .share .done b + b { visibility:visible; }
+  .won.on .close, .won.on a, .won.on .share button { pointer-events:auto; }
   .won:has(~ .tip.on), .won:has(~ .tip.on) .close,
-  .won:has(~ .tip.on) a { opacity:0; pointer-events:none; }
+  .won:has(~ .tip.on) a, .won:has(~ .tip.on) .share button {
+    opacity:0; pointer-events:none; }
   .egg { width:min(442px, 88vw); }
   .egg .close { background:rgba(0,0,0,0.5); }
   .egg img { display:block; width:100%; height:auto; max-height:64vh; }
@@ -787,10 +826,15 @@ const locked = (e) => e.classList.contains('v');
 function judge() {
   const box = new Map();
   const tag = new Map();
+  const fresh = [];
   let done = 0;
   for (let i = 0; i < RUNS.length; i++) {
     const v = verdict(i);
-    if (v === 1) done++;
+    if (v === 1) {
+      done++;
+      if (!GOT[i]) fresh.push(i);
+    }
+    GOT[i] = v === 1;
     if (!v) continue;
     for (const e of CELLS[i]) {
       if (e) box.set(e, box.get(e) === 1 || v === 1 ? 1 : 2);
@@ -801,10 +845,23 @@ function judge() {
   for (const e of TAG.values()) dress(e, tag.get(e) || 0);
   if (FIG) dress(FIG, tag.get(FIG) || 0);
   LIT.style.setProperty('--p', (100 * done / RUNS.length).toFixed(2) + '%');
+  const was = hits;
   hits = done;
-  if (hits !== RUNS.length) bye = 0;
-  crown();
+  if (hits !== RUNS.length) {
+    bye = 0;
+    if (was === RUNS.length) {
+      still();
+      GRID.classList.remove('woke');
+      took = 0;
+    }
+    if (live && fresh.length) spark(fresh);
+  } else if (live && was !== RUNS.length) {
+    due = 1;
+    const [a, b] = clock();
+    if (a) clocked(a, b || Date.now() - a);
+  }
   pop();
+  crown();
 }
 
 const ARROW = {
@@ -897,6 +954,7 @@ function put(ch) {
   if (!locked(e)) {
     e.textContent = ch;
     e.classList.add('l');
+    last = e;
     keep();
   }
   if (caret < CELLS[sel].length - 1) caret++;
@@ -931,6 +989,29 @@ function keep() {
   let s = '';
   for (const e of SPOTS) s += e.textContent || '.';
   try { localStorage.setItem(KEY, s); } catch (err) {}
+  if (!s.replace(/[.]/g, '')) {
+    blank = 1;
+    clocked(0, 0);
+  } else if (blank && !t0) {
+    clocked(Date.now(), 0);
+  }
+}
+
+function clock() {
+  try {
+    const got = JSON.parse(localStorage.getItem(TIMED));
+    if (Array.isArray(got) && got.length === 2) return got;
+  } catch (err) {}
+  return [0, 0];
+}
+
+function clocked(a, b) {
+  t0 = a;
+  took = b;
+  try {
+    if (a) localStorage.setItem(TIMED, JSON.stringify([a, b]));
+    else localStorage.removeItem(TIMED);
+  } catch (err) {}
 }
 
 function paint(s) {
@@ -950,7 +1031,13 @@ function revive() {
 
 window.addEventListener('storage', (e) => {
   try {
-    if (e.key === KEY && e.storageArea === localStorage) paint(e.newValue);
+    if (e.storageArea !== localStorage) return;
+    if (e.key === TIMED) [t0, took] = clock();
+    if (e.key === KEY) {
+      paint(e.newValue);
+      blank = SPOTS.every((x) => !x.textContent) ? 1 : 0;
+      if (blank && t0) clocked(0, 0);
+    }
   } catch (err) {}
 });
 
@@ -978,6 +1065,13 @@ document.addEventListener('keydown', (e) => {
       && !(e.getModifierState && e.getModifierState('AltGraph'))) {
     e.preventDefault();
     peek = peek ? 0 : 1;
+    if (peek) {
+      due = 1;
+      pop();
+    } else {
+      still();
+      if (hits !== RUNS.length) GRID.classList.remove('woke');
+    }
     crown();
     return;
   }
@@ -986,6 +1080,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === '?') {
     e.preventDefault();
     veil(HELP, !HELP.classList.contains('on'));
+    pop();
     return;
   }
   const open = modalOpen();
@@ -1052,15 +1147,172 @@ ASK.addEventListener('click', () => veil(HELP, 1));
 
 const WON = document.createElement('div');
 WON.className = 'won';
-WON.innerHTML = "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"headline\">Сканворд разгадан</p><p class=\"go\"><a href=\"../\">Другие сканворды</a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span><span>Специально для <a href=\"https://www.twitch.tv/oladiavt\">oladiavt</a></span></p>";
+WON.innerHTML = "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"headline\"></p><p class=\"took\"></p><p class=\"thanks\">Спасибо тем, кто разгадывал прошлые сканворды! Первыми отвечали greendancer, chudoleo, amillesairon, sug4rr4t и golod_gg</p><p class=\"share\"><button type=\"button\"><b>Поделиться</b><b>Ссылка скопирована</b></button></p><p class=\"go\"><a href=\"../\">Другие сканворды</a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span><span>Специально для <a href=\"https://www.twitch.tv/oladiavt\">oladiavt</a></span></p>";
 document.body.appendChild(WON);
+
+const SAYS = ["Ну, допустим", "Вот и всё", "Изи", "Я поддавался", "Сканворд капитулировал", "Составитель уже готовит следующий", "Все слова угаданы. Некоторые даже не перебором", "С Гуглом не считается", "Вы узнали новое слово... Но какой ценой?", "Хаос побеждён", "Ожегов бы прослезился", "Извилины отскрипели", "Скрип извилин сменился довольным урчанием", "Хоть что-то в жизни сошлось", "Скриншот или не было"];
+const AGAIN = ["Да, всё ещё разгадан"];
+const TOOK_SAY = ["Время решения:", "ч", "мин"];
+const HEAD = WON.querySelector('.headline');
+const TOOK = WON.querySelector('.took');
+const SHARE = WON.querySelector('.share button');
+const SHARE_WAIT = 2000;
+let copied = 0;
+
+function pick(list) {
+  const rest = list.filter((s) => s !== HEAD.textContent);
+  const from = rest.length ? rest : list;
+  return from[Math.floor(Math.random() * from.length)];
+}
+
+function copy(url) {
+  if (!navigator.clipboard) return;
+  navigator.clipboard.writeText(url).then(() => {
+    clearTimeout(copied);
+    SHARE.classList.add('done');
+    copied = setTimeout(() => SHARE.classList.remove('done'), SHARE_WAIT);
+  }, () => {});
+}
+
+function share() {
+  const url = location.href.replace(/[?#].*$/, '').replace(/index[.]html$/, '');
+  if (!navigator.share) {
+    copy(url);
+    return;
+  }
+  navigator.share({ title: document.title, url })
+    .catch((err) => { if (err.name !== 'AbortError') copy(url); });
+}
+
+if (navigator.share || navigator.clipboard) {
+  SHARE.addEventListener('click', share);
+} else {
+  SHARE.parentNode.remove();
+}
 
 let hits = 0;
 let bye = 0;
 let peek = 0;
+let live = 0;
+const TIMED = KEY + ':time';
+let blank = 0;
+let t0 = 0;
+let took = 0;
+let due = 0;
+let run = 0;
+let last = null;
+const GOT = [];
+let lull = 0;
+let till = 0;
+
+const WAVE_STEP = 70;
+const WAVE_SWELL = 560;
+const READ_STEP = 150;
+const READ_LIT = 450;
+const SPARK_STEP = 70;
+const SPARK_FLASH = 210;
+const SPARK_PEAK = "0 0 15px rgba(5,255,0,1), 0 0 30px rgba(5,255,0,0.5)";
+const CLICK_TIME = 250;
+const CLICK_EDGE = "10px";
+
+const SPELL = [...document.querySelectorAll('.g i.k')]
+  .sort((a, b) => a.offsetTop - b.offsetTop || a.offsetLeft - b.offsetLeft);
+SPELL.forEach((e, n) => e.style.setProperty('--r', n * READ_STEP + 'ms'));
+
+function lasted(ms) {
+  const m = Math.max(1, Math.round(ms / 60000));
+  const h = Math.floor(m / 60);
+  const rest = m % 60 ? m % 60 + ' ' + TOOK_SAY[2] : '';
+  return TOOK_SAY[0] + ' '
+    + (h ? h + ' ' + TOOK_SAY[1] + (rest ? ' ' + rest : '') : rest);
+}
 
 function crown() {
-  WON.classList.toggle('on', !!peek || (hits === RUNS.length && !bye));
+  const on = !run && !due && (!!peek || (hits === RUNS.length && !bye));
+  if (on && !WON.classList.contains('on')) {
+    HEAD.textContent = pick(live ? SAYS : AGAIN);
+    TOOK.textContent = took ? lasted(took) : '';
+  }
+  WON.classList.toggle('on', on);
+}
+
+function still() {
+  clearTimeout(run);
+  run = 0;
+  due = 0;
+  GRID.classList.remove('wave', 'read');
+}
+
+function fin() {
+  run = 0;
+  GRID.classList.remove('read');
+  GRID.classList.add('woke');
+  crown();
+}
+
+function cheer() {
+  still();
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    crown();
+    return;
+  }
+  const y = last ? last.offsetTop : (GRID.offsetHeight - CELL) / 2;
+  const x = last ? last.offsetLeft : (GRID.offsetWidth - CELL) / 2;
+  let far = 0;
+  for (const e of SPOTS) {
+    const d = Math.round(Math.hypot(e.offsetTop - y, e.offsetLeft - x)
+                         / CELL * WAVE_STEP);
+    e.style.setProperty('--d', d + 'ms');
+    far = Math.max(far, d);
+  }
+  void GRID.offsetWidth;
+  GRID.classList.add('wave');
+  run = setTimeout(() => {
+    GRID.classList.remove('wave');
+    if (!SPELL.length) {
+      fin();
+      return;
+    }
+    GRID.classList.add('read');
+    run = setTimeout(fin, (SPELL.length - 1) * READ_STEP + READ_LIT);
+  }, far + WAVE_SWELL);
+  crown();
+}
+
+function spark(fresh) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const lit = new Map();
+  const rim = new Map();
+  for (const i of fresh) {
+    const from = Math.max(0, CELLS[i].indexOf(last));
+    CELLS[i].forEach((e, n) => {
+      const d = Math.abs(n - from) * SPARK_STEP;
+      if (e && (!lit.has(e) || lit.get(e) > d)) lit.set(e, d);
+    });
+    const d = from * SPARK_STEP;
+    const q = MARK[i];
+    if (q && (!rim.has(q) || rim.get(q) > d)) rim.set(q, d);
+  }
+  let far = 0;
+  try {
+    for (const [e, d] of lit) {
+      e.animate([{ offset: 0.35, textShadow: SPARK_PEAK, easing: 'ease-out' }],
+                { duration: SPARK_FLASH, delay: d });
+      far = Math.max(far, d + SPARK_FLASH);
+    }
+    for (const [q, d] of rim) {
+      q.animate([{ offset: 0, borderWidth: CLICK_EDGE, easing: 'ease-out' }],
+                { duration: CLICK_TIME, delay: d, pseudoElement: '::after' });
+      far = Math.max(far, d + CLICK_TIME);
+    }
+  } catch (err) {}
+  const now = performance.now();
+  till = Math.max(till, now + far);
+  clearTimeout(lull);
+  lull = setTimeout(() => {
+    lull = 0;
+    pop();
+  }, till - now);
 }
 
 function eggKey(i) {
@@ -1133,7 +1385,7 @@ if (SOUND) {
 }
 
 function pop() {
-  if (modalOpen()) return;
+  if (modalOpen() || lull) return;
   for (const g of EGG) {
     if (verdict(g.i) !== 1) {
       if (!g.shown) continue;
@@ -1148,6 +1400,7 @@ function pop() {
     veil(g.win, 1);
     return;
   }
+  if (due) cheer();
 }
 
 const SHADE = document.createElement('div');
@@ -1166,7 +1419,7 @@ function makeModal(cls, html) {
   return el;
 }
 
-const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Меня выгнали из чата за бесполезный навык &quot;желать всем приятного стрима&quot;, и я уехал в деревню собирать коровий навоз к сельскому празднику, однако оказалось, что бывшие товарищи сами бегут ко мне занимать баллы канала на документалку про рептилий</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды</a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span><span>Специально для <a href=\"https://www.twitch.tv/oladiavt\">oladiavt</a></span></p>");
+const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Меня выгнали из чата за бесполезный навык &quot;желать всем приятного стрима&quot;, и я уехал в деревню собирать коровий навоз к сельскому празднику, однако оказалось, что бывшие товарищи сами бегут ко мне занимать баллы канала на документалку про рептилий</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды</a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span><span>Специально для <a href=\"https://www.twitch.tv/oladiavt\">oladiavt</a></span></p>");
 const EGG = EGGS.map((g) => ({ i: g.i, win: makeModal('egg', g.html),
                                shown: eggSeen(g.i) ? 1 : 0 }));
 
@@ -1232,8 +1485,13 @@ window.addEventListener('focus', () => LIT.classList.add('on'));
 window.addEventListener('blur', () => LIT.classList.remove('on'));
 if (document.hasFocus()) LIT.classList.add('on');
 
+[t0, took] = clock();
 revive();
 judge();
+live = 1;
+blank = SPOTS.every((e) => !e.textContent) ? 1 : 0;
+if (blank && t0) clocked(0, 0);
+if (hits !== RUNS.length && took) clocked(t0, 0);
 fit();
 watch();
 veil(HELP, SPOTS.every((e) => !e.textContent));
