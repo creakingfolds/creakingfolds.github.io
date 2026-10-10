@@ -39,7 +39,13 @@ body { margin:0;
     border:4px solid #FFDDB8; pointer-events:none; }
   .g b.s { z-index:0; }
   .g b.s::after { z-index:-1; }
+  .g figure s { padding:4px 0; }
   .g i.v { color:#0E890B; }
+  .g i.h { color:#226FC3; }
+  .g i.h::before { content:""; position:absolute; right:12%; top:12%;
+    width:10%; height:10%; border-radius:50%; background:currentColor; }
+  .g i.h.v { color:#0E890B; }
+  .g i.h.x { color:#226FC3; background-image:none; }
   @keyframes aura {
     0%, 100% { text-shadow:0 0 0 rgba(5,255,0,0), 0 0 0 rgba(5,255,0,0); }
     50% { text-shadow:0 0 15px rgba(5,255,0,1),
@@ -107,6 +113,13 @@ body { margin:0;
     background:rgba(255,255,255,0.9); color:#1D5EA5; font:inherit; font-size:21.8px;
     line-height:1; cursor:pointer; opacity:0.5; transition:opacity 120ms; }
   .ask:hover, .ask:focus-visible { opacity:1; }
+  .ask.letter { bottom:65px; }
+  .ask.off, .ask.off:hover, .ask.off:focus-visible { opacity:0.35;
+    cursor:default; }
+  .ask b { position:absolute; top:-0.35em; right:-0.35em; min-width:1.4em;
+    box-sizing:border-box; padding:0 0.25em; border:1px solid #1D5EA5;
+    border-radius:0.7em; background:rgba(255,255,255,0.9); color:#1D5EA5;
+    font-weight:normal; font-size:0.62em; line-height:1.4; text-align:center; }
   .shade { position:fixed; inset:0; background:rgba(0,0,0,0.45); opacity:0;
     pointer-events:none; transition:opacity 120ms; }
   .shade.on { opacity:1; transition:none; pointer-events:auto; }
@@ -122,9 +135,22 @@ body { margin:0;
     font:inherit; font-size:2em; line-height:1; cursor:pointer; }
   .modal.on .close { pointer-events:auto; }
   .help { max-width:min(884px, 94vw); }
+  .modal.hint { max-width:min(884px, 94vw); text-align:center; }
+  .modal.hint .head { margin:0.9em 2.6em 0; font-weight:bold; }
+  .modal.hint .say { margin:0.6em 1.2em 0; }
+  .modal.hint .btns { display:flex; justify-content:center; gap:0.8em;
+    margin:1em; }
+  .modal.hint .btns button { margin:0; padding:0.25em 1.1em;
+    border:1px solid currentColor; background:none; color:inherit;
+    font:inherit; cursor:pointer; }
+  .modal.hint.on .btns button { pointer-events:auto; }
+  .modal.hint .yes { font-weight:bold; }
+  .modal.hint .close { color:inherit; }
   .help .who { margin:0; padding:0.4em 2.6em 0.4em 0.8em; background:#1D5EA5;
     color:#fff; font-size:1.6em; line-height:1.25; font-weight:bold;
     text-align:center; overflow-wrap:anywhere; }
+  .help .lvl { margin:0; padding:0.5em 0.8em 0; text-align:center;
+    font-weight:bold; opacity:0.75; }
   .help .two { display:flex; flex-wrap:wrap; gap:1em 2em; padding:1em; }
   .help section { flex:0 1 auto; min-width:0; }
   .help .head { margin:0 0 0.5em; padding-bottom:0.3em;
@@ -160,7 +186,7 @@ body { margin:0;
     transform:translateX(-50%); box-sizing:border-box; width:max-content;
     max-width:min(884px, 94vw); max-height:40vh;
     overflow:hidden; padding:0.6em 0 0;
-    border:1px solid #1D5EA5; background:rgba(255,255,255,0.9); color:#1D5EA5;
+    border:1px solid #1D5EA5; background:rgba(255,255,255,0.97); color:#1D5EA5;
     font-size:15.0px; line-height:1.35; text-align:center;
     pointer-events:none; opacity:0; transition:opacity 120ms; }
   @keyframes rise { from { opacity:0; translate:0 0.6em; } }
@@ -172,6 +198,7 @@ body { margin:0;
   .won .headline { margin:0 2.6em; }
   .won .took { margin:0.2em 2.6em 0; }
   .won .took:empty { display:none; }
+  .won .hints { margin:0.2em 2.6em 0; }
   .won .thanks { margin:0.4em 1.5em 0; font-size:0.85em; }
   .won .share { margin:0.5em 1em 0; }
   .won .share button { display:inline-grid; margin:0; padding:0.2em 0.9em;
@@ -184,7 +211,14 @@ body { margin:0;
   .won:has(~ .tip.on), .won:has(~ .tip.on) .close,
   .won:has(~ .tip.on) a, .won:has(~ .tip.on) .share button {
     opacity:0; pointer-events:none; }
+  @keyframes emerge { from { opacity:0; scale:0.96; } }
+  .egg.on { animation:emerge 260ms ease-out; }
+  @media (prefers-reduced-motion:reduce) { .egg.on { animation:none; } }
   .egg { width:min(442px, 88vw); }
+  .egg.full { width:fit-content; max-width:96vw; }
+  .egg.full img { width:auto; max-width:96vw; max-height:84vh;
+    margin:0 auto; }
+  .egg.full .cap { max-width:40em; margin:0.5em auto 0.7em; }
   .egg .close { background:rgba(0,0,0,0.5); }
   .egg img { display:block; width:100%; height:auto; max-height:64vh; }
   .egg .cap { margin:0.5em 0.8em 0.7em; }
@@ -551,8 +585,24 @@ const SALT = 'b2cc652533c23be1';
 const CELL = 68;
 const PHOTO = 15;
 const KEY = 'scanword-18x13-03f3b2e1';
-const EGGS = [{"i": 0, "html": "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><img src=\"egg-0.jpg\" alt=\"\" draggable=\"false\"><p class=\"cap\">Почему засыпаны первые этажи старых зданий в Санкт-Петербурге? Кто это сделал?</p>"}, {"i": 44, "html": "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><img src=\"egg-44.webp\" alt=\"\" draggable=\"false\">"}];
+const EGGS = [{"i": 0, "full": false, "html": "PGJ1dHRvbiB0eXBlPSJidXR0b24iIGNsYXNzPSJjbG9zZSIgYXJpYS1sYWJlbD0i0JfQsNC60YDRi9GC0YwiPiZ0aW1lczs8L2J1dHRvbj48aW1nIHNyYz0iZWdnLTAuanBnIiBhbHQ9IiIgZHJhZ2dhYmxlPSJmYWxzZSI+PHAgY2xhc3M9ImNhcCI+0J/QvtGH0LXQvNGDINC30LDRgdGL0L/QsNC90Ysg0L/QtdGA0LLRi9C1INGN0YLQsNC20Lgg0YHRgtCw0YDRi9GFINC30LTQsNC90LjQuSDQsiDQodCw0L3QutGCLdCf0LXRgtC10YDQsdGD0YDQs9C1PyDQmtGC0L4g0Y3RgtC+INGB0LTQtdC70LDQuz88L3A+"}, {"i": 44, "full": false, "html": "PGJ1dHRvbiB0eXBlPSJidXR0b24iIGNsYXNzPSJjbG9zZSIgYXJpYS1sYWJlbD0i0JfQsNC60YDRi9GC0YwiPiZ0aW1lczs8L2J1dHRvbj48aW1nIHNyYz0iZWdnLTQ0LndlYnAiIGFsdD0iIiBkcmFnZ2FibGU9ImZhbHNlIj4="}];
 const SOUND = "egg-sound.ogg";
+
+const HSEAL = '88e2c7410b4ecce4df42845fff042cd36d7c51bf1aa6876a22f5d93a1e3e89363235311e676b6619d58778b13125b71e51638a029f1bf1837482df0c466068a669c936df577eeaf78ccfc88d453b91f68ade277f8df1456176b103d40bfc09e02ce897b00e8c2f61c3740d50ef3026e2b053fd8b394c7ea48a5f749365860c11e1b6b4551954eab58e8f04c7692c7cc19c7aab591d6a1f86a4877c83d8734c2ec7cfa5634df3d62ef2b52087b220fb4dce65329ad7c985917c171a93ef61cdf5787246cc536d93a8ab09d4b10cc8c984637c445567be10ec6fee10562d4dd589a80054c4b107f4b7e85d22882d61ea289b018ff9aaa526b81a727f85abceaeb8c4c035679bd86fcaee0dfe79ccb6b276f7de915635b18b94c4d44ff3de41080e37bafece0eac72c7e93711c87485ce20dce2eb45ad330beced711ded09304fc7ce368b10eeaf8efda467db973b90467da40e0f135ef58008ac6060fb08455c52584efb5a741641455dbd4d7f5af95960969b19f8ab7058b38f6e9031b46d16123672f1a49fc7f3eca8ab5a1cb3773f3e92f2928ba42cf6309b461ed5c62518e2bfe389205cbf5538f97be96e27f86d531bfaf6556a06e74ba38d4aa316b4cdd3f42221ee62160daff3990c8157c69c335d66492da307bb47625b8ec03a06f0ae2c4ae8aeddc01a53197e96d653972d6eaa40e2c3a1cf99040fdca8c3602fc0da3f0091b7475571a8356ed5aa6abd1375a28e4fc96d9c48e0ff4f90e441aa8eed5be55d83a70cc62fa5c9e5467596a8c792fc15077ec5e7313c170c208e8b7c2199b9827a1a0da268efdb1f49704dfdab2847396a1f256ead55d03af8ebe0f2a71f0dca73a250838f9a802fec769d531f0b6c57b4ba701e9eea03c602ebe600afb918597870350c72f0a5cd1caeaaf7c1b7bdfb1e3e166762003740ef5bfb2a4b8946b5544c079fa7440e59c3a85be8e46b4167350ce3bbc8ddc2e7569d179f0412a70351b73374d18bfd9a6e6d2ea5a2adc05577bd6c1b0d13cadbc070c623276141b859811c24b2267f534a4513ec9a7b78a73130edd302896324be8076ddb58565f2b7ee2b9cae984cce86a2f9af4acb9ee0ee1491ad5a819f849d159f7519f8925b488c82e60f793eb316e56db0f959afcfab82eba031a371b4d97bf89f2b6d772bb90fae40e02cc13a6f173958e3b493e90362c437220e63045ef1465d60a17e2c15964741ae87cba917202c9ceb9078ddf8b9a7ff790ddf4f9627e2e103bfe6236062677bc2191a0bc2274add85f69e6daaff8f420d1aa7a8f1c36ea42b1b593312873f7cb0c9e85263a9ba4d6cf2eb298b043700fd5a4e8c22aaed32c2b2e730257df1d69300d34ca8627fa4541c5efeb68bbc86377cf6254b483bb376d62f495d44ddc7351b607e73bf0c3b2ade8b69104c78';
+const HSALT = 'c6725e08269fcf13';
+const HLEN = 12;
+const HSTEP = 6;
+const HGLYPH = "А";
+const HINT_ASK = "Открыть букву";
+const HINT_NONE = "Подсказок нет, их дают отгаданные слова";
+const HINT_NEED = "Сначала выберите клетку";
+const HINT_OPEN = "Эта буква уже открыта";
+const HINT_DONE = "Слово с этой буквой уже сошлось";
+const HINT_FAIL = "Подсказка не сработала: печать буквы не сошлась";
+const HINT_SAY = 2600;
+const HINT_PULSE = 600;
+const HINT_RING = 0.7;
+const HKEY = KEY + ':hint';
 
 const GRID = document.querySelector('.g');
 
@@ -823,7 +873,7 @@ function dress(e, v) {
   e.classList.toggle('x', v === 2);
 }
 
-const locked = (e) => e.classList.contains('v');
+const locked = (e) => e.classList.contains('v') || e.classList.contains('h');
 
 function judge() {
   const box = new Map();
@@ -864,6 +914,7 @@ function judge() {
   }
   pop();
   crown();
+  hcount();
 }
 
 const ARROW = {
@@ -987,6 +1038,137 @@ function forth() {
   judge();
 }
 
+const SPOT_IX = new Map();
+SPOTS.forEach((e, i) => SPOT_IX.set(e, i));
+
+let hints = [];
+
+function parseHints(raw) {
+  let got;
+  try { got = JSON.parse(raw); } catch (err) { return []; }
+  if (!Array.isArray(got)) return [];
+  const seen = new Set();
+  const out = [];
+  for (const v of got) {
+    if (v === Math.floor(v) && v >= 0 && v < SPOTS.length && !seen.has(v)) {
+      seen.add(v);
+      out.push(v);
+    }
+  }
+  return out;
+}
+
+function loadHints() {
+  try { return parseHints(localStorage.getItem(HKEY)); } catch (err) {
+    return [];
+  }
+}
+
+function keepHints() {
+  try { localStorage.setItem(HKEY, JSON.stringify(hints)); } catch (err) {}
+}
+
+function letterOf(ix) {
+  const want = HSEAL.substr(ix * HLEN, HLEN);
+  for (let i = 0x410; i <= 0x42F; i++) {
+    const ch = String.fromCharCode(i);
+    if (sha256(HSALT + ':' + ix + ':' + ch).slice(0, HLEN) === want) return ch;
+  }
+  return '';
+}
+
+function hpaint() {
+  const want = new Set(hints);
+  for (let i = 0; i < SPOTS.length; i++) {
+    const e = SPOTS[i];
+    if (!e) continue;
+    if (!want.has(i)) {
+      e.classList.remove('h');
+      continue;
+    }
+    const ch = letterOf(i);
+    if (!ch) {
+      e.classList.remove('h');
+      continue;
+    }
+    if (e.textContent !== ch) {
+      e.textContent = ch;
+      e.classList.add('l');
+    }
+    e.classList.add('h');
+  }
+}
+
+function avail() {
+  return Math.max(0, Math.floor(hits / HSTEP) - hints.length);
+}
+
+let hintWas = 0;
+
+function hcount() {
+  const n = avail();
+  const grew = n > hintWas;
+  hintWas = n;
+  HINT_NUM.textContent = n;
+  HINT_BTN.classList.toggle('off',
+                            n <= 0 || HSEAL.length !== SPOTS.length * HLEN);
+  if (grew && live && HSEAL.length === SPOTS.length * HLEN) hintPulse();
+}
+
+function hintPulse() {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  try {
+    HINT_NUM.animate(
+      [{ transform: 'scale(1)' },
+       { transform: 'scale(1.35)', offset: 0.35 },
+       { transform: 'scale(1)' }],
+      { duration: HINT_PULSE, easing: 'ease-out' });
+    const ink = getComputedStyle(HINT_BTN).color;
+    HINT_BTN.animate(
+      [{ boxShadow: `0 0 0 0 ${ink}` },
+       { boxShadow: `0 0 0 ${HINT_RING}em transparent` }],
+      { duration: HINT_PULSE, easing: 'ease-out' });
+  } catch (err) {}
+}
+
+function whyHint() {
+  if (HSEAL.length !== SPOTS.length * HLEN) return HINT_FAIL;
+  const e = sel < 0 ? null : CELLS[sel][caret];
+  if (!e || !SPOT_IX.has(e)) return HINT_NEED;
+  if (e.classList.contains('v')) return HINT_DONE;
+  if (e.classList.contains('h')) return HINT_OPEN;
+  if (avail() <= 0) return HINT_NONE;
+  return '';
+}
+
+function hintAsk() {
+  const why = whyHint();
+  if (why) {
+    say(why, HINT_SAY);
+    return;
+  }
+  veil(HINT_WIN, 1);
+}
+
+function reveal() {
+  const e = sel < 0 ? null : CELLS[sel][caret];
+  const ix = e ? SPOT_IX.get(e) : undefined;
+  if (ix === undefined) return;
+  const ch = letterOf(ix);
+  if (!ch) {
+    say(HINT_FAIL, HINT_SAY);
+    return;
+  }
+  e.textContent = ch;
+  e.classList.add('l', 'h');
+  last = e;
+  hints.push(ix);
+  keepHints();
+  keep();
+  mark();
+  judge();
+}
+
 function keep() {
   let s = '';
   for (const e of SPOTS) s += e.textContent || '.';
@@ -1029,6 +1211,7 @@ function paint(s) {
 
 function revive() {
   try { paint(localStorage.getItem(KEY)); } catch (err) {}
+  hpaint();
 }
 
 window.addEventListener('storage', (e) => {
@@ -1037,8 +1220,14 @@ window.addEventListener('storage', (e) => {
     if (e.key === TIMED) [t0, took] = clock();
     if (e.key === KEY) {
       paint(e.newValue);
+      hpaint();
       blank = SPOTS.every((x) => !x.textContent) ? 1 : 0;
       if (blank && t0) clocked(0, 0);
+    }
+    if (e.key === HKEY) {
+      hints = parseHints(e.newValue);
+      hpaint();
+      hcount();
     }
   } catch (err) {}
 });
@@ -1079,13 +1268,14 @@ document.addEventListener('keydown', (e) => {
   }
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   if (MODS.has(e.code)) return;
+  const open = modalOpen();
   if (e.key === '?') {
     e.preventDefault();
+    if (open && open !== HELP) return;
     veil(HELP, !HELP.classList.contains('on'));
     pop();
     return;
   }
-  const open = modalOpen();
   if (e.code === 'Escape' && open) {
     e.preventDefault();
     veil(open, 0);
@@ -1147,16 +1337,29 @@ ASK.textContent = '?';
 document.body.appendChild(ASK);
 ASK.addEventListener('click', () => veil(HELP, 1));
 
+const HINT_BTN = document.createElement('button');
+HINT_BTN.type = 'button';
+HINT_BTN.className = 'ask letter';
+HINT_BTN.setAttribute('aria-label', HINT_ASK);
+HINT_BTN.textContent = HGLYPH;
+const HINT_NUM = document.createElement('b');
+HINT_NUM.textContent = '0';
+HINT_BTN.appendChild(HINT_NUM);
+document.body.appendChild(HINT_BTN);
+HINT_BTN.addEventListener('click', hintAsk);
+
 const WON = document.createElement('div');
 WON.className = 'won';
-WON.innerHTML = "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"headline\"></p><p class=\"took\"></p><p class=\"share\"><button type=\"button\"><b>Поделиться</b><b>Ссылка скопирована</b></button></p><p class=\"go\"><a href=\"../\">Другие сканворды</a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span></p>";
+WON.innerHTML = "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"headline\"></p><p class=\"took\"></p><p class=\"hints\"></p><p class=\"share\"><button type=\"button\"><b>Поделиться</b><b>Ссылка скопирована</b></button></p><p class=\"go\"><a href=\"../\">Другие сканворды</a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span></p>";
 document.body.appendChild(WON);
 
 const SAYS = ["Ну, допустим", "Вот и всё", "Изи", "Я поддавался", "Сканворд капитулировал", "Составитель уже готовит следующий", "Все слова угаданы. Некоторые даже не перебором", "С Гуглом не считается", "Вы узнали новое слово... Но какой ценой?", "Хаос побеждён", "Ожегов бы прослезился", "Извилины отскрипели", "Скрип извилин сменился довольным урчанием", "Хоть что-то в жизни сошлось", "Скриншот или не было"];
 const AGAIN = ["Да, всё ещё разгадан"];
 const TOOK_SAY = ["Время решения:", "ч", "мин"];
+const WON_HINTS = "Подсказок использовано:";
 const HEAD = WON.querySelector('.headline');
 const TOOK = WON.querySelector('.took');
+const HINTS = WON.querySelector('.hints');
 const SHARE = WON.querySelector('.share button');
 const SHARE_WAIT = 2000;
 let copied = 0;
@@ -1231,9 +1434,12 @@ function lasted(ms) {
 
 function crown() {
   const on = !run && !due && (!!peek || (hits === RUNS.length && !bye));
-  if (on && !WON.classList.contains('on')) {
-    HEAD.textContent = pick(live ? SAYS : AGAIN);
-    TOOK.textContent = took ? lasted(took) : '';
+  if (on) {
+    if (!WON.classList.contains('on')) {
+      HEAD.textContent = pick(live ? SAYS : AGAIN);
+      TOOK.textContent = took ? lasted(took) : '';
+    }
+    HINTS.textContent = WON_HINTS + ' ' + hints.length;
   }
   WON.classList.toggle('on', on);
 }
@@ -1325,64 +1531,11 @@ function eggSeen(i) {
   try { return localStorage.getItem(eggKey(i)) === '1'; } catch (err) { return false; }
 }
 
-function spook() {
-  if (SOUND) {
-    try {
-      spook.audio.currentTime = 0;
-      spook.audio.play().catch(() => {});
-    } catch (err) {}
-    return;
-  }
-  try {
-    const ctx = spook.ctx || (spook.ctx = new (window.AudioContext || window.webkitAudioContext)());
-    ctx.resume();
-    const now = ctx.currentTime;
-    const delay = ctx.createDelay();
-    delay.delayTime.value = 0.26;
-    const echo = ctx.createGain();
-    echo.gain.value = 0.4;
-    delay.connect(echo);
-    echo.connect(delay);
-    echo.connect(ctx.destination);
-
-    const drone = ctx.createOscillator();
-    drone.type = 'sine';
-    drone.frequency.value = 82;
-    const droneGain = ctx.createGain();
-    droneGain.gain.setValueAtTime(0, now);
-    droneGain.gain.linearRampToValueAtTime(0.05, now + 0.4);
-    droneGain.gain.exponentialRampToValueAtTime(0.0001, now + 3);
-    drone.connect(droneGain);
-    droneGain.connect(ctx.destination);
-
-    const voice = ctx.createOscillator();
-    voice.type = 'sine';
-    voice.frequency.setValueAtTime(880, now);
-    voice.frequency.exponentialRampToValueAtTime(440, now + 1.4);
-    const wobble = ctx.createOscillator();
-    wobble.frequency.value = 5.5;
-    const wobbleGain = ctx.createGain();
-    wobbleGain.gain.value = 14;
-    wobble.connect(wobbleGain);
-    wobbleGain.connect(voice.frequency);
-    const voiceGain = ctx.createGain();
-    voiceGain.gain.setValueAtTime(0, now);
-    voiceGain.gain.linearRampToValueAtTime(0.12, now + 0.06);
-    voiceGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.2);
-    voice.connect(voiceGain);
-    voiceGain.connect(ctx.destination);
-    voiceGain.connect(delay);
-
-    [drone, voice, wobble].forEach((o) => o.start(now));
-    drone.stop(now + 3);
-    voice.stop(now + 2.2);
-    wobble.stop(now + 2.2);
-  } catch (err) {}
-}
+let audio = null;
 if (SOUND) {
   try {
-    spook.audio = new Audio(SOUND);
-    spook.audio.preload = 'auto';
+    audio = new Audio(SOUND);
+    audio.preload = 'auto';
   } catch (err) {}
 }
 
@@ -1398,7 +1551,12 @@ function pop() {
     if (g.shown) continue;
     g.shown = 1;
     try { localStorage.setItem(eggKey(g.i), '1'); } catch (err) {}
-    spook();
+    if (audio) {
+      try {
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+      } catch (err) {}
+    }
     veil(g.win, 1);
     return;
   }
@@ -1421,8 +1579,17 @@ function makeModal(cls, html) {
   return el;
 }
 
-const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Они уже читают это</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды</a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span></p>");
-const EGG = EGGS.map((g) => ({ i: g.i, win: makeModal('egg', g.html),
+const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Они уже читают это</p><p class=\"lvl\">Сложность: простой</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды</a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span></p>");
+const HINT_WIN = makeModal('hint', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"head\">Открыть выбранную букву?</p><p class=\"say\">Сгорит одна подсказка. Отгаданные слова пополняют запас.</p><p class=\"btns\"><button type=\"button\" class=\"yes\">Открыть</button><button type=\"button\" class=\"no\">Отмена</button></p>");
+
+function unfold(b64) {
+  const bytes = Uint8Array.from(atob(b64), (ch) => ch.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+
+const EGG = EGGS.map((g) => ({ i: g.i,
+                               win: makeModal('egg' + (g.full ? ' full' : ''),
+                                              unfold(g.html)),
                                shown: eggSeen(g.i) ? 1 : 0 }));
 
 let mute = 0;
@@ -1477,7 +1644,11 @@ function zap() {
   disarm();
   show(-1);
   paint('.'.repeat(SPOTS.length));
+  hints = [];
+  keepHints();
+  hpaint();
   keep();
+  hcount();
 }
 
 const LIT = document.createElement('div');
@@ -1488,6 +1659,7 @@ window.addEventListener('blur', () => LIT.classList.remove('on'));
 if (document.hasFocus()) LIT.classList.add('on');
 
 [t0, took] = clock();
+hints = loadHints();
 revive();
 judge();
 live = 1;
@@ -1502,6 +1674,17 @@ document.addEventListener('click', (e) => {
   const shut = e.target.closest('.modal .close');
   if (shut) {
     veil(shut.closest('.modal'), 0);
+    pop();
+    return;
+  }
+  if (e.target.closest('.modal.hint .yes')) {
+    veil(HINT_WIN, 0);
+    pop();
+    reveal();
+    return;
+  }
+  if (e.target.closest('.modal.hint .no')) {
+    veil(HINT_WIN, 0);
     pop();
     return;
   }
