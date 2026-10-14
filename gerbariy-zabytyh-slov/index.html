@@ -174,15 +174,25 @@ body { margin:0;
     gap:0.2em 1.5em; margin:0 1em; padding:0.6em 0 0.8em;
     border-top:1px solid #A0511C; font-size:0.85em; }
   .credit a { color:inherit; }
+  .credit .host { white-space:nowrap; }
   .help.on .credit a { pointer-events:auto; }
-  .go, .tg { display:flex; flex-wrap:wrap; justify-content:center;
+  .go { display:flex; flex-wrap:wrap; justify-content:center;
     gap:0.2em 1.5em; margin:0.5em 1em 0; }
-  .go a, .tg a { color:inherit; }
-  .go .host, .tg .host { white-space:nowrap; }
-  .help.on .go a, .help.on .tg a { pointer-events:auto; }
+  .go a { color:inherit; }
+  .go .host { white-space:nowrap; }
+  .help.on .go a { pointer-events:auto; }
   .help .go { margin-top:0; padding-top:0.6em;
     border-top:1px solid #A0511C; }
   .help .credit { padding-top:0.3em; border-top:none; }
+  @keyframes chan {
+    0% { background-color:rgba(255,213,74,0); }
+    10% { background-color:rgba(255,213,74,0.45); }
+    20%, 100% { background-color:rgba(255,213,74,0); }
+  }
+  .help.on .chan, .won.on .chan {
+    animation:chan 4s ease-in-out infinite; }
+  @media (prefers-reduced-motion:reduce) {
+    .help.on .chan, .won.on .chan { animation:none; } }
   .won { position:fixed; left:50%; bottom:8px;
     transform:translateX(-50%); box-sizing:border-box; width:max-content;
     max-width:min(884px, 94vw); max-height:40vh;
@@ -1350,7 +1360,7 @@ HINT_BTN.addEventListener('click', hintAsk);
 
 const WON = document.createElement('div');
 WON.className = 'won';
-WON.innerHTML = "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"headline\"></p><p class=\"took\"></p><p class=\"hints\"></p><p class=\"share\"><button type=\"button\"><b>Поделиться</b><b>Ссылка скопирована</b></button></p><p class=\"go\"><a href=\"../\">Другие сканворды: <span class=\"host\">creakingfolds.github.io</span></a></p><p class=\"tg\"><a href=\"https://t.me/skripizvilin\" data-goatcounter-click=\"tg/won\">Что нового - в канале: <span class=\"host\">t.me/skripizvilin</span></a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span></p>";
+WON.innerHTML = "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"headline\"></p><p class=\"took\"></p><p class=\"hints\"></p><p class=\"share\"><button type=\"button\"><b>Поделиться</b><b>Ссылка скопирована</b></button></p><p class=\"go\"><a href=\"../\">Другие сканворды: <span class=\"host\">creakingfolds.github.io</span></a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span><a class=\"chan\" href=\"https://t.me/skripizvilin\" target=\"_blank\" rel=\"noopener\" data-goatcounter-click=\"tg/won\">Что нового - в канале: <span class=\"host\">t.me/skripizvilin</span></a></span></p>";
 document.body.appendChild(WON);
 
 const SAYS = ["Ну, допустим", "Вот и всё", "Изи", "Я поддавался", "Сканворд капитулировал", "Составитель уже готовит следующий", "Все слова угаданы. Некоторые даже не перебором", "С Гуглом не считается", "Вы узнали новое слово... Но какой ценой?", "Хаос побеждён", "Ожегов бы прослезился", "Извилины отскрипели", "Скрип извилин сменился довольным урчанием", "Хоть что-то в жизни сошлось", "Скриншот или не было"];
@@ -1579,7 +1589,7 @@ function makeModal(cls, html) {
   return el;
 }
 
-const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Гербарий забытых слов</p><p class=\"lvl\">Сложность: трудный</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды: <span class=\"host\">creakingfolds.github.io</span></a></p><p class=\"tg\"><a href=\"https://t.me/skripizvilin\" data-goatcounter-click=\"tg/help\">Что нового - в канале: <span class=\"host\">t.me/skripizvilin</span></a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span>Почта для связи: <a href=\"mailto:wibblywombat10@gmail.com\">wibblywombat10@gmail.com</a></span></p>");
+const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Гербарий забытых слов</p><p class=\"lvl\">Сложность: трудный</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды: <span class=\"host\">creakingfolds.github.io</span></a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span><a class=\"chan\" href=\"https://t.me/skripizvilin\" target=\"_blank\" rel=\"noopener\" data-goatcounter-click=\"tg/help\">Что нового - в канале: <span class=\"host\">t.me/skripizvilin</span></a></span></p>");
 const HINT_WIN = makeModal('hint', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"head\">Открыть выбранную букву?</p><p class=\"say\">Сгорит одна подсказка. Отгаданные слова пополняют запас.</p><p class=\"btns\"><button type=\"button\" class=\"yes\">Открыть</button><button type=\"button\" class=\"no\">Отмена</button></p>");
 
 function unfold(b64) {
