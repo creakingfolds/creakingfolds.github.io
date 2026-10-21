@@ -1464,8 +1464,6 @@ const READ_LIT = 450;
 const SPARK_STEP = 70;
 const SPARK_FLASH = 210;
 const SPARK_PEAK = "0 0 15px rgba(5,255,0,1), 0 0 30px rgba(5,255,0,0.5)";
-const CLICK_TIME = 250;
-const CLICK_EDGE = "10px";
 
 const SPELL = [...document.querySelectorAll('.g i.k')]
   .sort((a, b) => a.offsetTop - b.offsetTop || a.offsetLeft - b.offsetLeft);
@@ -1537,16 +1535,12 @@ function cheer() {
 function spark(fresh) {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const lit = new Map();
-  const rim = new Map();
   for (const i of fresh) {
     const from = Math.max(0, CELLS[i].indexOf(last));
     CELLS[i].forEach((e, n) => {
       const d = Math.abs(n - from) * SPARK_STEP;
       if (e && (!lit.has(e) || lit.get(e) > d)) lit.set(e, d);
     });
-    const d = from * SPARK_STEP;
-    const q = MARK[i];
-    if (q && (!rim.has(q) || rim.get(q) > d)) rim.set(q, d);
   }
   let far = 0;
   try {
@@ -1554,11 +1548,6 @@ function spark(fresh) {
       e.animate([{ offset: 0.35, textShadow: SPARK_PEAK, easing: 'ease-out' }],
                 { duration: SPARK_FLASH, delay: d });
       far = Math.max(far, d + SPARK_FLASH);
-    }
-    for (const [q, d] of rim) {
-      q.animate([{ offset: 0, borderWidth: CLICK_EDGE, easing: 'ease-out' }],
-                { duration: CLICK_TIME, delay: d, pseudoElement: '::after' });
-      far = Math.max(far, d + CLICK_TIME);
     }
   } catch (err) {}
   const now = performance.now();
