@@ -1,5 +1,17 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><title>Они уже читают это · Тихий скрип извилин</title><link rel="icon" type="image/png" href="../favicon.png">
+<meta name="description" content="Сканворд 18x13 из 50 слов. Уровень сложности: простой. Разгадать онлайн.">
+<meta property="og:title" content="Они уже читают это">
+<meta property="og:description" content="Сканворд 18x13 из 50 слов. Уровень сложности: простой. Разгадать онлайн.">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Тихий скрип извилин">
+<meta property="og:image" content="https://creakingfolds.github.io/oni-uzhe-chitayut-eto/card-fc8e6fe951d6.webp">
+<meta property="og:image:alt" content="Они уже читают это">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Они уже читают это">
+<meta name="twitter:description" content="Сканворд 18x13 из 50 слов. Уровень сложности: простой. Разгадать онлайн.">
+<meta name="twitter:image" content="https://creakingfolds.github.io/oni-uzhe-chitayut-eto/card-fc8e6fe951d6.webp">
 <style>
 html { background:#fff; color-scheme:light; }
 body { margin:0;
@@ -165,6 +177,12 @@ body { margin:0;
   .help .rules { width:0; min-width:100%; margin:0; padding:0;
     list-style:none; }
   .help .rules li + li { margin-top:0.4em; }
+  .help .eggs { display:flex; align-items:center; gap:0.7em;
+    margin:1.2em 0 0; padding-top:0.9em; border-top:1px solid #1D5EA5;
+    font-size:1.15em; font-weight:bold; cursor:pointer; }
+  .help .eggs input { flex:0 0 auto; width:1.25em; height:1.25em;
+    margin:0; accent-color:#1D5EA5; }
+  .help.on .eggs { pointer-events:auto; }
   .help kbd, .tip kbd { display:inline-block; min-width:1.1em;
     margin-right:0.25em; padding:0 0.3em; border:1px solid currentColor;
     border-radius:0.25em; font:inherit; text-align:center; }
@@ -225,13 +243,17 @@ body { margin:0;
   @keyframes emerge { from { opacity:0; scale:0.96; } }
   .egg.on { animation:emerge 260ms ease-out; }
   @media (prefers-reduced-motion:reduce) { .egg.on { animation:none; } }
-  .egg { width:min(442px, 88vw); }
+  .egg { --egg-box:min(442px, 88vw, 64vh); }
+  .egg:not(.full) { width:fit-content; max-width:var(--egg-box); }
   .egg.full { width:fit-content; max-width:96vw; }
   .egg.full img { width:auto; max-width:96vw; max-height:84vh;
     margin:0 auto; }
   .egg.full .cap { max-width:40em; margin:0.5em auto 0.7em; }
   .egg .close { background:rgba(0,0,0,0.5); }
-  .egg img { display:block; width:100%; height:auto; max-height:64vh; }
+  .egg img { display:block; }
+  .egg:not(.full) img { width:auto; height:auto;
+    max-width:calc(var(--egg-box) - 2px);
+    max-height:calc(var(--egg-box) - 2px); margin:0 auto; }
   .egg .cap { margin:0.5em 0.8em 0.7em; }
 }
 @media print { .tip, .ask, .shade, .modal, .won { display:none; } }
@@ -596,8 +618,8 @@ const SALT = 'b2cc652533c23be1';
 const CELL = 68;
 const PHOTO = 15;
 const KEY = 'scanword-18x13-03f3b2e1';
-const EGGS = [{"i": 0, "full": false, "html": "PGJ1dHRvbiB0eXBlPSJidXR0b24iIGNsYXNzPSJjbG9zZSIgYXJpYS1sYWJlbD0i0JfQsNC60YDRi9GC0YwiPiZ0aW1lczs8L2J1dHRvbj48aW1nIHNyYz0iZWdnLTAuanBnIiBhbHQ9IiIgZHJhZ2dhYmxlPSJmYWxzZSI+PHAgY2xhc3M9ImNhcCI+0J/QvtGH0LXQvNGDINC30LDRgdGL0L/QsNC90Ysg0L/QtdGA0LLRi9C1INGN0YLQsNC20Lgg0YHRgtCw0YDRi9GFINC30LTQsNC90LjQuSDQsiDQodCw0L3QutGCLdCf0LXRgtC10YDQsdGD0YDQs9C1PyDQmtGC0L4g0Y3RgtC+INGB0LTQtdC70LDQuz88L3A+"}, {"i": 44, "full": false, "html": "PGJ1dHRvbiB0eXBlPSJidXR0b24iIGNsYXNzPSJjbG9zZSIgYXJpYS1sYWJlbD0i0JfQsNC60YDRi9GC0YwiPiZ0aW1lczs8L2J1dHRvbj48aW1nIHNyYz0iZWdnLTQ0LndlYnAiIGFsdD0iIiBkcmFnZ2FibGU9ImZhbHNlIj4="}];
-const SOUND = "egg-sound.ogg";
+const EGGS = [{"i": 0, "full": false, "snd": "egg-sound.ogg", "html": "PGJ1dHRvbiB0eXBlPSJidXR0b24iIGNsYXNzPSJjbG9zZSIgYXJpYS1sYWJlbD0i0JfQsNC60YDRi9GC0YwiPiZ0aW1lczs8L2J1dHRvbj48aW1nIHNyYz0iZWdnLTAuanBnIiBhbHQ9IiIgZHJhZ2dhYmxlPSJmYWxzZSI+PHAgY2xhc3M9ImNhcCI+0J/QvtGH0LXQvNGDINC30LDRgdGL0L/QsNC90Ysg0L/QtdGA0LLRi9C1INGN0YLQsNC20Lgg0YHRgtCw0YDRi9GFINC30LTQsNC90LjQuSDQsiDQodCw0L3QutGCLdCf0LXRgtC10YDQsdGD0YDQs9C1PyDQmtGC0L4g0Y3RgtC+INGB0LTQtdC70LDQuz88L3A+"}, {"i": 44, "full": false, "snd": "egg-sound.ogg", "html": "PGJ1dHRvbiB0eXBlPSJidXR0b24iIGNsYXNzPSJjbG9zZSIgYXJpYS1sYWJlbD0i0JfQsNC60YDRi9GC0YwiPiZ0aW1lczs8L2J1dHRvbj48aW1nIHNyYz0iZWdnLTQ0LndlYnAiIGFsdD0iIiBkcmFnZ2FibGU9ImZhbHNlIj4="}];
+const SOUNDS = ["egg-sound.ogg"];
 
 const HSEAL = '88e2c7410b4ecce4df42845fff042cd36d7c51bf1aa6876a22f5d93a1e3e89363235311e676b6619d58778b13125b71e51638a029f1bf1837482df0c466068a669c936df577eeaf78ccfc88d453b91f68ade277f8df1456176b103d40bfc09e02ce897b00e8c2f61c3740d50ef3026e2b053fd8b394c7ea48a5f749365860c11e1b6b4551954eab58e8f04c7692c7cc19c7aab591d6a1f86a4877c83d8734c2ec7cfa5634df3d62ef2b52087b220fb4dce65329ad7c985917c171a93ef61cdf5787246cc536d93a8ab09d4b10cc8c984637c445567be10ec6fee10562d4dd589a80054c4b107f4b7e85d22882d61ea289b018ff9aaa526b81a727f85abceaeb8c4c035679bd86fcaee0dfe79ccb6b276f7de915635b18b94c4d44ff3de41080e37bafece0eac72c7e93711c87485ce20dce2eb45ad330beced711ded09304fc7ce368b10eeaf8efda467db973b90467da40e0f135ef58008ac6060fb08455c52584efb5a741641455dbd4d7f5af95960969b19f8ab7058b38f6e9031b46d16123672f1a49fc7f3eca8ab5a1cb3773f3e92f2928ba42cf6309b461ed5c62518e2bfe389205cbf5538f97be96e27f86d531bfaf6556a06e74ba38d4aa316b4cdd3f42221ee62160daff3990c8157c69c335d66492da307bb47625b8ec03a06f0ae2c4ae8aeddc01a53197e96d653972d6eaa40e2c3a1cf99040fdca8c3602fc0da3f0091b7475571a8356ed5aa6abd1375a28e4fc96d9c48e0ff4f90e441aa8eed5be55d83a70cc62fa5c9e5467596a8c792fc15077ec5e7313c170c208e8b7c2199b9827a1a0da268efdb1f49704dfdab2847396a1f256ead55d03af8ebe0f2a71f0dca73a250838f9a802fec769d531f0b6c57b4ba701e9eea03c602ebe600afb918597870350c72f0a5cd1caeaaf7c1b7bdfb1e3e166762003740ef5bfb2a4b8946b5544c079fa7440e59c3a85be8e46b4167350ce3bbc8ddc2e7569d179f0412a70351b73374d18bfd9a6e6d2ea5a2adc05577bd6c1b0d13cadbc070c623276141b859811c24b2267f534a4513ec9a7b78a73130edd302896324be8076ddb58565f2b7ee2b9cae984cce86a2f9af4acb9ee0ee1491ad5a819f849d159f7519f8925b488c82e60f793eb316e56db0f959afcfab82eba031a371b4d97bf89f2b6d772bb90fae40e02cc13a6f173958e3b493e90362c437220e63045ef1465d60a17e2c15964741ae87cba917202c9ceb9078ddf8b9a7ff790ddf4f9627e2e103bfe6236062677bc2191a0bc2274add85f69e6daaff8f420d1aa7a8f1c36ea42b1b593312873f7cb0c9e85263a9ba4d6cf2eb298b043700fd5a4e8c22aaed32c2b2e730257df1d69300d34ca8627fa4541c5efeb68bbc86377cf6254b483bb376d62f495d44ddc7351b607e73bf0c3b2ade8b69104c78';
 const HSALT = 'c6725e08269fcf13';
@@ -614,6 +636,7 @@ const HINT_SAY = 2600;
 const HINT_PULSE = 600;
 const HINT_RING = 0.7;
 const HKEY = KEY + ':hint';
+const EGG_PREF = KEY + ':eggs';
 
 const GRID = document.querySelector('.g');
 
@@ -1240,6 +1263,7 @@ window.addEventListener('storage', (e) => {
       hpaint();
       hcount();
     }
+    if (e.key === EGG_PREF) setEggs(e.newValue === '0', 0);
   } catch (err) {}
 });
 
@@ -1531,16 +1555,25 @@ function eggSeen(i) {
   try { return localStorage.getItem(eggKey(i)) === '1'; } catch (err) { return false; }
 }
 
-let audio = null;
-if (SOUND) {
-  try {
-    audio = new Audio(SOUND);
-    audio.preload = 'auto';
-  } catch (err) {}
+const AUDIO = {};
+let eggsOff = 0;
+let spiderDone = 0;
+try { eggsOff = localStorage.getItem(EGG_PREF) === '0' ? 1 : 0; } catch (err) {}
+
+function loadAudio() {
+  for (const snd of SOUNDS) {
+    if (AUDIO[snd]) continue;
+    try {
+      AUDIO[snd] = new Audio(snd);
+      AUDIO[snd].preload = 'auto';
+    } catch (err) {}
+  }
 }
+if (!eggsOff) loadAudio();
 
 function pop() {
-  if (modalOpen() || lull) return;
+  if (modalOpen() || lull || soundOnly) return;
+  if (!eggsOff) buildEggs();
   for (const g of EGG) {
     if (verdict(g.i) !== 1) {
       if (!g.shown) continue;
@@ -1551,13 +1584,46 @@ function pop() {
     if (g.shown) continue;
     g.shown = 1;
     try { localStorage.setItem(eggKey(g.i), '1'); } catch (err) {}
-    if (audio) {
-      try {
-        audio.currentTime = 0;
-        audio.play().catch(() => {});
-      } catch (err) {}
+    if (eggsOff) continue;
+    const snd = g.snd ? AUDIO[g.snd] : null;
+    let resume = null;
+    if (!g.win && snd) {
+      soundOnly = 1;
+      let next = 0;
+      resume = () => {
+        if (next) return;
+        next = 1;
+        soundOnly = 0;
+        setTimeout(pop, 0);
+      };
+      snd.addEventListener('ended', resume, { once: true });
     }
-    veil(g.win, 1);
+    if (snd) {
+      for (const name in AUDIO) {
+        if (AUDIO[name] !== snd) {
+          try {
+            AUDIO[name].pause();
+            AUDIO[name].currentTime = 0;
+          } catch (err) {}
+        }
+      }
+      try {
+        snd.currentTime = 0;
+        const playing = snd.play();
+        if (playing && playing.catch) playing.catch(resume || (() => {}));
+      } catch (err) {
+        if (resume) resume();
+      }
+    }
+    if (g.win) {
+      veil(g.win, 1);
+      return;
+    }
+    if (resume) {
+      setTimeout(() => { if (snd.paused) resume(); }, 1000);
+      return;
+    }
+    setTimeout(pop, 0);
     return;
   }
   if (due) cheer();
@@ -1579,7 +1645,9 @@ function makeModal(cls, html) {
   return el;
 }
 
-const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Они уже читают это</p><p class=\"lvl\">Сложность: простой</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды: <span class=\"host\">creakingfolds.github.io</span></a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span><a class=\"chan\" href=\"https://t.me/skripizvilin\" target=\"_blank\" rel=\"noopener\" data-goatcounter-click=\"tg/help\">Что нового - в канале: <span class=\"host\">t.me/skripizvilin</span></a></span></p>");
+const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Они уже читают это</p><p class=\"lvl\">Сложность: простой</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul><label class=\"eggs\"><input type=\"checkbox\" id=\"egg-pref\">Пасхалки и скримеры</label></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды: <span class=\"host\">creakingfolds.github.io</span></a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span><a class=\"chan\" href=\"https://t.me/skripizvilin\" target=\"_blank\" rel=\"noopener\" data-goatcounter-click=\"tg/help\">Что нового - в канале: <span class=\"host\">t.me/skripizvilin</span></a></span></p>");
+const EGG_BOX = HELP.querySelector('#egg-pref');
+if (EGG_BOX) EGG_BOX.checked = !eggsOff;
 const HINT_WIN = makeModal('hint', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"head\">Открыть выбранную букву?</p><p class=\"say\">Сгорит одна подсказка. Отгаданные слова пополняют запас.</p><p class=\"btns\"><button type=\"button\" class=\"yes\">Открыть</button><button type=\"button\" class=\"no\">Отмена</button></p>");
 
 function unfold(b64) {
@@ -1588,12 +1656,58 @@ function unfold(b64) {
 }
 
 const EGG = EGGS.map((g) => ({ i: g.i,
-                               win: makeModal('egg' + (g.full ? ' full' : ''),
-                                              unfold(g.html)),
+                               snd: g.snd,
+                               full: g.full,
+                               html: g.html,
+                               win: null,
                                shown: eggSeen(g.i) ? 1 : 0 }));
+let eggBuilt = 0;
 
+function buildEggs() {
+  if (eggBuilt) return;
+  eggBuilt = 1;
+  for (const g of EGG) {
+    if (g.html) {
+      g.win = makeModal('egg' + (g.full ? ' full' : ''), unfold(g.html));
+    }
+  }
+}
+if (!eggsOff) buildEggs();
+
+let soundOnly = 0;
 let mute = 0;
 let armed = 0;
+
+function setEggs(off, save) {
+  eggsOff = off ? 1 : 0;
+  if (EGG_BOX) EGG_BOX.checked = !eggsOff;
+  if (save) {
+    try {
+      if (eggsOff) localStorage.setItem(EGG_PREF, '0');
+      else localStorage.removeItem(EGG_PREF);
+    } catch (err) {}
+  }
+  if (eggsOff) {
+    for (const name in AUDIO) {
+      try {
+        AUDIO[name].pause();
+        AUDIO[name].currentTime = 0;
+      } catch (err) {}
+    }
+    soundOnly = 0;
+    for (const g of EGG) {
+      if (g.win && g.win.classList.contains('on')) veil(g.win, 0);
+    }
+  } else {
+    buildEggs();
+    loadAudio();
+  }
+  pop();
+}
+
+if (EGG_BOX) {
+  EGG_BOX.addEventListener('change', () => setEggs(!EGG_BOX.checked, 1));
+}
 
 function snug(el) {
   el.style.fontSize = '';
@@ -1643,6 +1757,8 @@ function zap() {
   }
   disarm();
   show(-1);
+  spiderDone = 0;
+  try { localStorage.removeItem(KEY + ':spider'); } catch (err) {}
   paint('.'.repeat(SPOTS.length));
   hints = [];
   keepHints();

@@ -1,5 +1,17 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><title>Мой бывший попросил витубершу нагадать мне... · Тихий скрип извилин</title><link rel="icon" type="image/png" href="../favicon.png">
+<meta name="description" content="Сканворд 13x18 из 51 слов. Уровень сложности: средний. Разгадать онлайн.">
+<meta property="og:title" content="Мой бывший попросил витубершу нагадать мне...">
+<meta property="og:description" content="Сканворд 13x18 из 51 слов. Уровень сложности: средний. Разгадать онлайн.">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Тихий скрип извилин">
+<meta property="og:image" content="https://creakingfolds.github.io/moy-byvshiy-poprosil-vitubershu-nagadat-mne/card-523e17f2d518.webp">
+<meta property="og:image:alt" content="Мой бывший попросил витубершу нагадать мне понос, и это оказалось пророчеством о моём перерождении в чужом мире">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Мой бывший попросил витубершу нагадать мне...">
+<meta name="twitter:description" content="Сканворд 13x18 из 51 слов. Уровень сложности: средний. Разгадать онлайн.">
+<meta name="twitter:image" content="https://creakingfolds.github.io/moy-byvshiy-poprosil-vitubershu-nagadat-mne/card-523e17f2d518.webp">
 <style>
 html { background:#fff; color-scheme:light; }
 body { margin:0;
@@ -165,6 +177,12 @@ body { margin:0;
   .help .rules { width:0; min-width:100%; margin:0; padding:0;
     list-style:none; }
   .help .rules li + li { margin-top:0.4em; }
+  .help .eggs { display:flex; align-items:center; gap:0.7em;
+    margin:1.2em 0 0; padding-top:0.9em; border-top:1px solid #A5351D;
+    font-size:1.15em; font-weight:bold; cursor:pointer; }
+  .help .eggs input { flex:0 0 auto; width:1.25em; height:1.25em;
+    margin:0; accent-color:#A5351D; }
+  .help.on .eggs { pointer-events:auto; }
   .help kbd, .tip kbd { display:inline-block; min-width:1.1em;
     margin-right:0.25em; padding:0 0.3em; border:1px solid currentColor;
     border-radius:0.25em; font:inherit; text-align:center; }
@@ -225,13 +243,17 @@ body { margin:0;
   @keyframes emerge { from { opacity:0; scale:0.96; } }
   .egg.on { animation:emerge 260ms ease-out; }
   @media (prefers-reduced-motion:reduce) { .egg.on { animation:none; } }
-  .egg { width:min(442px, 88vw); }
+  .egg { --egg-box:min(442px, 88vw, 64vh); }
+  .egg:not(.full) { width:fit-content; max-width:var(--egg-box); }
   .egg.full { width:fit-content; max-width:96vw; }
   .egg.full img { width:auto; max-width:96vw; max-height:84vh;
     margin:0 auto; }
   .egg.full .cap { max-width:40em; margin:0.5em auto 0.7em; }
   .egg .close { background:rgba(0,0,0,0.5); }
-  .egg img { display:block; width:100%; height:auto; max-height:64vh; }
+  .egg img { display:block; }
+  .egg:not(.full) img { width:auto; height:auto;
+    max-width:calc(var(--egg-box) - 2px);
+    max-height:calc(var(--egg-box) - 2px); margin:0 auto; }
   .egg .cap { margin:0.5em 0.8em 0.7em; }
 }
 @media print { .tip, .ask, .shade, .modal, .won { display:none; } }
@@ -597,7 +619,7 @@ const CELL = 68;
 const PHOTO = 14;
 const KEY = 'scanword-13x18-7edf05ae';
 const EGGS = [];
-const SOUND = null;
+const SOUNDS = [];
 
 const HSEAL = 'de7fba4b05a12276f7d3501934a5d844a58230f15c24c3b0f2010f2269b72edd9a0f685e3925cec8f8efe5625b1d029e581a3743d17382c37f8091b033d1b4d008d369cd6a97eb60da7a1c67c58f10a179b662171b38be8394fef0a4a1a64cc605358cdee04854070c1d371414b6d64cfc614b499d55889d07688ece89985328ae86d80ca66d8c4e2817f9c386a3a2a23408bd703f63963f2299031f8cc1abc634b9434614484f5616f2f5f5d31c82503ae39eb0c9738c7aa47fa28870115884c0ea72aa214d422b1985747390bdcd8d78ed5f5c1bf238dbef7362af0c77624ffe521eebd16783cc92127e251d5613094e97576ab3d07a4e24601307cc1372659c80d81b9e6e7bd9daf5ffac6e2ea6f85e1ad7fc98713a21b06a548578fee8950931ff608416939293bf4ca43d0400421a828084654e1d7aa0674411be6800f6bc90e6da6e22310876c41b56b01335febbf48398884013988a69bcfd2bf62cdc8a106c5965a2d40ad62dc75a596298f5da49e818b0969847f6c6797e853123a8ffa6276fa46e5ffaac6cf0d80facb1c086cbc8c172831f2c54bc7b827ff9a3d3d1a05ed11ac5b1dff38d6ab93ac7424f86c7594272b1dee94546f5a76c6ab02e2208c38725023d2d7b1293483edb177c54d14a3d3f3920c122541cced0f25d13b74456e448c344f759f905e36e5c2e5c938c82ebfb40959667aea567ddbc29ead63f733ae179dc8f69b1816d285e110805f46fbd06c1f8f81d1a0c04437f9b2edc2e1284675a3d51d78a0fad456344810a765cf5bbc8b3fb4604ab6a6a9658c9fb0922d0a929b0d7b690539e8ee4d2005c57f65450681a25b69a835f785153b386d54653ce594478b2e7d5b16f4554bd3a6d77159cf558b48452b4915e19e26bf16942523cc72b9bf358aa6f3026d6c715cea018249b9631ad1442f2f1443cad46c3e9fb3b801d791c5346ddc960d8d941e8f975134718ead311412b2e8bea5b2a9420cf830c29cd1396ae4c53385f2d5b0400304da5a991bdf0f420dbdb79aebc29fd2e24e6d8b1e93343ebd4584b326831c85579061fe2eda9cc19c686fd8f8119cf2d814b832c8daf52d65208411452d6e7d0e77bbe75a91fc940d0ad71fcda102a4f95f4e07afc088b1c9f51193f58be8c92a2896eb2126b81a6d872fac3799e845ba148f971ef24af737742ee36ed34c52669ad80987bbc0a4437a1ae34ad8e657b0a9ac3e675932708f5ae13810cda100968ebd1a55ba3e7c7dd09798771bbd87cddf478bf4b88feaecbb3213ba3bfa543ef1fac68ced19146c5e6d0766c2aab0ee734018b024004aa7af37b06f7c0b8d9e576fe9f33d31a0222cb8dee60328de07b10274de03981198e73e7f4caa357b6245cfb6438d775725b939fdff4bd6b0646390be688f32a44ffefc3bf';
 const HSALT = 'd0130b4d69fd31f7';
@@ -614,6 +636,7 @@ const HINT_SAY = 2600;
 const HINT_PULSE = 600;
 const HINT_RING = 0.7;
 const HKEY = KEY + ':hint';
+const EGG_PREF = KEY + ':eggs';
 
 const GRID = document.querySelector('.g');
 
@@ -1240,6 +1263,7 @@ window.addEventListener('storage', (e) => {
       hpaint();
       hcount();
     }
+    if (e.key === EGG_PREF) setEggs(e.newValue === '0', 0);
   } catch (err) {}
 });
 
@@ -1531,16 +1555,25 @@ function eggSeen(i) {
   try { return localStorage.getItem(eggKey(i)) === '1'; } catch (err) { return false; }
 }
 
-let audio = null;
-if (SOUND) {
-  try {
-    audio = new Audio(SOUND);
-    audio.preload = 'auto';
-  } catch (err) {}
+const AUDIO = {};
+let eggsOff = 0;
+let spiderDone = 0;
+try { eggsOff = localStorage.getItem(EGG_PREF) === '0' ? 1 : 0; } catch (err) {}
+
+function loadAudio() {
+  for (const snd of SOUNDS) {
+    if (AUDIO[snd]) continue;
+    try {
+      AUDIO[snd] = new Audio(snd);
+      AUDIO[snd].preload = 'auto';
+    } catch (err) {}
+  }
 }
+if (!eggsOff) loadAudio();
 
 function pop() {
-  if (modalOpen() || lull) return;
+  if (modalOpen() || lull || soundOnly) return;
+  if (!eggsOff) buildEggs();
   for (const g of EGG) {
     if (verdict(g.i) !== 1) {
       if (!g.shown) continue;
@@ -1551,13 +1584,46 @@ function pop() {
     if (g.shown) continue;
     g.shown = 1;
     try { localStorage.setItem(eggKey(g.i), '1'); } catch (err) {}
-    if (audio) {
-      try {
-        audio.currentTime = 0;
-        audio.play().catch(() => {});
-      } catch (err) {}
+    if (eggsOff) continue;
+    const snd = g.snd ? AUDIO[g.snd] : null;
+    let resume = null;
+    if (!g.win && snd) {
+      soundOnly = 1;
+      let next = 0;
+      resume = () => {
+        if (next) return;
+        next = 1;
+        soundOnly = 0;
+        setTimeout(pop, 0);
+      };
+      snd.addEventListener('ended', resume, { once: true });
     }
-    veil(g.win, 1);
+    if (snd) {
+      for (const name in AUDIO) {
+        if (AUDIO[name] !== snd) {
+          try {
+            AUDIO[name].pause();
+            AUDIO[name].currentTime = 0;
+          } catch (err) {}
+        }
+      }
+      try {
+        snd.currentTime = 0;
+        const playing = snd.play();
+        if (playing && playing.catch) playing.catch(resume || (() => {}));
+      } catch (err) {
+        if (resume) resume();
+      }
+    }
+    if (g.win) {
+      veil(g.win, 1);
+      return;
+    }
+    if (resume) {
+      setTimeout(() => { if (snd.paused) resume(); }, 1000);
+      return;
+    }
+    setTimeout(pop, 0);
     return;
   }
   if (due) cheer();
@@ -1580,6 +1646,8 @@ function makeModal(cls, html) {
 }
 
 const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Мой бывший попросил витубершу нагадать мне понос, и это оказалось пророчеством о моём перерождении в чужом мире</p><p class=\"lvl\">Сложность: средний</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды: <span class=\"host\">creakingfolds.github.io</span></a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span><a class=\"chan\" href=\"https://t.me/skripizvilin\" target=\"_blank\" rel=\"noopener\" data-goatcounter-click=\"tg/help\">Что нового - в канале: <span class=\"host\">t.me/skripizvilin</span></a></span><span>Специально для <a href=\"https://www.twitch.tv/oladiavt\" target=\"_blank\" rel=\"noopener\">oladiavt</a></span></p>");
+const EGG_BOX = HELP.querySelector('#egg-pref');
+if (EGG_BOX) EGG_BOX.checked = !eggsOff;
 const HINT_WIN = makeModal('hint', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"head\">Открыть выбранную букву?</p><p class=\"say\">Сгорит одна подсказка. Отгаданные слова пополняют запас.</p><p class=\"btns\"><button type=\"button\" class=\"yes\">Открыть</button><button type=\"button\" class=\"no\">Отмена</button></p>");
 
 function unfold(b64) {
@@ -1588,12 +1656,58 @@ function unfold(b64) {
 }
 
 const EGG = EGGS.map((g) => ({ i: g.i,
-                               win: makeModal('egg' + (g.full ? ' full' : ''),
-                                              unfold(g.html)),
+                               snd: g.snd,
+                               full: g.full,
+                               html: g.html,
+                               win: null,
                                shown: eggSeen(g.i) ? 1 : 0 }));
+let eggBuilt = 0;
 
+function buildEggs() {
+  if (eggBuilt) return;
+  eggBuilt = 1;
+  for (const g of EGG) {
+    if (g.html) {
+      g.win = makeModal('egg' + (g.full ? ' full' : ''), unfold(g.html));
+    }
+  }
+}
+if (!eggsOff) buildEggs();
+
+let soundOnly = 0;
 let mute = 0;
 let armed = 0;
+
+function setEggs(off, save) {
+  eggsOff = off ? 1 : 0;
+  if (EGG_BOX) EGG_BOX.checked = !eggsOff;
+  if (save) {
+    try {
+      if (eggsOff) localStorage.setItem(EGG_PREF, '0');
+      else localStorage.removeItem(EGG_PREF);
+    } catch (err) {}
+  }
+  if (eggsOff) {
+    for (const name in AUDIO) {
+      try {
+        AUDIO[name].pause();
+        AUDIO[name].currentTime = 0;
+      } catch (err) {}
+    }
+    soundOnly = 0;
+    for (const g of EGG) {
+      if (g.win && g.win.classList.contains('on')) veil(g.win, 0);
+    }
+  } else {
+    buildEggs();
+    loadAudio();
+  }
+  pop();
+}
+
+if (EGG_BOX) {
+  EGG_BOX.addEventListener('change', () => setEggs(!EGG_BOX.checked, 1));
+}
 
 function snug(el) {
   el.style.fontSize = '';
@@ -1643,6 +1757,8 @@ function zap() {
   }
   disarm();
   show(-1);
+  spiderDone = 0;
+  try { localStorage.removeItem(KEY + ':spider'); } catch (err) {}
   paint('.'.repeat(SPOTS.length));
   hints = [];
   keepHints();

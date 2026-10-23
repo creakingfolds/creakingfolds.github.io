@@ -1,5 +1,17 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><title>Пока я разбиралась, чем Вува отличается... · Тихий скрип извилин</title><link rel="icon" type="image/png" href="../favicon.png">
+<meta name="description" content="Сканворд 14x17 из 51 слов. Уровень сложности: средний. Разгадать онлайн.">
+<meta property="og:title" content="Пока я разбиралась, чем Вува отличается...">
+<meta property="og:description" content="Сканворд 14x17 из 51 слов. Уровень сложности: средний. Разгадать онлайн.">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Тихий скрип извилин">
+<meta property="og:image" content="https://creakingfolds.github.io/poka-ya-razbiralas-chem-vuva-otlichaetsya/card-756f03728211.webp">
+<meta property="og:image:alt" content="Пока я разбиралась, чем Вува отличается от Драгонсворда и почему Айон 2 тоже в чём-то Геншин, мой колл-центр продал бабушке золотую карту, зомби съели инвентарь, а баллы канала ушли на билеты МММ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Пока я разбиралась, чем Вува отличается...">
+<meta name="twitter:description" content="Сканворд 14x17 из 51 слов. Уровень сложности: средний. Разгадать онлайн.">
+<meta name="twitter:image" content="https://creakingfolds.github.io/poka-ya-razbiralas-chem-vuva-otlichaetsya/card-756f03728211.webp">
 <style>
 html { background:#fff; color-scheme:light; }
 body { margin:0;
@@ -165,6 +177,12 @@ body { margin:0;
   .help .rules { width:0; min-width:100%; margin:0; padding:0;
     list-style:none; }
   .help .rules li + li { margin-top:0.4em; }
+  .help .eggs { display:flex; align-items:center; gap:0.7em;
+    margin:1.2em 0 0; padding-top:0.9em; border-top:1px solid #A51D5D;
+    font-size:1.15em; font-weight:bold; cursor:pointer; }
+  .help .eggs input { flex:0 0 auto; width:1.25em; height:1.25em;
+    margin:0; accent-color:#A51D5D; }
+  .help.on .eggs { pointer-events:auto; }
   .help kbd, .tip kbd { display:inline-block; min-width:1.1em;
     margin-right:0.25em; padding:0 0.3em; border:1px solid currentColor;
     border-radius:0.25em; font:inherit; text-align:center; }
@@ -225,13 +243,17 @@ body { margin:0;
   @keyframes emerge { from { opacity:0; scale:0.96; } }
   .egg.on { animation:emerge 260ms ease-out; }
   @media (prefers-reduced-motion:reduce) { .egg.on { animation:none; } }
-  .egg { width:min(442px, 88vw); }
+  .egg { --egg-box:min(442px, 88vw, 64vh); }
+  .egg:not(.full) { width:fit-content; max-width:var(--egg-box); }
   .egg.full { width:fit-content; max-width:96vw; }
   .egg.full img { width:auto; max-width:96vw; max-height:84vh;
     margin:0 auto; }
   .egg.full .cap { max-width:40em; margin:0.5em auto 0.7em; }
   .egg .close { background:rgba(0,0,0,0.5); }
-  .egg img { display:block; width:100%; height:auto; max-height:64vh; }
+  .egg img { display:block; }
+  .egg:not(.full) img { width:auto; height:auto;
+    max-width:calc(var(--egg-box) - 2px);
+    max-height:calc(var(--egg-box) - 2px); margin:0 auto; }
   .egg .cap { margin:0.5em 0.8em 0.7em; }
 }
 @media print { .tip, .ask, .shade, .modal, .won { display:none; } }
@@ -607,7 +629,7 @@ const CELL = 68;
 const PHOTO = 1;
 const KEY = 'scanword-14x17-74c49f81';
 const EGGS = [];
-const SOUND = null;
+const SOUNDS = [];
 
 const HSEAL = 'a2a8e872de0c8a9d855f7a588b00cf5a2555f77c4b3e23f05b0c2066a82ba312e4e0b9a892a33f0601c47c999ae6530ea0f49af6825c024c9421a1a5cee541a1997518d9f03da44385a1db31c2f4c6139d5975126ff3c06a8f144db011173dfeed9c51505f081356ba37deec734d69d76eed35fda34f84761bd702b4dcfc459fb7ce2fa9f402a3e3d6310bad5a076a2abbe65b81697bffa85aa64089176855af7e217726c4a7f656cc2230e7fdd080e8b301f01dbf5b41523f729d3f99bb68a0e28aaa070f3a84f7cb69210990d878d783dd778e0e25a0d9bfe72a4c687c7790d4176d0d8a7f935074ce3136326db9a6394f1308b9c8a63f0179fdecf9db85d0eb1a30de959aedf88b6ed78eb003207e701e48a1c547af9d955cb9d2c2ff55cec77fc7ddbb289bf21e3a6fa0facbbb5f4fbb527f581dce5c0492e7f3f92da6601f9fc8998d54ea4421297dcb4b2d32f3bf7468ef6d137877b6a131c4434a726c9b5669706f0d604559f8bf3565b72dde910b1f8d48f63d379ae0afa14feeec2bc8d9e4af5538c4b5cf66efbc134ba3c01cfed18d135ca616d0d34aa5fb287d8cd61856f65f0f31c66466523b1b6932bef211bef906a3dbb8b83ea7ff39348845089cbc8c5018d8d466d5e7cad416435ae10c8942ceca80cb8933f0375a50d63463635f539ca8c0bf97aa345e9ddc4e3507958bac772e3997c1fdd8a650d76559219250e29ab37f8b6864cf42226522349c2b71a1de71c44f03f488eaecc002478630516ff9c9271f650c3c1bca1ea44082fdc5724a7b70a8901d18fdde0c10d67d548b1d9c990e1fadcfa01057753d463952857f0862aea2ac6069af018c23fd3ac192ac46ba6c5c41adb5b7256b0d3aecfa7672aabf453954147fdf79fc2518c6ece94a2a960f8c90d9502613f8a08ba285bea4c855f819d59410b476ce52415568bf1d85c8062becf7615b580c876042f2492f69104567acf9b42ee77c3b441937b242d69fc260df6e01aa2ac8dabca6b7f3bb37760a42136e555c5efbf9991b9c2bcda1b43f33e69996f68ec30e7f62905826e08ac42df8cba50e01e849761eb8e3ec937d02bda08dd99e99c85afda5b876fc66df4cca3423fb853ac49c00ce5ea1711a60725737e4b6e632028eac88aa68e26bbc64dc87ebe37164d35e938b2b34cf625b638f628848e6b410a85764b74258c1794fa1456bcbf81c1d2ed2f80668da9f04e94eb705174acb6b2d75927521765312d50e673a47d979bcba5d2d27193779cf3df64ef02a33bd5a74b04f854dc6bbef7a4ffa1a856d8ac15376f19239ab65d2f1d0dadcc4f96461eee8c29c9de14ebd59bcafd2d4078375e01f2575051acf342b4d5c1f97f48afcf9116e67c530915ca9ceded2c178117a6d3880cc56aa279dc69ba9c4fbb9fd55ac2b63ce494517655a2fabdc19d1fb0909537d2d8270e4d40903';
 const HSALT = 'b9f8bea5a7877c7c';
@@ -624,6 +646,7 @@ const HINT_SAY = 2600;
 const HINT_PULSE = 600;
 const HINT_RING = 0.7;
 const HKEY = KEY + ':hint';
+const EGG_PREF = KEY + ':eggs';
 
 const GRID = document.querySelector('.g');
 
@@ -1250,6 +1273,7 @@ window.addEventListener('storage', (e) => {
       hpaint();
       hcount();
     }
+    if (e.key === EGG_PREF) setEggs(e.newValue === '0', 0);
   } catch (err) {}
 });
 
@@ -1541,16 +1565,25 @@ function eggSeen(i) {
   try { return localStorage.getItem(eggKey(i)) === '1'; } catch (err) { return false; }
 }
 
-let audio = null;
-if (SOUND) {
-  try {
-    audio = new Audio(SOUND);
-    audio.preload = 'auto';
-  } catch (err) {}
+const AUDIO = {};
+let eggsOff = 0;
+let spiderDone = 0;
+try { eggsOff = localStorage.getItem(EGG_PREF) === '0' ? 1 : 0; } catch (err) {}
+
+function loadAudio() {
+  for (const snd of SOUNDS) {
+    if (AUDIO[snd]) continue;
+    try {
+      AUDIO[snd] = new Audio(snd);
+      AUDIO[snd].preload = 'auto';
+    } catch (err) {}
+  }
 }
+if (!eggsOff) loadAudio();
 
 function pop() {
-  if (modalOpen() || lull) return;
+  if (modalOpen() || lull || soundOnly) return;
+  if (!eggsOff) buildEggs();
   for (const g of EGG) {
     if (verdict(g.i) !== 1) {
       if (!g.shown) continue;
@@ -1561,13 +1594,46 @@ function pop() {
     if (g.shown) continue;
     g.shown = 1;
     try { localStorage.setItem(eggKey(g.i), '1'); } catch (err) {}
-    if (audio) {
-      try {
-        audio.currentTime = 0;
-        audio.play().catch(() => {});
-      } catch (err) {}
+    if (eggsOff) continue;
+    const snd = g.snd ? AUDIO[g.snd] : null;
+    let resume = null;
+    if (!g.win && snd) {
+      soundOnly = 1;
+      let next = 0;
+      resume = () => {
+        if (next) return;
+        next = 1;
+        soundOnly = 0;
+        setTimeout(pop, 0);
+      };
+      snd.addEventListener('ended', resume, { once: true });
     }
-    veil(g.win, 1);
+    if (snd) {
+      for (const name in AUDIO) {
+        if (AUDIO[name] !== snd) {
+          try {
+            AUDIO[name].pause();
+            AUDIO[name].currentTime = 0;
+          } catch (err) {}
+        }
+      }
+      try {
+        snd.currentTime = 0;
+        const playing = snd.play();
+        if (playing && playing.catch) playing.catch(resume || (() => {}));
+      } catch (err) {
+        if (resume) resume();
+      }
+    }
+    if (g.win) {
+      veil(g.win, 1);
+      return;
+    }
+    if (resume) {
+      setTimeout(() => { if (snd.paused) resume(); }, 1000);
+      return;
+    }
+    setTimeout(pop, 0);
     return;
   }
   if (due) cheer();
@@ -1589,7 +1655,9 @@ function makeModal(cls, html) {
   return el;
 }
 
-const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Пока я разбиралась, чем Вува отличается от Драгонсворда и почему Айон 2 тоже в чём-то Геншин, мой колл-центр продал бабушке золотую карту, зомби съели инвентарь, а баллы канала ушли на билеты МММ</p><p class=\"lvl\">Сложность: простой</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды: <span class=\"host\">creakingfolds.github.io</span></a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span><a class=\"chan\" href=\"https://t.me/skripizvilin\" target=\"_blank\" rel=\"noopener\" data-goatcounter-click=\"tg/help\">Что нового - в канале: <span class=\"host\">t.me/skripizvilin</span></a></span><span>Специально для <a href=\"https://www.twitch.tv/oladiavt\" target=\"_blank\" rel=\"noopener\">oladiavt</a></span></p>");
+const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Пока я разбиралась, чем Вува отличается от Драгонсворда и почему Айон 2 тоже в чём-то Геншин, мой колл-центр продал бабушке золотую карту, зомби съели инвентарь, а баллы канала ушли на билеты МММ</p><p class=\"lvl\">Сложность: средний</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды: <span class=\"host\">creakingfolds.github.io</span></a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span><a class=\"chan\" href=\"https://t.me/skripizvilin\" target=\"_blank\" rel=\"noopener\" data-goatcounter-click=\"tg/help\">Что нового - в канале: <span class=\"host\">t.me/skripizvilin</span></a></span><span>Специально для <a href=\"https://www.twitch.tv/oladiavt\" target=\"_blank\" rel=\"noopener\">oladiavt</a></span></p>");
+const EGG_BOX = HELP.querySelector('#egg-pref');
+if (EGG_BOX) EGG_BOX.checked = !eggsOff;
 const HINT_WIN = makeModal('hint', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"head\">Открыть выбранную букву?</p><p class=\"say\">Сгорит одна подсказка. Отгаданные слова пополняют запас.</p><p class=\"btns\"><button type=\"button\" class=\"yes\">Открыть</button><button type=\"button\" class=\"no\">Отмена</button></p>");
 
 function unfold(b64) {
@@ -1598,12 +1666,58 @@ function unfold(b64) {
 }
 
 const EGG = EGGS.map((g) => ({ i: g.i,
-                               win: makeModal('egg' + (g.full ? ' full' : ''),
-                                              unfold(g.html)),
+                               snd: g.snd,
+                               full: g.full,
+                               html: g.html,
+                               win: null,
                                shown: eggSeen(g.i) ? 1 : 0 }));
+let eggBuilt = 0;
 
+function buildEggs() {
+  if (eggBuilt) return;
+  eggBuilt = 1;
+  for (const g of EGG) {
+    if (g.html) {
+      g.win = makeModal('egg' + (g.full ? ' full' : ''), unfold(g.html));
+    }
+  }
+}
+if (!eggsOff) buildEggs();
+
+let soundOnly = 0;
 let mute = 0;
 let armed = 0;
+
+function setEggs(off, save) {
+  eggsOff = off ? 1 : 0;
+  if (EGG_BOX) EGG_BOX.checked = !eggsOff;
+  if (save) {
+    try {
+      if (eggsOff) localStorage.setItem(EGG_PREF, '0');
+      else localStorage.removeItem(EGG_PREF);
+    } catch (err) {}
+  }
+  if (eggsOff) {
+    for (const name in AUDIO) {
+      try {
+        AUDIO[name].pause();
+        AUDIO[name].currentTime = 0;
+      } catch (err) {}
+    }
+    soundOnly = 0;
+    for (const g of EGG) {
+      if (g.win && g.win.classList.contains('on')) veil(g.win, 0);
+    }
+  } else {
+    buildEggs();
+    loadAudio();
+  }
+  pop();
+}
+
+if (EGG_BOX) {
+  EGG_BOX.addEventListener('change', () => setEggs(!EGG_BOX.checked, 1));
+}
 
 function snug(el) {
   el.style.fontSize = '';
@@ -1653,6 +1767,8 @@ function zap() {
   }
   disarm();
   show(-1);
+  spiderDone = 0;
+  try { localStorage.removeItem(KEY + ':spider'); } catch (err) {}
   paint('.'.repeat(SPOTS.length));
   hints = [];
   keepHints();

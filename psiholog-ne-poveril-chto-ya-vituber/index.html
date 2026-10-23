@@ -1,5 +1,17 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><title>Психолог не поверил, что я витубер... · Тихий скрип извилин</title><link rel="icon" type="image/png" href="../favicon.png">
+<meta name="description" content="Сканворд 13x18 из 50 слов. Уровень сложности: средний. Разгадать онлайн.">
+<meta property="og:title" content="Психолог не поверил, что я витубер...">
+<meta property="og:description" content="Сканворд 13x18 из 50 слов. Уровень сложности: средний. Разгадать онлайн.">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Тихий скрип извилин">
+<meta property="og:image" content="https://creakingfolds.github.io/psiholog-ne-poveril-chto-ya-vituber/card-061633b6bcf0.webp">
+<meta property="og:image:alt" content="Психолог не поверил, что я витубер, и переселил меня в тело нарисованной девушки, однако оказалось, что чат уже голосует, какая из двух Олесь настоящая, и требует показать вебку в доказательство">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Психолог не поверил, что я витубер...">
+<meta name="twitter:description" content="Сканворд 13x18 из 50 слов. Уровень сложности: средний. Разгадать онлайн.">
+<meta name="twitter:image" content="https://creakingfolds.github.io/psiholog-ne-poveril-chto-ya-vituber/card-061633b6bcf0.webp">
 <style>
 html { background:#fff; color-scheme:light; }
 body { margin:0;
@@ -165,6 +177,12 @@ body { margin:0;
   .help .rules { width:0; min-width:100%; margin:0; padding:0;
     list-style:none; }
   .help .rules li + li { margin-top:0.4em; }
+  .help .eggs { display:flex; align-items:center; gap:0.7em;
+    margin:1.2em 0 0; padding-top:0.9em; border-top:1px solid #A51DA5;
+    font-size:1.15em; font-weight:bold; cursor:pointer; }
+  .help .eggs input { flex:0 0 auto; width:1.25em; height:1.25em;
+    margin:0; accent-color:#A51DA5; }
+  .help.on .eggs { pointer-events:auto; }
   .help kbd, .tip kbd { display:inline-block; min-width:1.1em;
     margin-right:0.25em; padding:0 0.3em; border:1px solid currentColor;
     border-radius:0.25em; font:inherit; text-align:center; }
@@ -225,13 +243,17 @@ body { margin:0;
   @keyframes emerge { from { opacity:0; scale:0.96; } }
   .egg.on { animation:emerge 260ms ease-out; }
   @media (prefers-reduced-motion:reduce) { .egg.on { animation:none; } }
-  .egg { width:min(442px, 88vw); }
+  .egg { --egg-box:min(442px, 88vw, 64vh); }
+  .egg:not(.full) { width:fit-content; max-width:var(--egg-box); }
   .egg.full { width:fit-content; max-width:96vw; }
   .egg.full img { width:auto; max-width:96vw; max-height:84vh;
     margin:0 auto; }
   .egg.full .cap { max-width:40em; margin:0.5em auto 0.7em; }
   .egg .close { background:rgba(0,0,0,0.5); }
-  .egg img { display:block; width:100%; height:auto; max-height:64vh; }
+  .egg img { display:block; }
+  .egg:not(.full) img { width:auto; height:auto;
+    max-width:calc(var(--egg-box) - 2px);
+    max-height:calc(var(--egg-box) - 2px); margin:0 auto; }
   .egg .cap { margin:0.5em 0.8em 0.7em; }
 }
 @media print { .tip, .ask, .shade, .modal, .won { display:none; } }
@@ -597,7 +619,7 @@ const CELL = 68;
 const PHOTO = 1;
 const KEY = 'scanword-13x18-c781120c';
 const EGGS = [];
-const SOUND = null;
+const SOUNDS = [];
 
 const HSEAL = 'e069f96fa9626bc57304183819baa0ce39ecb38cd64165ca8e7804955675ae40d06b6e865b97323bc344b37f00df8c797ed0113246f12f86475a59886a4a9c112c218f9c097eca7245863b097cb5386326c3258baf7c1a59b9d9322c3ba594022730cb5c815f8b81be1a90f36768340b78a98e26d6388a60bf58ac5c68027734b2c9446eb944437615b74eea0b488d21c78c7a203b1786b875af2a60529794d1ecb7f941100a25babff4b19c23382d23ff1d53bd9175ca3c89ec521be83c764c7257562529a6f3b527880fd447765b076b02e1c2a23b72f55b516009a0afc6bc78a1de40d76bf87bd28d3eed18c7e3e48a6a61add5f459b57f8c548684e7355d5982c00140e216236a4f318f7959ec3a5e4b16f22acb3280942e31b9e3f89a4233e6bf10669683b1633fc53ffe51864a42d450f0e3d4790cf6e5f1c8e6db6242945dcff769fbea7cd65870d73e5157e74358942675d386a7986e87206f448ad4360f504a7296e6a8ce9f9fac6e9ddc8d183a5bb4b140b582a40b0bf3254391365892a82892ea9d316c3ea56720d4512820ed87c01b384dd210d528b61adef10f9a9c3c460af7db3512d14e256aedbe10dfff1f05e9e9497848849b11207d48507dd3440be6bff046254bdfcb0f95793e28119b9a90d9230e6250a51449fdc2c0e8d94e2730c3f840b13b417bb19db292ddb4de7aa383d4577db11aa05540ef691906aaff540f1738871ad4e7a19038e6259cf4778bcb7d5adcc15f83941be52627e504a86264aaf5ce260a35f2c770fdba7c56e6924c5550054091fc5b8cecaf36ebd990c34722bb7403e77dc0bc0137b88677c15903a196c05a2809e38da29618e50922147159daec095a52c39ac5a5e8603139a65a49a843a1241df41b97de20edc218e251346e180f7dc2522709d535eef66fb4fdeafaa1dd45cef7b87df7b3af25c6546f7e39d6d68133c9b9e2354e5712a41ad4728bfc0c8d47aa2c53eb6ace3abe3471b9ee83ca3807a222b116776074682d182c98f4b00b71b6f6a74d27df6015fa3dd5b031fb0c62400e2c9cc8700ca1903304f452dea6cf1bb4bc8058b175892d6449d2af04f7e4dbb2822f86205482183ea4cdec13da9dd95316e4ea65a76745b1a5e200dd7d1a9b40607f826f8a09ba43fb05e709ec5edb1a6b6b9194b5be39037a75a1ccfd48c8212b84436f4b6fc720819ea7a3497a8490aabd0bbeafc0e1aedf21a43ecb2f451f2705ba7d3209f65f5e9c8a93bc38008e1e3a977ef4535cca5a929b82b66d0700b90827437d596034565878a186506ea53ed0732b9f4482c12581705a306cfa10bc25aee308c2e9d037de8841b35f5ae1fcaa2f4ae9b5ea3291011200486be5f04606a84beffda72989edd36bd8d0ab07d91a74e8c3a61a12259112f5c382c2b3a79374c9650abb94';
 const HSALT = '4ca93c2eddf087b6';
@@ -614,6 +636,7 @@ const HINT_SAY = 2600;
 const HINT_PULSE = 600;
 const HINT_RING = 0.7;
 const HKEY = KEY + ':hint';
+const EGG_PREF = KEY + ':eggs';
 
 const GRID = document.querySelector('.g');
 
@@ -1240,6 +1263,7 @@ window.addEventListener('storage', (e) => {
       hpaint();
       hcount();
     }
+    if (e.key === EGG_PREF) setEggs(e.newValue === '0', 0);
   } catch (err) {}
 });
 
@@ -1531,16 +1555,25 @@ function eggSeen(i) {
   try { return localStorage.getItem(eggKey(i)) === '1'; } catch (err) { return false; }
 }
 
-let audio = null;
-if (SOUND) {
-  try {
-    audio = new Audio(SOUND);
-    audio.preload = 'auto';
-  } catch (err) {}
+const AUDIO = {};
+let eggsOff = 0;
+let spiderDone = 0;
+try { eggsOff = localStorage.getItem(EGG_PREF) === '0' ? 1 : 0; } catch (err) {}
+
+function loadAudio() {
+  for (const snd of SOUNDS) {
+    if (AUDIO[snd]) continue;
+    try {
+      AUDIO[snd] = new Audio(snd);
+      AUDIO[snd].preload = 'auto';
+    } catch (err) {}
+  }
 }
+if (!eggsOff) loadAudio();
 
 function pop() {
-  if (modalOpen() || lull) return;
+  if (modalOpen() || lull || soundOnly) return;
+  if (!eggsOff) buildEggs();
   for (const g of EGG) {
     if (verdict(g.i) !== 1) {
       if (!g.shown) continue;
@@ -1551,13 +1584,46 @@ function pop() {
     if (g.shown) continue;
     g.shown = 1;
     try { localStorage.setItem(eggKey(g.i), '1'); } catch (err) {}
-    if (audio) {
-      try {
-        audio.currentTime = 0;
-        audio.play().catch(() => {});
-      } catch (err) {}
+    if (eggsOff) continue;
+    const snd = g.snd ? AUDIO[g.snd] : null;
+    let resume = null;
+    if (!g.win && snd) {
+      soundOnly = 1;
+      let next = 0;
+      resume = () => {
+        if (next) return;
+        next = 1;
+        soundOnly = 0;
+        setTimeout(pop, 0);
+      };
+      snd.addEventListener('ended', resume, { once: true });
     }
-    veil(g.win, 1);
+    if (snd) {
+      for (const name in AUDIO) {
+        if (AUDIO[name] !== snd) {
+          try {
+            AUDIO[name].pause();
+            AUDIO[name].currentTime = 0;
+          } catch (err) {}
+        }
+      }
+      try {
+        snd.currentTime = 0;
+        const playing = snd.play();
+        if (playing && playing.catch) playing.catch(resume || (() => {}));
+      } catch (err) {
+        if (resume) resume();
+      }
+    }
+    if (g.win) {
+      veil(g.win, 1);
+      return;
+    }
+    if (resume) {
+      setTimeout(() => { if (snd.paused) resume(); }, 1000);
+      return;
+    }
+    setTimeout(pop, 0);
     return;
   }
   if (due) cheer();
@@ -1580,6 +1646,8 @@ function makeModal(cls, html) {
 }
 
 const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Психолог не поверил, что я витубер, и переселил меня в тело нарисованной девушки, однако оказалось, что чат уже голосует, какая из двух Олесь настоящая, и требует показать вебку в доказательство</p><p class=\"lvl\">Сложность: средний</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды: <span class=\"host\">creakingfolds.github.io</span></a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span><a class=\"chan\" href=\"https://t.me/skripizvilin\" target=\"_blank\" rel=\"noopener\" data-goatcounter-click=\"tg/help\">Что нового - в канале: <span class=\"host\">t.me/skripizvilin</span></a></span><span>Специально для <a href=\"https://www.twitch.tv/oladiavt\" target=\"_blank\" rel=\"noopener\">oladiavt</a></span></p>");
+const EGG_BOX = HELP.querySelector('#egg-pref');
+if (EGG_BOX) EGG_BOX.checked = !eggsOff;
 const HINT_WIN = makeModal('hint', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"head\">Открыть выбранную букву?</p><p class=\"say\">Сгорит одна подсказка. Отгаданные слова пополняют запас.</p><p class=\"btns\"><button type=\"button\" class=\"yes\">Открыть</button><button type=\"button\" class=\"no\">Отмена</button></p>");
 
 function unfold(b64) {
@@ -1588,12 +1656,58 @@ function unfold(b64) {
 }
 
 const EGG = EGGS.map((g) => ({ i: g.i,
-                               win: makeModal('egg' + (g.full ? ' full' : ''),
-                                              unfold(g.html)),
+                               snd: g.snd,
+                               full: g.full,
+                               html: g.html,
+                               win: null,
                                shown: eggSeen(g.i) ? 1 : 0 }));
+let eggBuilt = 0;
 
+function buildEggs() {
+  if (eggBuilt) return;
+  eggBuilt = 1;
+  for (const g of EGG) {
+    if (g.html) {
+      g.win = makeModal('egg' + (g.full ? ' full' : ''), unfold(g.html));
+    }
+  }
+}
+if (!eggsOff) buildEggs();
+
+let soundOnly = 0;
 let mute = 0;
 let armed = 0;
+
+function setEggs(off, save) {
+  eggsOff = off ? 1 : 0;
+  if (EGG_BOX) EGG_BOX.checked = !eggsOff;
+  if (save) {
+    try {
+      if (eggsOff) localStorage.setItem(EGG_PREF, '0');
+      else localStorage.removeItem(EGG_PREF);
+    } catch (err) {}
+  }
+  if (eggsOff) {
+    for (const name in AUDIO) {
+      try {
+        AUDIO[name].pause();
+        AUDIO[name].currentTime = 0;
+      } catch (err) {}
+    }
+    soundOnly = 0;
+    for (const g of EGG) {
+      if (g.win && g.win.classList.contains('on')) veil(g.win, 0);
+    }
+  } else {
+    buildEggs();
+    loadAudio();
+  }
+  pop();
+}
+
+if (EGG_BOX) {
+  EGG_BOX.addEventListener('change', () => setEggs(!EGG_BOX.checked, 1));
+}
 
 function snug(el) {
   el.style.fontSize = '';
@@ -1643,6 +1757,8 @@ function zap() {
   }
   disarm();
   show(-1);
+  spiderDone = 0;
+  try { localStorage.removeItem(KEY + ':spider'); } catch (err) {}
   paint('.'.repeat(SPOTS.length));
   hints = [];
   keepHints();

@@ -1,5 +1,17 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><title>Меня выгнали из книжного клуба за... · Тихий скрип извилин</title><link rel="icon" type="image/png" href="../favicon.png">
+<meta name="description" content="Сканворд 16x16 из 56 слов. Уровень сложности: средний. Разгадать онлайн.">
+<meta property="og:title" content="Меня выгнали из книжного клуба за...">
+<meta property="og:description" content="Сканворд 16x16 из 56 слов. Уровень сложности: средний. Разгадать онлайн.">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Тихий скрип извилин">
+<meta property="og:image" content="https://creakingfolds.github.io/menya-vygnali-iz-knizhnogo-kluba-za/card-9061c4a86089.webp">
+<meta property="og:image:alt" content="Меня выгнали из книжного клуба за спойлеры к Гарри Поттеру, и я ушла доказывать гипотезу Пуанкаре, однако оказалось, что секта жён Северуса Снейпа спойлеров не прощает, Перельман давно отказался от миллиона, а чат требует кнопи-попи">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Меня выгнали из книжного клуба за...">
+<meta name="twitter:description" content="Сканворд 16x16 из 56 слов. Уровень сложности: средний. Разгадать онлайн.">
+<meta name="twitter:image" content="https://creakingfolds.github.io/menya-vygnali-iz-knizhnogo-kluba-za/card-9061c4a86089.webp">
 <style>
 html { background:#fff; color-scheme:light; }
 body { margin:0;
@@ -165,6 +177,12 @@ body { margin:0;
   .help .rules { width:0; min-width:100%; margin:0; padding:0;
     list-style:none; }
   .help .rules li + li { margin-top:0.4em; }
+  .help .eggs { display:flex; align-items:center; gap:0.7em;
+    margin:1.2em 0 0; padding-top:0.9em; border-top:1px solid #865C18;
+    font-size:1.15em; font-weight:bold; cursor:pointer; }
+  .help .eggs input { flex:0 0 auto; width:1.25em; height:1.25em;
+    margin:0; accent-color:#865C18; }
+  .help.on .eggs { pointer-events:auto; }
   .help kbd, .tip kbd { display:inline-block; min-width:1.1em;
     margin-right:0.25em; padding:0 0.3em; border:1px solid currentColor;
     border-radius:0.25em; font:inherit; text-align:center; }
@@ -225,13 +243,17 @@ body { margin:0;
   @keyframes emerge { from { opacity:0; scale:0.96; } }
   .egg.on { animation:emerge 260ms ease-out; }
   @media (prefers-reduced-motion:reduce) { .egg.on { animation:none; } }
-  .egg { width:min(442px, 88vw); }
+  .egg { --egg-box:min(442px, 88vw, 64vh); }
+  .egg:not(.full) { width:fit-content; max-width:var(--egg-box); }
   .egg.full { width:fit-content; max-width:96vw; }
   .egg.full img { width:auto; max-width:96vw; max-height:84vh;
     margin:0 auto; }
   .egg.full .cap { max-width:40em; margin:0.5em auto 0.7em; }
   .egg .close { background:rgba(0,0,0,0.5); }
-  .egg img { display:block; width:100%; height:auto; max-height:64vh; }
+  .egg img { display:block; }
+  .egg:not(.full) img { width:auto; height:auto;
+    max-width:calc(var(--egg-box) - 2px);
+    max-height:calc(var(--egg-box) - 2px); margin:0 auto; }
   .egg .cap { margin:0.5em 0.8em 0.7em; }
 }
 @media print { .tip, .ask, .shade, .modal, .won { display:none; } }
@@ -633,7 +655,7 @@ const CELL = 68;
 const PHOTO = 22;
 const KEY = 'scanword-16x16-6c93974e';
 const EGGS = [];
-const SOUND = null;
+const SOUNDS = [];
 
 const HSEAL = '3482b7909ffcd28e36cc2e8480a5188b22ce4c9b9f441cc0085afdfbaf794ca2fd109a708fb7e1dec6029ceebc13139cd9e7cf3617007ac96ed7502b0ff78d63d89f0766ea65664465220e44107c80e5ce1a6945505ba7b703b320347d0909666e47c5e6834cfe62f0c794a69d2fdd3568ed876deda136c4a968e2f780f0a1fd2bdf907d33c9bab7001d679119809145d9c9e3d3a500bd5cb3191b8e4f8e5ffb88fa694c3fcf8e7dc332af0bcbcd45cf9c680c4f83dfb5c5b62ec1b5b2f2a3a95d37992de6e7ff4400cbbb05c6889e75cb1e53064492339e343a62f1e6830c88551263b9d08b620f6ebddb51149fcfe02801392d5e8dc98d7e9b5f36cde9b0b2126167de810d5c7d9ad6f8bebba9d8cd388e8175e3a4056d1917352b4f17b0aa0d66f1f4eac0253f9a267d0c7e862094a0377979a1054ab1e58c97ef61b771811c97ffffa86511c3f2f2e183b9822f63cfb33237fa87e9cefad6b4eb673e638729739dd09de89c2c789a13648e1dbb9fe9f451b4d7363c24992e6644aa471e6f0e1d0a3ed435c88d0082bebbe84d9ef0b894dc685e1257ca5b1280763092ac89a041627850f14a37fcfb45a4a0404f9a9c6420e769a996c05598be7fa0d7ee24807ad9deef685862883e972cde46c1c3d400268b6e67ddce527fe585a28670ce1d6d294cba006b5e502ae4015be50ad384a802c3f69f6dddaf062a17c527eb7739455389a322c4ee54c538a2d01f3d2814f09e248e0311346541c5c6e7394655fec69399ee425d38da5e852469451cc2089ffc94001c2e737ca7d8d26079379b51b56845265eeb502689dbdfc41573a8f0807002be14b11a4bcabbd482a0e86689f634d399d8d9a493c342fd33fd16bf13caa9aad05f074b690c57ba24966d0e1529a61cc9cdb73b0dbc7ffd62a809de5f1f75d45963c2776e2096a1d1dbdcdf6518374825e0a200e04c28639c3655e50e44a599ed0b6267fd99666acb2110bbb579b9a8711cff7d526f3c059f30d87d972ebfced3b29dd7e05dc3121b45fa67e55102e3c9e7adff41fae9b35ce742cf0a455cc54f59d2fb3f8138aacc9c2f3984f978c5fa8f42e33a3a04ae2364fbfc8f883b4fc066851fc48f227aa70030eacaaebb42a1fc690221a8279804a786ce744b3d4beeaa630d2532cf8415bd7771bfb0c6961f398e16caa891adbafe09460485c667b98e841874bb09a1af827fa1148d70619a5280804389423e794a463ace2aa11dcc147fb6b81c30272b8c479a7697c095c966689e163c2da0362c19f1d53986f890670f95b6d5a7624fd1a98b92def95fac56c2aeb894d11329e783ffb791a54e69e2481c3036a01ff1cce01dc12712b1f31adfc697f000e3e39070cfb5cbe206903b1da05d9229393e78f661e95ee9983b7334e468cb2b8c58c2963bf20f891929fc5a51ce2b1caa36e0c1f933e7961e9897aaecaa289380c3a559006cdca8ba8ad9dece5f0062a21b3e311a96b1a75ae4a25acde27c55726d6a77c30cfc77866189177fc2c42705eedfcc3efdd9fd67021e5c0590c98a3f3070909bf9301b0ea504';
 const HSALT = '46a31ebd5cd227c6';
@@ -650,6 +672,7 @@ const HINT_SAY = 2600;
 const HINT_PULSE = 600;
 const HINT_RING = 0.7;
 const HKEY = KEY + ':hint';
+const EGG_PREF = KEY + ':eggs';
 
 const GRID = document.querySelector('.g');
 
@@ -1276,6 +1299,7 @@ window.addEventListener('storage', (e) => {
       hpaint();
       hcount();
     }
+    if (e.key === EGG_PREF) setEggs(e.newValue === '0', 0);
   } catch (err) {}
 });
 
@@ -1567,16 +1591,25 @@ function eggSeen(i) {
   try { return localStorage.getItem(eggKey(i)) === '1'; } catch (err) { return false; }
 }
 
-let audio = null;
-if (SOUND) {
-  try {
-    audio = new Audio(SOUND);
-    audio.preload = 'auto';
-  } catch (err) {}
+const AUDIO = {};
+let eggsOff = 0;
+let spiderDone = 0;
+try { eggsOff = localStorage.getItem(EGG_PREF) === '0' ? 1 : 0; } catch (err) {}
+
+function loadAudio() {
+  for (const snd of SOUNDS) {
+    if (AUDIO[snd]) continue;
+    try {
+      AUDIO[snd] = new Audio(snd);
+      AUDIO[snd].preload = 'auto';
+    } catch (err) {}
+  }
 }
+if (!eggsOff) loadAudio();
 
 function pop() {
-  if (modalOpen() || lull) return;
+  if (modalOpen() || lull || soundOnly) return;
+  if (!eggsOff) buildEggs();
   for (const g of EGG) {
     if (verdict(g.i) !== 1) {
       if (!g.shown) continue;
@@ -1587,13 +1620,46 @@ function pop() {
     if (g.shown) continue;
     g.shown = 1;
     try { localStorage.setItem(eggKey(g.i), '1'); } catch (err) {}
-    if (audio) {
-      try {
-        audio.currentTime = 0;
-        audio.play().catch(() => {});
-      } catch (err) {}
+    if (eggsOff) continue;
+    const snd = g.snd ? AUDIO[g.snd] : null;
+    let resume = null;
+    if (!g.win && snd) {
+      soundOnly = 1;
+      let next = 0;
+      resume = () => {
+        if (next) return;
+        next = 1;
+        soundOnly = 0;
+        setTimeout(pop, 0);
+      };
+      snd.addEventListener('ended', resume, { once: true });
     }
-    veil(g.win, 1);
+    if (snd) {
+      for (const name in AUDIO) {
+        if (AUDIO[name] !== snd) {
+          try {
+            AUDIO[name].pause();
+            AUDIO[name].currentTime = 0;
+          } catch (err) {}
+        }
+      }
+      try {
+        snd.currentTime = 0;
+        const playing = snd.play();
+        if (playing && playing.catch) playing.catch(resume || (() => {}));
+      } catch (err) {
+        if (resume) resume();
+      }
+    }
+    if (g.win) {
+      veil(g.win, 1);
+      return;
+    }
+    if (resume) {
+      setTimeout(() => { if (snd.paused) resume(); }, 1000);
+      return;
+    }
+    setTimeout(pop, 0);
     return;
   }
   if (due) cheer();
@@ -1616,6 +1682,8 @@ function makeModal(cls, html) {
 }
 
 const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Меня выгнали из книжного клуба за спойлеры к Гарри Поттеру, и я ушла доказывать гипотезу Пуанкаре, однако оказалось, что секта жён Северуса Снейпа спойлеров не прощает, Перельман давно отказался от миллиона, а чат требует кнопи-попи</p><p class=\"lvl\">Сложность: средний</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды: <span class=\"host\">creakingfolds.github.io</span></a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span><a class=\"chan\" href=\"https://t.me/skripizvilin\" target=\"_blank\" rel=\"noopener\" data-goatcounter-click=\"tg/help\">Что нового - в канале: <span class=\"host\">t.me/skripizvilin</span></a></span><span>Специально для <a href=\"https://www.twitch.tv/oladiavt\" target=\"_blank\" rel=\"noopener\">oladiavt</a></span></p>");
+const EGG_BOX = HELP.querySelector('#egg-pref');
+if (EGG_BOX) EGG_BOX.checked = !eggsOff;
 const HINT_WIN = makeModal('hint', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"head\">Открыть выбранную букву?</p><p class=\"say\">Сгорит одна подсказка. Отгаданные слова пополняют запас.</p><p class=\"btns\"><button type=\"button\" class=\"yes\">Открыть</button><button type=\"button\" class=\"no\">Отмена</button></p>");
 
 function unfold(b64) {
@@ -1624,12 +1692,58 @@ function unfold(b64) {
 }
 
 const EGG = EGGS.map((g) => ({ i: g.i,
-                               win: makeModal('egg' + (g.full ? ' full' : ''),
-                                              unfold(g.html)),
+                               snd: g.snd,
+                               full: g.full,
+                               html: g.html,
+                               win: null,
                                shown: eggSeen(g.i) ? 1 : 0 }));
+let eggBuilt = 0;
 
+function buildEggs() {
+  if (eggBuilt) return;
+  eggBuilt = 1;
+  for (const g of EGG) {
+    if (g.html) {
+      g.win = makeModal('egg' + (g.full ? ' full' : ''), unfold(g.html));
+    }
+  }
+}
+if (!eggsOff) buildEggs();
+
+let soundOnly = 0;
 let mute = 0;
 let armed = 0;
+
+function setEggs(off, save) {
+  eggsOff = off ? 1 : 0;
+  if (EGG_BOX) EGG_BOX.checked = !eggsOff;
+  if (save) {
+    try {
+      if (eggsOff) localStorage.setItem(EGG_PREF, '0');
+      else localStorage.removeItem(EGG_PREF);
+    } catch (err) {}
+  }
+  if (eggsOff) {
+    for (const name in AUDIO) {
+      try {
+        AUDIO[name].pause();
+        AUDIO[name].currentTime = 0;
+      } catch (err) {}
+    }
+    soundOnly = 0;
+    for (const g of EGG) {
+      if (g.win && g.win.classList.contains('on')) veil(g.win, 0);
+    }
+  } else {
+    buildEggs();
+    loadAudio();
+  }
+  pop();
+}
+
+if (EGG_BOX) {
+  EGG_BOX.addEventListener('change', () => setEggs(!EGG_BOX.checked, 1));
+}
 
 function snug(el) {
   el.style.fontSize = '';
@@ -1679,6 +1793,8 @@ function zap() {
   }
   disarm();
   show(-1);
+  spiderDone = 0;
+  try { localStorage.removeItem(KEY + ':spider'); } catch (err) {}
   paint('.'.repeat(SPOTS.length));
   hints = [];
   keepHints();

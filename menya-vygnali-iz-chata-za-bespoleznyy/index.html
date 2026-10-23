@@ -1,5 +1,17 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><title>Меня выгнали из чата за бесполезный... · Тихий скрип извилин</title><link rel="icon" type="image/png" href="../favicon.png">
+<meta name="description" content="Сканворд 18x13 из 49 слов. Уровень сложности: простой. Разгадать онлайн.">
+<meta property="og:title" content="Меня выгнали из чата за бесполезный...">
+<meta property="og:description" content="Сканворд 18x13 из 49 слов. Уровень сложности: простой. Разгадать онлайн.">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Тихий скрип извилин">
+<meta property="og:image" content="https://creakingfolds.github.io/menya-vygnali-iz-chata-za-bespoleznyy/card-6ba866488ae2.webp">
+<meta property="og:image:alt" content="Меня выгнали из чата за бесполезный навык &quot;желать всем приятного стрима&quot;, и я уехал в деревню собирать коровий навоз к сельскому празднику, однако оказалось, что бывшие товарищи сами бегут ко мне занимать баллы канала на документалку про рептилий">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Меня выгнали из чата за бесполезный...">
+<meta name="twitter:description" content="Сканворд 18x13 из 49 слов. Уровень сложности: простой. Разгадать онлайн.">
+<meta name="twitter:image" content="https://creakingfolds.github.io/menya-vygnali-iz-chata-za-bespoleznyy/card-6ba866488ae2.webp">
 <style>
 html { background:#fff; color-scheme:light; }
 body { margin:0;
@@ -165,6 +177,12 @@ body { margin:0;
   .help .rules { width:0; min-width:100%; margin:0; padding:0;
     list-style:none; }
   .help .rules li + li { margin-top:0.4em; }
+  .help .eggs { display:flex; align-items:center; gap:0.7em;
+    margin:1.2em 0 0; padding-top:0.9em; border-top:1px solid #1C6A9C;
+    font-size:1.15em; font-weight:bold; cursor:pointer; }
+  .help .eggs input { flex:0 0 auto; width:1.25em; height:1.25em;
+    margin:0; accent-color:#1C6A9C; }
+  .help.on .eggs { pointer-events:auto; }
   .help kbd, .tip kbd { display:inline-block; min-width:1.1em;
     margin-right:0.25em; padding:0 0.3em; border:1px solid currentColor;
     border-radius:0.25em; font:inherit; text-align:center; }
@@ -225,13 +243,17 @@ body { margin:0;
   @keyframes emerge { from { opacity:0; scale:0.96; } }
   .egg.on { animation:emerge 260ms ease-out; }
   @media (prefers-reduced-motion:reduce) { .egg.on { animation:none; } }
-  .egg { width:min(442px, 88vw); }
+  .egg { --egg-box:min(442px, 88vw, 64vh); }
+  .egg:not(.full) { width:fit-content; max-width:var(--egg-box); }
   .egg.full { width:fit-content; max-width:96vw; }
   .egg.full img { width:auto; max-width:96vw; max-height:84vh;
     margin:0 auto; }
   .egg.full .cap { max-width:40em; margin:0.5em auto 0.7em; }
   .egg .close { background:rgba(0,0,0,0.5); }
-  .egg img { display:block; width:100%; height:auto; max-height:64vh; }
+  .egg img { display:block; }
+  .egg:not(.full) img { width:auto; height:auto;
+    max-width:calc(var(--egg-box) - 2px);
+    max-height:calc(var(--egg-box) - 2px); margin:0 auto; }
   .egg .cap { margin:0.5em 0.8em 0.7em; }
 }
 @media print { .tip, .ask, .shade, .modal, .won { display:none; } }
@@ -595,7 +617,7 @@ const CELL = 68;
 const PHOTO = 27;
 const KEY = 'scanword-18x13-30925d12';
 const EGGS = [];
-const SOUND = null;
+const SOUNDS = [];
 
 const HSEAL = 'bc00f2d29797848263a35ee5606b2ce0600e527e13c1e74646b08b3ef5b5eb902fc7997d4f4e629041e68c04c195519e4faefd08e6fba5b3b9687021a446279d577cf498e2f1d2b425b44e48580ad196ab876ea2e06219b1a0e4c72a442e92a59a4ddaf83bbe8b8c5592c1d100562f751ebc36876f75e5709182c240d590c83e3bfaf285fd955ed427ae99677225b88911f0e3f2dac0579a6f00df4da18fc663f0dca08ebc380e8d7575bca4d506a7ce7645eaf57e33ba2208286f62c5c333506938697a395184c5aa5a8dfadb3d51a79474e38eb8b689d68c3144e9e3477e114ee9a315b07c1cbc4ec9780cc7f50bee48b6b32b2af400554563a47848e11f4c081aa6aa481b52ca622b10b3c1fc438c668145636351e2a9a6c9ad938d8636513704e85c6b1f8804590e573eafa4c70d2b61629c3e62c80dcfd0a0a2b6363a12f8092b6e4f7110ad5bcf64d3ffeb6c4927d429fda8262acc6658d86d20a74b5ce6373eb24262b5e747d049831d80fdf2bc74315be1489a874db2778591a0296e2977977756dd1377ce81b2d47de1d5c4e5e3c80bcb6a1f06b7e354328e757467be6f675e16f724a9385f9e8aab1cfaaa744d903cc1048c1eaf82c6ffde990c275b0f10cd5abcb80557e1559a2392520352e32da844c710c4598a1bc1f65c2d68b6a6eb460a848b71d4af660085b27896fcef7d09e579fbd2794c4dbc32cbe088671727f060aacb07ad45a4c19111538db79581fb522974e89fdc2cd1ef815b934ee67c6d9c8fbca57e08e25dfb724929f64c9c917e22a64a565c7ff2194279c0670c9d2bc284e41c63b54ceb3f51a57cf5c643f20e40679706beb92fa723d587cc8ebc4653d98308feed836c2b1bafc25becfdee9f46fdf5dd6451a3019f8409daac8a2db655a339262ab71a452ad6d8e934d988b5114b2973be05ebad95e5a3c76c52c95d5b6f126db01bf7379bf0983ecb7253e9eefad15b9c3ded14380a9688ec5960b86e1e8aed547032008eae50bc2065312bcd09f79f40d54aec458f5f8c0fc26c0505d67ba0d493a530108abff59f501743bde7c68168a2cde91e2ab9b51fa3520aa82f5eff7286a68b5a8e68dfce4b14e6624aaadfdc3e04c88540a6a9012b2ce19e713507dc967186124c5c996db308c9c727b5eaa4af7b3520d93f0b92ff106db868327687e6fc1c90ecc111c4a695cd9f11b15e5d0052cd4b7dc30e76f39e13c20ab4252c4376384d0ae9e8b0b6aa10e379be3b761b59c682ecf1574949314104e6fbcd801db1fac9cb3c803984d5615582546d43889264410f59bebcaddb65470468fa31ccb47635e3737c6bc772fbc0ca2d14aa94e90449c69be79ae2d143c6eecb711c59b8b1e37a858088dc7ca65e16be54bab57bfc9eb76e90c7c0be33fa133a59015198ceff754b06c1c48a80fe6b24bbccb1d2';
 const HSALT = '481f86a896ce56b4';
@@ -612,6 +634,7 @@ const HINT_SAY = 2600;
 const HINT_PULSE = 600;
 const HINT_RING = 0.7;
 const HKEY = KEY + ':hint';
+const EGG_PREF = KEY + ':eggs';
 
 const GRID = document.querySelector('.g');
 
@@ -1238,6 +1261,7 @@ window.addEventListener('storage', (e) => {
       hpaint();
       hcount();
     }
+    if (e.key === EGG_PREF) setEggs(e.newValue === '0', 0);
   } catch (err) {}
 });
 
@@ -1529,16 +1553,25 @@ function eggSeen(i) {
   try { return localStorage.getItem(eggKey(i)) === '1'; } catch (err) { return false; }
 }
 
-let audio = null;
-if (SOUND) {
-  try {
-    audio = new Audio(SOUND);
-    audio.preload = 'auto';
-  } catch (err) {}
+const AUDIO = {};
+let eggsOff = 0;
+let spiderDone = 0;
+try { eggsOff = localStorage.getItem(EGG_PREF) === '0' ? 1 : 0; } catch (err) {}
+
+function loadAudio() {
+  for (const snd of SOUNDS) {
+    if (AUDIO[snd]) continue;
+    try {
+      AUDIO[snd] = new Audio(snd);
+      AUDIO[snd].preload = 'auto';
+    } catch (err) {}
+  }
 }
+if (!eggsOff) loadAudio();
 
 function pop() {
-  if (modalOpen() || lull) return;
+  if (modalOpen() || lull || soundOnly) return;
+  if (!eggsOff) buildEggs();
   for (const g of EGG) {
     if (verdict(g.i) !== 1) {
       if (!g.shown) continue;
@@ -1549,13 +1582,46 @@ function pop() {
     if (g.shown) continue;
     g.shown = 1;
     try { localStorage.setItem(eggKey(g.i), '1'); } catch (err) {}
-    if (audio) {
-      try {
-        audio.currentTime = 0;
-        audio.play().catch(() => {});
-      } catch (err) {}
+    if (eggsOff) continue;
+    const snd = g.snd ? AUDIO[g.snd] : null;
+    let resume = null;
+    if (!g.win && snd) {
+      soundOnly = 1;
+      let next = 0;
+      resume = () => {
+        if (next) return;
+        next = 1;
+        soundOnly = 0;
+        setTimeout(pop, 0);
+      };
+      snd.addEventListener('ended', resume, { once: true });
     }
-    veil(g.win, 1);
+    if (snd) {
+      for (const name in AUDIO) {
+        if (AUDIO[name] !== snd) {
+          try {
+            AUDIO[name].pause();
+            AUDIO[name].currentTime = 0;
+          } catch (err) {}
+        }
+      }
+      try {
+        snd.currentTime = 0;
+        const playing = snd.play();
+        if (playing && playing.catch) playing.catch(resume || (() => {}));
+      } catch (err) {
+        if (resume) resume();
+      }
+    }
+    if (g.win) {
+      veil(g.win, 1);
+      return;
+    }
+    if (resume) {
+      setTimeout(() => { if (snd.paused) resume(); }, 1000);
+      return;
+    }
+    setTimeout(pop, 0);
     return;
   }
   if (due) cheer();
@@ -1578,6 +1644,8 @@ function makeModal(cls, html) {
 }
 
 const HELP = makeModal('help', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"who\">Меня выгнали из чата за бесполезный навык &quot;желать всем приятного стрима&quot;, и я уехал в деревню собирать коровий навоз к сельскому празднику, однако оказалось, что бывшие товарищи сами бегут ко мне занимать баллы канала на документалку про рептилий</p><p class=\"lvl\">Сложность: простой</p><div class=\"two\"><section class=\"say\"><p class=\"head\">Мышь</p><dl><dt>левая кнопка</dt><dd>курсор</dd><dt>дважды по одной клетке</dt><dd>поменять направление</dd><dt>колесо</dt><dd>масштабировать</dd><dt>перетащить</dt><dd>двигать сетку</dd></dl><p class=\"head\">Правила</p><ul class=\"rules\"><li>Ответ - существительное в именительном падеже и единственном числе. Во множественном бывают только слова без единственного: сани, ножницы</li><li>Е и Ё - одна буква</li><li>В кавычках - иносказание, название или цитата</li><li>Большинство ответов - обычные слова, не по теме</li></ul></section><section><p class=\"head\">Клавиатура</p><dl><dt><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>курсор</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd><span class=\"dir\">↑</span></kbd><kbd><span class=\"dir\">↓</span></kbd><kbd><span class=\"dir\">←</span></kbd><kbd><span class=\"dir\">→</span></kbd></dt><dd>двигать сетку</dd><dt><kbd>Tab</kbd></dt><dd>следующее неразгаданное</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Tab</kbd></dt><dd>предыдущее неразгаданное</dd><dt><kbd>Home</kbd></dt><dd>в начало слова</dd><dt><kbd>End</kbd></dt><dd>в конец слова</dd><dt><kbd>А</kbd><span class=\"word\">-</span><kbd>Я</kbd></dt><dd>вписать букву</dd><dt><kbd>Backspace</kbd><kbd>Delete</kbd></dt><dd>стереть букву</dd><dt><kbd>+</kbd><kbd>-</kbd></dt><dd>масштабировать</dd><dt><kbd>0</kbd></dt><dd>сбросить масштаб</dd><dt><kbd>Shift</kbd><span class=\"word\">+</span><kbd>Delete</kbd><span class=\"word\">дважды</span></dt><dd>стереть всё</dd><dt><kbd>?</kbd></dt><dd>открыть/закрыть эту подсказку</dd></dl></section></div><p class=\"go\"><a href=\"../\">Другие сканворды: <span class=\"host\">creakingfolds.github.io</span></a></p><p class=\"credit\"><span>&copy; wibblywombat</span><span><a class=\"chan\" href=\"https://t.me/skripizvilin\" target=\"_blank\" rel=\"noopener\" data-goatcounter-click=\"tg/help\">Что нового - в канале: <span class=\"host\">t.me/skripizvilin</span></a></span><span>Специально для <a href=\"https://www.twitch.tv/oladiavt\" target=\"_blank\" rel=\"noopener\">oladiavt</a></span></p>");
+const EGG_BOX = HELP.querySelector('#egg-pref');
+if (EGG_BOX) EGG_BOX.checked = !eggsOff;
 const HINT_WIN = makeModal('hint', "<button type=\"button\" class=\"close\" aria-label=\"Закрыть\">&times;</button><p class=\"head\">Открыть выбранную букву?</p><p class=\"say\">Сгорит одна подсказка. Отгаданные слова пополняют запас.</p><p class=\"btns\"><button type=\"button\" class=\"yes\">Открыть</button><button type=\"button\" class=\"no\">Отмена</button></p>");
 
 function unfold(b64) {
@@ -1586,12 +1654,58 @@ function unfold(b64) {
 }
 
 const EGG = EGGS.map((g) => ({ i: g.i,
-                               win: makeModal('egg' + (g.full ? ' full' : ''),
-                                              unfold(g.html)),
+                               snd: g.snd,
+                               full: g.full,
+                               html: g.html,
+                               win: null,
                                shown: eggSeen(g.i) ? 1 : 0 }));
+let eggBuilt = 0;
 
+function buildEggs() {
+  if (eggBuilt) return;
+  eggBuilt = 1;
+  for (const g of EGG) {
+    if (g.html) {
+      g.win = makeModal('egg' + (g.full ? ' full' : ''), unfold(g.html));
+    }
+  }
+}
+if (!eggsOff) buildEggs();
+
+let soundOnly = 0;
 let mute = 0;
 let armed = 0;
+
+function setEggs(off, save) {
+  eggsOff = off ? 1 : 0;
+  if (EGG_BOX) EGG_BOX.checked = !eggsOff;
+  if (save) {
+    try {
+      if (eggsOff) localStorage.setItem(EGG_PREF, '0');
+      else localStorage.removeItem(EGG_PREF);
+    } catch (err) {}
+  }
+  if (eggsOff) {
+    for (const name in AUDIO) {
+      try {
+        AUDIO[name].pause();
+        AUDIO[name].currentTime = 0;
+      } catch (err) {}
+    }
+    soundOnly = 0;
+    for (const g of EGG) {
+      if (g.win && g.win.classList.contains('on')) veil(g.win, 0);
+    }
+  } else {
+    buildEggs();
+    loadAudio();
+  }
+  pop();
+}
+
+if (EGG_BOX) {
+  EGG_BOX.addEventListener('change', () => setEggs(!EGG_BOX.checked, 1));
+}
 
 function snug(el) {
   el.style.fontSize = '';
@@ -1641,6 +1755,8 @@ function zap() {
   }
   disarm();
   show(-1);
+  spiderDone = 0;
+  try { localStorage.removeItem(KEY + ':spider'); } catch (err) {}
   paint('.'.repeat(SPOTS.length));
   hints = [];
   keepHints();
